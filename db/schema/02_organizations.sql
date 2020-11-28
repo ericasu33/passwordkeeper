@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS organizations CASCADE;
+
+CREATE TABLE organizations (
+  id SERIAL PRIMARY KEY NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  logo_url VARCHAR(255)
+);
