@@ -1,17 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <%- include('partials/_head') %>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <title>PasswordKeeper - Home </title>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <header>
+      <nav>
+        <div>
+          LOGO
+        </div>
+
+        <div class='dropdown'>
+          <button>
+            Categories (icon)
+          </button>
+          <div class='dropdown-content'>
+            <a href ='#'> Cat1</a>
+            <a href ='#'> Cat2</a>
+            <a href ='#'> Cat3</a>
+          </div>
+        </div>
+
+        <div class='nav-right'>
+          <div>Favourites Icon</div>
+          <div>User_Email(tempVar)</div> 
+          <div>
+            <form method="POST" action="/logout">
+              <button type="submit">Log Out</button>  
+            </form>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+
+    <main>
+      <h1> Category Name </h1>
+
+  <% for (const site in sites) { %>
+      <form method="GET" action="/sites/:id">
+        <button type="submit">
+          <div class='site'>
+            <img src="<%= sites[site].image_url %>" alt="site logo image" />
+            <%= sites[site].name %>
+            <%= sites[site].login_url %>
+          </div>
+        </button>
+      </form>
+  <% } %>
+
+    </main>
+
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
   </body>
 </html>
