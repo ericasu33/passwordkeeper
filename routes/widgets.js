@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
     let query = `SELECT * FROM widgets`;
     console.log(query);
@@ -23,5 +24,37 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post("/", (req, res) => {
+    const record = req.body;
+    console.log(record);
+
+    const params = [record.user_id, record.name]
+    const query = `INSERT INTO widgets (user_id, name) VALUES ($1, $2) RETURNING id`;
+
+    console.log(query);
+    db.query(query, params)
+      .then(data => {
+        console.log(data.rows[0]);
+        res.send(data.rows[0]);
+      })
+      .catch(err => {
+        console.log(err);
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   return router;
 };
+
+
+
+
+
+
+
+
+
+

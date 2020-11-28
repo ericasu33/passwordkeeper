@@ -1,7 +1,7 @@
 /*
  * All routes for Widgets are defined here
- * Since this file is loaded in server.js into api/organization,
- *   these routes are mounted onto /organization
+ * Since this file is loaded in server.js into api/sites,
+ *   these routes are mounted onto /sites
  */
 
 const express = require('express');
@@ -9,12 +9,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM sites WHERE organization_id=1`;
+    let query = `SELECT * FROM websites`;
     console.log(query);
     db.query(query)
       .then(data => {
-        const organization = data.rows;
-        res.json({ organization });
+        const sites = data.rows;
+        console.log(sites);
+        res.json({ sites });
       })
       .catch(err => {
         res
