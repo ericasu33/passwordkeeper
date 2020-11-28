@@ -40,30 +40,17 @@
     <main>
       <h1> Category Name </h1>
 
+  <% for (const site in sites) { %>
       <form method="GET" action="/sites/:id">
         <button type="submit">
           <div class='site'>
-            Site Name
-            URL
+            <img src="<%= sites[site].image_url %>" alt="site logo image" />
+            <%= sites[site].name %>
+            <%= sites[site].login_url %>
           </div>
         </button>
       </form>
-   
-
-      <form method="GET" action="/sites/:id">
-        <button type="submit">
-          <div class='site'>
-          </div>
-        </button>
-      </form>
-
-
-      <form method="GET" action="/sites/:id">
-        <button type="submit">
-          <div class='site'>
-          </div>
-        </button>
-      </form>
+  <% } %>
 
     </main>
 
