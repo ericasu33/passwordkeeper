@@ -18,6 +18,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     res.render('user_login');
   });
+
   router.post("/", (req, res) => {
     const query = `
     SELECT * FROM users WHERE email = $1;
@@ -34,6 +35,8 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+
+  });
 
   router.post('/logout', (req, res) => {
     req.session.userId = null;
