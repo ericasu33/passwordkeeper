@@ -101,9 +101,9 @@ module.exports = (db) => {
   router.post("/:site/update", (req, res) => {
     console.log(req.body);
     site = [req.body];
-    params = [req.body.name, req.body.username, req.body.email, req.body.category, global_site_id]
+    params = [req.body.name, req.body.username, req.body.email, req.body.category, req.body.password, global_site_id]
 
-    const query = `UPDATE websites SET name=$1, username=$2, email=$3, category_id=$4  WHERE id=$5 RETURNING *`;
+    const query = `UPDATE websites SET name=$1, username=$2, email=$3, category_id=$4, password=$5  WHERE id=$6 RETURNING *`;
     console.log(query);
 
     db.query(query, params)
