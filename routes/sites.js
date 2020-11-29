@@ -7,6 +7,7 @@
 const express = require('express');
 const router  = express.Router();
 
+let globe_site_id = 0;
 
 module.exports = (db) => {
 
@@ -72,7 +73,7 @@ module.exports = (db) => {
 
   });
 
-  // Updates an entry
+  // Shows the details of a site so it can be updated
   router.get("/:site", (req, res) => {
     console.log(req.params.site);
     site = [req.params.site];
@@ -84,10 +85,35 @@ module.exports = (db) => {
       .then(data => {
         const site = data.rows[0];
         console.log(site)
+        global_site_id = site.id;
+        console.log(global_site_id);
         // res.json ({site})
         res.render("site", {site});
       })
       .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  // Update a site entry
+  router.post("/:site/update", (req, res) => {
+    console.log(req.body);
+    site = [req.body];
+    params = [req.body.name, req.body.username, req.body.email, req.body.category, global_site_id]
+
+    const query = `UPDATE websites SET name=$1, username=$2, email=$3, category_id=$4  WHERE id=$5 RETURNING *`;
+    console.log(query);
+
+    db.query(query, params)
+      .then(data => {
+        console.log(data.rows[0]);
+        //res.json (data.rows[0])
+        res.redirect("/organization/sites");
+      })
+      .catch(err => {
+        console.log(err);
         res
           .status(500)
           .json({ error: err.message });
