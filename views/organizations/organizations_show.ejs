@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <%- include('../partials/_head') %>
+
+  <title>PasswordKeeper - Edit Organization</title>
+</head>
+
+<body>
+
+  
+  <main>
+
+        <div>
+          <h3><%=organizations.name %></h3>
+          <img src="<%=organizations.logo_url %>">
+        
+          <form method="POST" action="/organizations/<%=organizations.organization_id %>">
+            <div>
+              <label for="name">Organization Name
+              <input type="text" name="name" placeholder="Organization Name">
+              </label>
+
+              <label for="logo_url">Organization Logo Image URL 
+              <input type="text" name="logo_url" placeholder="http://">
+              </label>
+
+              <button type="submit">Edit</button>
+            </div>
+          </form>
+
+        </div>
+
+  </main>
+  
+</body>
+</html>

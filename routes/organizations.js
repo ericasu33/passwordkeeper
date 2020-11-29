@@ -22,7 +22,7 @@ module.exports = (db) => {
     db.query(query, [1])  //would be cookie-session here for user_id
       .then(data => {
         const organizations = data.rows;
-        res.render("organizations", {organizations});
+        res.render("./organizations/organizations", {organizations});
       })
       .catch(err => {
         res
@@ -57,7 +57,7 @@ module.exports = (db) => {
   //====NEW ORG=====//
 
   router.get("/new", (req, res) => {
-    res.render("organizations_new");
+    res.render("./organizations/organizations_new");
   });
 
 
@@ -126,7 +126,7 @@ module.exports = (db) => {
       .then(data => {
         const organizations = data.rows[0];
         console.log(organizations);
-        res.render("organizations_show", { organizations });
+        res.render("./organizations/organizations_show", { organizations });
       })
       .catch(err => {
         res

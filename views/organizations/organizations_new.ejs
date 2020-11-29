@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <%- include('../partials/_head') %>
+
+    <title>PasswordKeeper - New Organization</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <div>
+          LOGO
+        </div>
+
+        <div class='dropdown'>
+          <button>
+            Categories (icon)
+          </button>
+          <div class='dropdown-content'>
+            <a href ='#'> Cat1</a>
+            <a href ='#'> Cat2</a>
+            <a href ='#'> Cat3</a>
+          </div>
+        </div>
+
+        <div class='nav-right'>
+          <div>Favourites Icon</div>
+          <div>User_Email(tempVar)</div>
+          <div>
+            <form method="POST" action="/logout">
+              <button type="submit">Log Out</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+    </header>
+
+    <main>
+      <div>
+        <h3>Add Organization</h3>
+        <form method="POST" action="/organizations">
+          <div>
+            <label for="name">Organization Name
+            <input type="text" name="name" placeholder="Organization Name">
+            </label>
+
+            <label for="logo_url">Organization Logo Image URL 
+            <input type="text" name="logo_url" placeholder="http://">
+            </label>
+
+            <button type="submit">Add</button>
+          </div>
+        </form>
+     </div>
+    </main>
+
+    
+  </body>
+</html>
