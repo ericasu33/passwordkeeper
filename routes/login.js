@@ -5,13 +5,9 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
 const express = require('express');
 const router  = express.Router();
-router.use(cookieSession({
-  name: 'session',
-  keys: ["lilduck"],
-}));
+
 
 module.exports = (db) => {
 
@@ -42,9 +38,6 @@ module.exports = (db) => {
     req.session.userId = null;
     res.send({});
   });
-
-  /*
- */
 
 
   return router;
