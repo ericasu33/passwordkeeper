@@ -33,19 +33,21 @@ module.exports = (db) => {
 
   // goes to page with all the sites for the specific organization
   router.get("/:organization_id/sites", (req, res) => {
+    const organization_id = req.params.organization_id;
+
     const query = `
-    SELECT organization_id, name, logo_url 
-    FROM organizations
-    JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
-    WHERE user_id = $1;
+    SELECT * 
+    FROM websites
+    WHERE organization_id = $1;
     `;
+    
     console.log(query);
 
-    db.query(query, [1])  //would be cookie-session here for user_id
+    db.query(query, [organization_id])  //would be cookie-session here for user_id
       .then(data => {
-        const organizations = data.rows;
-        console.log(organizations);
-        res.render("sites", { organizations });
+        const sites = data.rows;
+        // console.log(organizations);
+        res.render("sites", { sites });
       })
       .catch(err => {
         res
