@@ -16,56 +16,34 @@ router.use(cookieSession({
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM users WHERE id = $1`;
-    //console.log(req.session.user_id);
-    db.query(query, [req.session.user_id])
+    res.render('user_login');
+  });
+
+  router.post("/", (req, res) => {
+    const query = `
+    SELECT * FROM users WHERE email = $1;
+    `;
+    const queryParams = [req.body.email];
+    db.query(query, queryParams)
       .then(data => {
-        const users = data.rows;
-        console.log('LOOKING HERE:', users);
-        console.log(users[0].email);
-        res.render('user_login', { users });
-        //res.json('/users', { users });
+        const user = data.rows[0];
+        req.session.user_id = user.id;
+        res.redirect('/organizations');
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
   });
 
-
-  router.get('/:id', (req, res) => {
-    res.redirect('/users');
+  router.post('/logout', (req, res) => {
+    req.session.userId = null;
+    res.send({});
   });
-  /* const addUser =  function(user) {
-    const data = [user.name, user.email, user.password];
-    db.query(`
-    INSERT INTO users(name, email, password)
-    VALUES ($1, $2, $3) RETURNING *;
-    `, data)
-      .then(res => {
-        if (res.rows[0].name || res.rows[0].email) {
-          return res.rows[0];
-        } else {
-          return null;
-        }
 
-      });
-  };
-
-  router.get("/register", (req, res) => {
-    const user = req.body;
-    addUser(user)
-      .then(user => {
-        if (!user) {
-          res.send({error: "error"});
-          return;
-        }
-        req.session.userId = user.id;
-        res.send("🤗");
-      });
-    res.render("urls_register", templateVars);
-  });
+  /*
  */
 
 
@@ -121,7 +99,4 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
-  router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.send({});
-  }); */
+*/

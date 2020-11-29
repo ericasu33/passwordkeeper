@@ -12,7 +12,7 @@ module.exports = (db) => {
   //sees all organizations user belongs to
   router.get("/", (req, res) => {
     let query = `
-    SELECT organization_id, name, logo_url 
+    SELECT organization_id, name, logo_url
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
     WHERE user_id = $1
@@ -39,11 +39,11 @@ module.exports = (db) => {
     const organization_id = req.params.organization_id;
 
     const query = `
-    SELECT * 
+    SELECT *
     FROM websites
     WHERE organization_id = $1;
     `;
-    
+
     console.log(query);
 
     db.query(query, [organization_id])  //would be cookie-session here for user_id
@@ -113,15 +113,24 @@ module.exports = (db) => {
           .send(err);
       });
   });
+<<<<<<< HEAD
  
   //=====EDIT ========//
+=======
+
+  //=====EDIT ORG ========//
+>>>>>>> a3adfd3ed428ce0b871bb96e768ecae2306737fc
 
   //Edit Org Page
   router.get("/:organization_id", (req, res) => {
     const organization_id = req.params.organization_id;
 
     const query = `
+<<<<<<< HEAD
     SELECT organization_id, name, logo_url, user_id 
+=======
+    SELECT organization_id, name, logo_url
+>>>>>>> a3adfd3ed428ce0b871bb96e768ecae2306737fc
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
     WHERE user_id = $1 AND organization_id = $2;
@@ -197,7 +206,7 @@ module.exports = (db) => {
     const organization_id = req.params.organization_id;
 
     const query = `
-    DELETE FROM organizations 
+    DELETE FROM organizations
     WHERE id = $1;
     `;
     console.log(query, organization_id);
