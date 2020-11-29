@@ -44,7 +44,7 @@ const orgRoutes = require("./routes/organizations");
 app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/users", usersRoutes(db));
-app.use("/organization/sites", sitesRoutes(db));
+app.use("/organization/:organization_id/sites", sitesRoutes(db));
 app.use("/organizations", orgRoutes(db));
 
 
