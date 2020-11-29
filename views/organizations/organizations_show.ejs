@@ -13,11 +13,12 @@
   <main>
 
         <div>
-          <h3><%=organizations.name %></h3>
+          <h1><%=organizations.name %></h1>
           <img src="<%=organizations.logo_url %>">
         
           <form method="POST" action="/organizations/<%=organizations.organization_id %>">
             <div>
+              <h3>Edit Organization Details</h3>
               <label for="name">Organization Name
               <input type="text" name="name" placeholder="Organization Name">
               </label>
@@ -28,6 +29,33 @@
 
               <button type="submit">Edit</button>
             </div>
+          </form>
+
+          <form method="POST" action="/organizations/<%= organizations.organization_id %>">
+            <div>
+              <h3>Add Users</h3>
+              <label for="email">User Email
+              <input type="text" name="email" placeholder="User Email">
+              </label>
+
+              <button type="submit">Add</button>
+            </div>
+          </form>
+
+          <form method="POST" action="/organizations/<%= organizations.organization_id %>/<%= organizations.user_id %>/delete">
+            <div>
+              <h3>Remove Users</h3>
+              <label for="email">User Email
+              <input type="text" name="email" placeholder="User Email">
+              </label>
+
+              <button type="submit">Remove</button>
+            </div>
+          </form>
+
+          <form method="POST" action="/organizations/<%= organizations.organization_id %>/delete">
+            <h3>Delete Organization</h3>
+            <button type="submit" class="btn btn-outline-danger">Delete</button>
           </form>
 
         </div>

@@ -15,11 +15,14 @@ module.exports = (db) => {
     SELECT organization_id, name, logo_url
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
-    WHERE user_id = $1;
+    WHERE user_id = $1
+    ORDER BY organization_id;
     `;
-    console.log(query, [1]);
 
-    db.query(query, [1])  //would be cookie-session here for user_id
+    const queryParam = [req.session.user_id];
+    console.log(query, queryParam);
+
+    db.query(query, queryParam)  //would be cookie-session here for user_id
       .then(data => {
         const organizations = data.rows;
         res.render("./organizations/organizations", {organizations});
@@ -110,15 +113,15 @@ module.exports = (db) => {
           .send(err);
       });
   });
-
-  //=====EDIT ORG ========//
+ 
+  //=====EDIT ========//
 
   //Edit Org Page
   router.get("/:organization_id", (req, res) => {
     const organization_id = req.params.organization_id;
 
     const query = `
-    SELECT organization_id, name, logo_url
+    SELECT organization_id, name, logo_url, user_id 
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
     WHERE user_id = $1 AND organization_id = $2;
@@ -144,13 +147,37 @@ module.exports = (db) => {
     const organizationName = req.body.name;
     const logoUrl = req.body.logo_url;
 
-    const query = `
-    UPDATE organizations
-    SET name = $1, logo_url = $2
-    WHERE id = $3;
-    `;
+    let query;
+    const queryParams = [];
 
-    const queryParams = [organizationName, logoUrl, organizationId];
+    if (organizationName && logoUrl) {
+      queryParams.push(organizationName, logoUrl, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET name = $1, logo_url = $2
+      WHERE id = $3;
+      `;
+    } else if (organizationName) {
+      queryParams.push(organizationName, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET name = $1
+      WHERE id = $2;
+      `;
+    } else if (logoUrl) {
+      queryParams.push(logoUrl, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET logo_url = $1
+      WHERE id = $2;
+      `;
+    } else {
+      return res.redirect("/organizations");
+    }
+
 
     console.log(query, queryParams);
     db.query(query, queryParams)
@@ -164,7 +191,7 @@ module.exports = (db) => {
       });
   });
 
-
+  
   //delete organization
   router.post("/:organization_id/delete", (req, res) => {
     const organization_id = req.params.organization_id;
@@ -185,6 +212,75 @@ module.exports = (db) => {
       });
   });
 
+  //=====Users========//
+
+  //add users
+  router.post("/:organization_id", (req, res) => {
+    const userEmail = req.body.email;
+
+    const queryOrg = `
+    INSERT INTO user_organizations_role (user_id, organization_id, admin_privileges)
+    VALUES ($1, $2, $3)
+    RETURNING *;
+    `;
+
+    const queryParams = [orgName, logoUrl];
+    console.log(queryOrg, queryParams);
+
+    db.query(queryOrg, queryParams)
+      .then(data => {
+        console.log(data.rows);
+        const organization = data.rows[0];
+        const organization_id = organization.id;
+        return organization_id;
+      })
+      .then(organization_id => {
+        const queryOrgUser = `
+        INSERT INTO user_organizations_role (user_id, organization_id, admin_privileges)
+        VALUES ($1, $2, $3)
+        RETURNING *;
+        `;
+
+        const queryParams = [1, organization_id, "true"];
+
+        db.query(queryOrgUser, queryParams)
+          .then(data => {
+            console.log(data.rows);
+            res.redirect("/organizations");
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .send(err);
+          });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  });
+
+
+  //delete user
+  router.post("/:organization_id/delete", (req, res) => {
+    const organization_id = req.params.organization_id;
+
+    const query = `
+    DELETE FROM organizations 
+    WHERE id = $1;
+    `;
+    console.log(query, organization_id);
+    db.query(query, [organization_id])
+      .then(data => {
+        res.redirect("/organizations");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  });
 
 
   return router;
