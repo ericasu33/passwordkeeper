@@ -15,7 +15,8 @@ module.exports = (db) => {
     SELECT organization_id, name, logo_url 
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
-    WHERE user_id = $1;
+    WHERE user_id = $1
+    ORDER BY organization_id;
     `;
     console.log(query, [1]);
 
@@ -144,13 +145,37 @@ module.exports = (db) => {
     const organizationName = req.body.name;
     const logoUrl = req.body.logo_url;
 
-    const query = `
-    UPDATE organizations
-    SET name = $1, logo_url = $2
-    WHERE id = $3;
-    `;
+    let query;
+    const queryParams = [];
 
-    const queryParams = [organizationName, logoUrl, organizationId];
+    if (organizationName && logoUrl) {
+      queryParams.push(organizationName, logoUrl, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET name = $1, logo_url = $2
+      WHERE id = $3;
+      `;
+    } else if (organizationName) {
+      queryParams.push(organizationName, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET name = $1
+      WHERE id = $2;
+      `;
+    } else if (logoUrl) {
+      queryParams.push(logoUrl, organizationId);
+
+      query = `
+      UPDATE organizations
+      SET logo_url = $1
+      WHERE id = $2;
+      `;
+    } else {
+      return res.redirect("/organizations");
+    }
+
 
     console.log(query, queryParams);
     db.query(query, queryParams)
