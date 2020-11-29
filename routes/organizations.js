@@ -111,6 +111,26 @@ module.exports = (db) => {
  
  
   //delete organization
-  router.post;
+  router.post("/:organization_id/delete", (req, res) => {
+    const organization_id = req.params.organization_id;
+
+    const query = `
+    DELETE FROM organizations 
+    WHERE id = $1;
+    `;
+    console.log(query, organization_id);
+    db.query(query, [organization_id])
+      .then(data => {
+        res.redirect("/organizations");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  });
+
+
+
   return router;
 };
