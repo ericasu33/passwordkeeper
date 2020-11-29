@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
   <%- include('../partials/_head') %>
 
   <title>PasswordKeeper - Edit Organization</title>
@@ -13,16 +15,17 @@
   <main>
 
         <div>
-          <h1><%=organizations.name %></h1>
-          <img src="<%=organizations.logo_url %>">
+          <h1><%=organization.org_name %></h1>
+          <img src="<%=organization.logo_url %>">
         
-          <form method="POST" action="/organizations/<%=organizations.organization_id %>">
+          <form method="POST" action="/organizations/<%=organization.organization_id %>">
+
             <div>
               <h3>Edit Organization Details</h3>
-              <label for="name">Organization Name
-              <input type="text" name="name" placeholder="Organization Name">
+              <label for="orgName">Organization Name
+              <input type="text" name="orgName" placeholder="Organization Name">
               </label>
-
+              
               <label for="logo_url">Organization Logo Image URL 
               <input type="text" name="logo_url" placeholder="http://">
               </label>
@@ -31,31 +34,45 @@
             </div>
           </form>
 
-          <form method="POST" action="/organizations/<%= organizations.organization_id %>">
+          <form method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
             <div>
               <h3>Add Users</h3>
               <label for="email">User Email
-              <input type="text" name="email" placeholder="User Email">
+              <input type="text" name="email" placeholder="User Email" required>
               </label>
 
               <button type="submit">Add</button>
             </div>
           </form>
 
-          <form method="POST" action="/organizations/<%= organizations.organization_id %>/<%= organizations.user_id %>/delete">
-            <div>
-              <h3>Remove Users</h3>
-              <label for="email">User Email
-              <input type="text" name="email" placeholder="User Email">
-              </label>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">User ID</th>
+                <th scope="col">User Name</th>
+                <th scope="col">User Email</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (const user in users) { %>
+              <tr>
+                  <td><%= users[user].id %></td>
+                  <td><%= users[user].name %></td>
+                  <td><%= users[user].email %></td>
+                  <td>
+                    <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
+                      <button type="submit" class="btn btn-outline-danger">Remove</button>
+                    </form>
+                  </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>  
 
-              <button type="submit">Remove</button>
-            </div>
-          </form>
-
-          <form method="POST" action="/organizations/<%= organizations.organization_id %>/delete">
+          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete">
             <h3>Delete Organization</h3>
-            <button type="submit" class="btn btn-outline-danger">Delete</button>
+            <button type="submit">Delete</button>
           </form>
 
         </div>

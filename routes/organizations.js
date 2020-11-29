@@ -6,11 +6,16 @@
 
 const express = require('express');
 const router  = express.Router();
+const { isUrl } = require('../public/scripts/organization_setting');
+
+const methodOverride = require('method-override');
+router.use(methodOverride('_method'));
 
 module.exports = (db) => {
 
   //sees all organizations user belongs to
   router.get("/", (req, res) => {
+    console.log;
     let query = `
     SELECT organization_id, name, logo_url
     FROM organizations
@@ -70,6 +75,11 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const orgName = req.body.name;
     const logoUrl = req.body.logo_url;
+    const error = true;
+
+    if (!isUrl(logoUrl) || !logoUrl) {
+      return res.render("./organizations/organizations_new", { error });
+    }
 
     const queryOrg = `
     INSERT INTO organizations (name, logo_url)
@@ -113,25 +123,53 @@ module.exports = (db) => {
           .send(err);
       });
   });
- 
-  //=====EDIT ========//
 
   //Edit Org Page
   router.get("/:organization_id", (req, res) => {
-    const organization_id = req.params.organization_id;
+    const organizationId = req.params.organization_id;
+    const userId = req.session.user_id;
 
+    //get org info
     const query = `
-    SELECT organization_id, name, logo_url, user_id 
+    SELECT organization_id, organizations.name AS org_name, logo_url, user_id
     FROM organizations
     JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
     WHERE user_id = $1 AND organization_id = $2;
     `;
 
-    db.query(query, [1, organization_id])  //would be cookie-session here for user_id
+    db.query(query, [userId, organizationId])
       .then(data => {
-        const organizations = data.rows[0];
-        console.log(organizations);
-        res.render("./organizations/organizations_show", { organizations });
+        const organization = data.rows[0];
+        console.log("DATAAAA", organization);
+        return organization;
+      })
+      .then(organization => {
+
+        //get all users that belongs to this org
+        const queryUsers = `
+        SELECT users.id, name, email
+        FROM users
+        JOIN user_organizations_role ON user_organizations_role.user_id = users.id
+        WHERE organization_id = $1
+        `;
+
+        const queryParams = [organization.organization_id];
+
+        db.query(queryUsers, queryParams)
+          .then(data => {
+            const users = data.rows;
+            console.log("WHATS HERE in USERS??", users);
+            const templateVars = {
+              organization,
+              users,
+            };
+            res.render("./organizations/organizations_show", templateVars);
+          })
+          .catch(err => {
+            res
+              .status(500)
+              .send(err);
+          });
       })
       .catch(err => {
         res
@@ -144,8 +182,14 @@ module.exports = (db) => {
   //edit organization
   router.post("/:organization_id", (req, res) => {
     const organizationId = req.params.organization_id;
-    const organizationName = req.body.name;
+    const organizationName = req.body.orgName;
     const logoUrl = req.body.logo_url;
+
+    // const error = true;
+
+    // if (!isUrl(logoUrl) || !logoUrl) {
+    //   return res.render("./organizations/organizations_show", { error });
+    // }
 
     let query;
     const queryParams = [];
@@ -175,14 +219,14 @@ module.exports = (db) => {
       WHERE id = $2;
       `;
     } else {
-      return res.redirect("/organizations");
+      return res.redirect(`/organizations/${organizationId}`);
     }
 
 
     console.log(query, queryParams);
     db.query(query, queryParams)
       .then(data => {
-        res.redirect("/organizations");
+        res.redirect(`/organizations/${organizationId}`);
       })
       .catch(err => {
         res
@@ -215,38 +259,69 @@ module.exports = (db) => {
   //=====Users========//
 
   //add users
-  router.post("/:organization_id", (req, res) => {
+  router.put("/:organization_id", (req, res) => {
+    console.log("ARE WE IN PUT??");
     const userEmail = req.body.email;
+    const organizationId = req.params.organization_id;
 
-    const queryOrg = `
-    INSERT INTO user_organizations_role (user_id, organization_id, admin_privileges)
-    VALUES ($1, $2, $3)
-    RETURNING *;
+    if (!userEmail) {
+
+      res.redirect(`/organizations/${organizationId}`);
+    }
+
+    const queryUser = `
+    SELECT id
+    FROM users
+    WHERE email = $1
     `;
+    const queryParams = [userEmail];
 
-    const queryParams = [orgName, logoUrl];
-    console.log(queryOrg, queryParams);
-
-    db.query(queryOrg, queryParams)
+    db.query(queryUser, queryParams)
       .then(data => {
         console.log(data.rows);
-        const organization = data.rows[0];
-        const organization_id = organization.id;
-        return organization_id;
+        const user = data.rows[0];
+        const userId = user.id;
+        return userId;
       })
-      .then(organization_id => {
-        const queryOrgUser = `
-        INSERT INTO user_organizations_role (user_id, organization_id, admin_privileges)
-        VALUES ($1, $2, $3)
-        RETURNING *;
+      .then(userId => {
+        console.log("HERE IS USERID", userId);
+
+        const queryIfExist = `
+        SELECT id 
+        FROM user_organizations_role
+        WHERE user_id = $1 AND organization_id = $2;
         `;
 
-        const queryParams = [1, organization_id, "true"];
+        const queryParams = [userId, organizationId];
 
-        db.query(queryOrgUser, queryParams)
+        db.query(queryIfExist, queryParams)
           .then(data => {
-            console.log(data.rows);
-            res.redirect("/organizations");
+            if (data.rows[0]) {
+              console.log("I EXIST!!!");
+              res.redirect(`/organizations/${organizationId}`); // make render error display later
+            } else {
+              console.log("Nope...nothing here, INSERT!");
+
+              const query = `
+              INSERT INTO user_organizations_role (user_id, organization_id, admin_privileges)
+              VALUES ($1, $2, $3)
+              RETURNING *
+              `;
+
+              const queryParams = [userId, organizationId, "false"];
+
+              db.query(query, queryParams)
+                .then(data => {
+                  console.log(data.rows);
+                  res.redirect(`/organizations/${organizationId}`);
+                  // make render success display later
+                })
+                .catch(err => {
+                  res
+                    .status(500)
+                    .send(err);
+                });
+            }
           })
           .catch(err => {
             res
@@ -263,17 +338,22 @@ module.exports = (db) => {
 
 
   //delete user
-  router.post("/:organization_id/delete", (req, res) => {
-    const organization_id = req.params.organization_id;
-
+  router.delete("/:organization_id/:user_id/delete", (req, res) => {
+    const organizationId = req.params.organization_id;
+    const userId = req.params.user_id;
+    
     const query = `
-    DELETE FROM organizations 
-    WHERE id = $1;
+    DELETE FROM user_organizations_role 
+    WHERE organization_id = $1 AND user_id = $2;
     `;
-    console.log(query, organization_id);
-    db.query(query, [organization_id])
+
+    const queryParams = [organizationId, userId];
+
+    console.log("WHAT TF IS DELETED...", query, queryParams);
+
+    db.query(query, queryParams)
       .then(data => {
-        res.redirect("/organizations");
+        res.redirect(`/organizations/${organizationId}`); //make render sucecss?
       })
       .catch(err => {
         res

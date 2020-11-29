@@ -47,6 +47,12 @@
             <input type="text" name="name" placeholder="Organization Name">
             </label>
 
+            <% if (locals.error) { %>
+              <div>
+                <p> Please input a valid url </p>
+              </div>
+            <% } %>
+
             <label for="logo_url">Organization Logo Image URL 
             <input type="text" name="logo_url" placeholder="http://">
             </label>
