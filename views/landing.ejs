@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PasswordKeeper</title>
+
+  <!-- CSS (load bootstrap from a CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles//sass/landing.css" type="text/css" />
+  <style>
+      body { padding-top:50px; }
+  </style>
+
+</head>
+<body class="container">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">PasswordKeeper</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id= "link" type="button" scroll-behaviour: smooth;>About</a>
+      </li>
+      <li>
+        <a class="nav-link" href="/registration">Register</a>
+      </li>
+      <li>
+        <button class="nav-button" onclick="myFunction()">
+        Login
+        </button>
+
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+    <div id="login" style= "display: none">
+      <%- include('user_login') %>
+    </div>
+    <div class="jumbotron">
+        <h1>Keep your password safe with us</h1>
+        <p>Welcome to PasswordKeeper</p>
+        <img src = "/images/home-pic1.jpg"  class="img-thumbnail"/>
+    </div>
+
+    <div class="container-fluid">
+      <div>
+        <p><b>What is a password manager?</b></p>
+        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit necessitatibus iste facere, quae perferendis architecto, id cumque maiores minima maxime consectetur deleniti voluptates reiciendis? Optio atque provident in non magnam?</p>
+      </div>
+      <img src = "/images/1.jpg"  class="img-thumbnail"/>
+    </div>
+
+</main>
+
+<footer>
+  <p class="text-center text-muted">© Copyright 2020 The Awesome People</p>
+</footer>
+
+<script>
+  function myFunction() {
+    const x = document.getElementById("login");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
+
+</body>
+</html>
