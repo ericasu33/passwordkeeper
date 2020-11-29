@@ -21,8 +21,8 @@ module.exports = (db) => {
     db.query(query, [req.session.user_id])
       .then(data => {
         const users = data.rows;
-        console.log('LOOKING HERE:', users);
-        console.log(users[0].email);
+        //console.log('LOOKING HERE:', users);
+        //console.log(users[0].email);
         res.render('user_login', { users });
         //res.json('/users', { users });
       })
@@ -35,37 +35,15 @@ module.exports = (db) => {
 
 
   router.get('/:id', (req, res) => {
-    res.redirect('/users');
+    res.redirect('/organizations');
   });
-  /* const addUser =  function(user) {
-    const data = [user.name, user.email, user.password];
-    db.query(`
-    INSERT INTO users(name, email, password)
-    VALUES ($1, $2, $3) RETURNING *;
-    `, data)
-      .then(res => {
-        if (res.rows[0].name || res.rows[0].email) {
-          return res.rows[0];
-        } else {
-          return null;
-        }
 
-      });
-  };
-
-  router.get("/register", (req, res) => {
-    const user = req.body;
-    addUser(user)
-      .then(user => {
-        if (!user) {
-          res.send({error: "error"});
-          return;
-        }
-        req.session.userId = user.id;
-        res.send("🤗");
-      });
-    res.render("urls_register", templateVars);
+  router.post('/logout', (req, res) => {
+    req.session.userId = null;
+    res.send({});
   });
+
+  /*
  */
 
 
@@ -121,7 +99,4 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
-  router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.send({});
-  }); */
+*/
