@@ -19,7 +19,7 @@ module.exports = (db) => {
     `;
     console.log(query, [1]);
 
-    db.query(query, [1])
+    db.query(query, [1])  //would be cookie-session here for user_id
       .then(data => {
         const organizations = data.rows;
         res.render("organizations", {organizations});
@@ -41,7 +41,7 @@ module.exports = (db) => {
     `;
     console.log(query);
 
-    db.query(query, [1])
+    db.query(query, [1])  //would be cookie-session here for user_id
       .then(data => {
         const organizations = data.rows;
         console.log(organizations);
@@ -54,7 +54,7 @@ module.exports = (db) => {
       });
   });
 
-
+  //====NEW ORG=====//
 
   router.get("/new", (req, res) => {
     res.render("organizations_new");
@@ -109,7 +109,60 @@ module.exports = (db) => {
       });
   });
  
- 
+  //=====EDIT ORG ========//
+
+  //Edit Org Page
+  router.get("/:organization_id", (req, res) => {
+    const organization_id = req.params.organization_id;
+
+    const query = `
+    SELECT organization_id, name, logo_url 
+    FROM organizations
+    JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
+    WHERE user_id = $1 AND organization_id = $2;
+    `;
+
+    db.query(query, [1, organization_id])  //would be cookie-session here for user_id
+      .then(data => {
+        const organizations = data.rows[0];
+        console.log(organizations);
+        res.render("organizations_show", { organizations });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+
+  });
+
+  //edit organization
+  router.post("/:organization_id", (req, res) => {
+    const organizationId = req.params.organization_id;
+    const organizationName = req.body.name;
+    const logoUrl = req.body.logo_url;
+
+    const query = `
+    UPDATE organizations
+    SET name = $1, logo_url = $2
+    WHERE id = $3;
+    `;
+
+    const queryParams = [organizationName, logoUrl, organizationId];
+
+    console.log(query, queryParams);
+    db.query(query, queryParams)
+      .then(data => {
+        res.redirect("/organizations");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  });
+
+
   //delete organization
   router.post("/:organization_id/delete", (req, res) => {
     const organization_id = req.params.organization_id;
