@@ -16,27 +16,24 @@ router.use(cookieSession({
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM users WHERE id = $1`;
-    //console.log(req.session.user_id);
-    db.query(query, [req.session.user_id])
+    res.render('user_login');
+  });
+  router.post("/", (req, res) => {
+    const query = `
+    SELECT * FROM users WHERE email = $1;
+    `;
+    const queryParams = [req.body.email];
+    db.query(query, queryParams)
       .then(data => {
-        const users = data.rows;
-        //console.log('LOOKING HERE:', users);
-        //console.log(users[0].email);
-        res.render('user_login', { users });
-        //res.json('/users', { users });
+        const user = data.rows[0];
+        req.session.user_id = user.id;
+        res.redirect('/organizations');
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
-  });
-
-
-  router.get('/:id', (req, res) => {
-    res.redirect('/organizations');
-  });
 
   router.post('/logout', (req, res) => {
     req.session.userId = null;

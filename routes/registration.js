@@ -1,11 +1,7 @@
 const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
 const express = require('express');
 const router  = express.Router();
-router.use(cookieSession({
-  name: 'session',
-  keys: ["lilduck"],
-}));
+
 
 module.exports = (db) => {
   const addUser =  function(user) {

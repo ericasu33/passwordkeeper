@@ -6,9 +6,12 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
 const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
+
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -22,6 +25,10 @@ db.connect();
 app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
+app.use(cookieSession({
+  name: 'session',
+  keys: ["lilduck"],
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/styles", sass({
@@ -35,7 +42,7 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const widgetsRoutes = require("./routes/widgets");
-const usersRoutes = require("./routes/users");
+const usersRoutes = require("./routes/login");
 const sitesRoutes = require("./routes/sites");
 const orgRoutes = require("./routes/organizations");
 
@@ -43,7 +50,7 @@ const orgRoutes = require("./routes/organizations");
 // Note: Feel free to replace the example routes below with your own
 app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/users", usersRoutes(db));
+app.use("/login", usersRoutes(db));
 app.use("/organization/:organization_id/sites", sitesRoutes(db));
 app.use("/organizations", orgRoutes(db));
 
