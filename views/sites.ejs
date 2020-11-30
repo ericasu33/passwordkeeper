@@ -3,6 +3,7 @@
   <head>
     <%- include('partials/_head') %>
 
+
     <!-- Bootstrap CSS -->
     <link href="/styles/layout.css" rel="stylesheet" type="text/css">
 
@@ -15,35 +16,7 @@
   </head>
 
   <body>
-    <header>
-      <nav>
-        <div>
-          LOGO
-        </div>
-
-        <div class='dropdown'>
-          <button>
-            Categories (icon)
-          </button>
-          <div class='dropdown-content'>
-            <a href ='#'> Cat1</a>
-            <a href ='#'> Cat2</a>
-            <a href ='#'> Cat3</a>
-          </div>
-        </div>
-
-        <div class='nav-right'>
-          <div>Favourites Icon</div>
-          <div>User_Email(tempVar)</div>
-          <div>
-            <form method="POST" action="/logout">
-              <button type="submit">Log Out</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-    </header>
+     <header><%- include('partials/header') %></header>
 
     <main>
       <h1> Category </h1>
@@ -57,42 +30,75 @@
             <div class="card-header"><%= sites[site].name %></div>
             <div class="card-body">
               <img src="<%= sites[site].image_url %>" alt="site logo image" /><br>
-              <%= sites[site].name %><br>
-              <%= sites[site].login_url %>
-                <br>
-
-              <a href="/organization/:organization_id/sites/<%= sites[site].name %>"><button class="btn btn-info" >Update</button></a>
-
-              <form method="POST" action="/organization/:organization_id/sites/<%= sites[site].name %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
+              <%= sites[site].login_url %><br>
+              <div class="site-info">
+                <span>Username: <input type="text" id="<%= sites[site].username %>" size="10" value="<%= sites[site].username %>"></span>
+                <!-- The button used to copy the text -->
+                <button onclick="myFunction('<%= sites[site].username %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+                <span>Password: <input type="text" id="<%= sites[site].password %>" size="10" value="<%= sites[site].password %>"></span>
+                <!-- The button used to copy the text -->
+                <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
               </div>
 
-             <div class="card-footer text-muted"></div>
+              <div id="buttons">
+                <a href="/organization/:organization_id/sites/<%= sites[site].name %>"><button class="btn btn-info" >Update</button></a>
+
+                <form method="POST" action="/organization/:organization_id/sites/<%= sites[site].name %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
+                </div>
+              </div>
+
+
           </div>
 
 
           <% } %>
-        </div>
+      </div>
 
-      <h2> Add New Site </h2>
-      <form method="POST" action="/organization/:organization_id/sites">
-        <label for="newsite">Site name: </label>
-          <input class="form-control" type="text" name="name" placeholder="http://" style="width: 300px; margin: 1em">
-        <label for="username">username: </label>
-          <input class="form-control" type="text" name="username" placeholder="Jane Doe"  style="width: 300px; margin: 1em">
-        <label for="email">email: </label>
-          <input class="form-control" type="text" name="email" placeholder="abc@example.com"  style="width: 300px; margin: 1em">
-        <label for="password">password: </label>
-          <input class="form-control" type="password" name="password" style="width: 300px; margin: 1em">
-        <label for="category">category: </label>
-          <input class="form-control" type="text" name="category" style="width: 300px; margin: 1em">
-        <button type="submit">Add Site</button>
-      </form>
+
+      <div class="add-new">
+        <h2> Add New Site </h2>
+        <form method="POST" action="/organization/:organization_id/sites">
+          <label for="newsite">Site name: </label>
+            <input class="form-control" type="text" name="name" placeholder="http://" style="width: 300px; margin: 1em">
+          <label for="username">username: </label>
+            <input class="form-control" type="text" name="username" placeholder="Jane Doe"  style="width: 300px; margin: 1em">
+          <label for="email">email: </label>
+            <input class="form-control" type="text" name="email" placeholder="abc@example.com"  style="width: 300px; margin: 1em">
+          <label for="password">password: </label>
+            <input class="form-control" type="password" name="password" style="width: 300px; margin: 1em">
+          <label for="category">category: </label>
+            <input class="form-control" type="text" name="category" style="width: 300px; margin: 1em">
+          <button type="submit">Add Site</button>
+        </form>
+      </div>
+
 
     </main>
 
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <script type="text/javascript">
+      function myFunction(element) {
+        console.log("copy text")
+        /* Get the text field */
+        var copyText = document.getElementById(element);
+        console.log(copyText)
+
+        /* Select the text field */
+        copyText.focus();
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the text: " + copyText.value);
+      }
+    </script>
+
 
     <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
