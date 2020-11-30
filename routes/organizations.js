@@ -64,7 +64,7 @@ module.exports = (db) => {
       .then(orgId => {
         return database.linkUserToOrganization(db, userId, orgId)
           .then(data => {
-            res.redirect("/organizations");
+            res.send("😊");
           });
       })
       .catch(err => {

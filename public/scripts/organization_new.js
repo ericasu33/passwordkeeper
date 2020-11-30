@@ -23,23 +23,20 @@ $(document).ready(function() {
       return;
     }
 
-    if (!isUrl(urlContent)) {
+    if (urlContent && !isUrl(urlContent)) {
       $(".invalid-url").show();
       $("#logo-url").focus();
       return;
     }
-
+    
     $.ajax({
       method: "POST",
       url: "/organizations",
       data: $("#add-org").serialize(),
-    });
-    // .then(function() {
-    //   return $.ajax({
-    //     method: "GET",
-    //     url: "/organizations",
-    //   });
-    // });
+    })
+      .then(function() {
+        window.location.href = '/organizations';
+      });
   });
 
   // Remove error message once validation passes
