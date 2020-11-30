@@ -41,7 +41,7 @@ module.exports = (db) => {
     db.query(query, params)
       .then(data => {
         console.log(data.rows[0]);
-        res.redirect("/organization/sites");
+        res.redirect("/organization/:organization_id/sites");
       })
       .catch(err => {
         console.log(err);
@@ -62,7 +62,7 @@ module.exports = (db) => {
     db.query(query, site)
       .then(data => {
         console.log(data.rows[0]);
-        res.redirect("/organization/sites");
+        res.redirect("/organization/:organization_id/sites");
       })
       .catch(err => {
         console.log(err);
@@ -110,7 +110,7 @@ module.exports = (db) => {
       .then(data => {
         console.log(data.rows[0]);
         //res.json (data.rows[0])
-        res.redirect("/organization/sites");
+        res.redirect("/organization/:organization_id/sites");
       })
       .catch(err => {
         console.log(err);
