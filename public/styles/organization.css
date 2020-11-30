@@ -9,3 +9,10 @@
   width: 300px;
   height: 300px;
 }
+
+.error-min-input,
+.invalid-url {
+  display: none;
+  color: #ff5f54;
+  font-size: 1.563rem;
+}

@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const path = require('path');
 const { isUrl } = require('../db/helpers/organizations/helper_functions');
 const database = require('../db/helpers/organizations/export_all');
 
@@ -41,6 +42,7 @@ module.exports = (db) => {
 
   router.get("/new", (req, res) => {
     res.render("./organizations/organizations_new");
+    // res.sendFile('/vagrant/passwordkeeper/public/organizations_new.html');
   });
 
 
