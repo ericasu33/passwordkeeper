@@ -12,19 +12,15 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    res.render('user_registration');
+    res.redirect('/');
   });
 
-  router.post("/", (req, res) => {
+  router.post("/register", (req, res) => {
     const query = `
-    INSERT INTO users(name, email, password)
-    VALUES ($1, $2, $3) RETURNING *;
-  `;
-    const queryParams = [req.body.name, req.body.email, req.body.password];
-    db.query(`
-    INSERT INTO users(name, email, password)
-    VALUES ($1, $2, $3) RETURNING *;
-  `, queryParams)
+    SELECT * FROM users WHERE email = $1;
+    `;
+    const queryParams = [req.body.email];
+    db.query(query, queryParams)
       .then(data => {
         const user = data.rows[0];
         req.session.user_id = user.id;
