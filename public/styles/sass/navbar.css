@@ -1,0 +1,69 @@
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  height: 90;
+  color: white;
+  scroll-padding-bottom: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+header .navbar {
+  margin: 0 0 10px 0;
+}
+
+header .Register-Login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header .nav-button {
+  color: rgba(0, 0, 0, 0.5);
+  border: none;
+  background-color: #f8f9fa !important;
+}
+
+.container-fluid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: #e9ecef;
+  padding: 4rem 2rem;
+}
+
+.container-fluid .description {
+  padding-right: 20px;
+}
+
+.container-fluid .img-thumbnail {
+  width: auto;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.error-container {
+  color: #e9ecef;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-color: red;
+  border: solid;
+  background-color: white;
+  width: 100px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+/*# sourceMappingURL=navbar.css.map */

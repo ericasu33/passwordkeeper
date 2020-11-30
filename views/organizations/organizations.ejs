@@ -51,16 +51,16 @@
           </div>
         </button>
       </form>
-    <% if (organizations[organization].admin_privileges) { %>  
+    <% if (organizations[organization].admin_privileges) { %>
       <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
         <button type="submit">Settings</button>
       </form>
     <% } %>
   <% } %>
 
-    <a href = "/organizations/new"> 
+    <a href = "/organizations/new">
       <button type="submit">Add</button>
-    </a> 
+    </a>
     </main>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>

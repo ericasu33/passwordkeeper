@@ -6,10 +6,12 @@
 
   <!-- CSS (load bootstrap from a CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css" />
   <style>
       body { padding-top:50px; }
   </style>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/login-register.js"></script>
 
 </head>
 <body class="container">
@@ -22,10 +24,10 @@
         <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id= "link" type="button" scroll-behaviour: smooth;>About</a>
+        <a class="nav-link" id= "link" type="button" href= '#about' scroll-behaviour: smooth;>About</a>
       </li>
       <li class="Register-Login">
-        <button class="nav-button" onclick="myFunction()">
+        <button class="nav-button">
         Register/Login
         </button>
       </li>
@@ -44,7 +46,7 @@
         <img src = "/images/home-pic1.jpg"  class="img-thumbnail"/>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid" id='about'>
       <div>
         <p><b>What is a password manager?</b></p>
         <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit necessitatibus iste facere, quae perferendis architecto, id cumque maiores minima maxime consectetur deleniti voluptates reiciendis? Optio atque provident in non magnam?</p>
@@ -57,17 +59,6 @@
 <footer>
   <p class="text-center text-muted">© Copyright 2020 The Awesome People</p>
 </footer>
-
-<script>
-  function myFunction() {
-    const x = document.getElementById("login");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-  </script>
 
 </body>
 </html>

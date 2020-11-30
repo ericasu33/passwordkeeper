@@ -4,38 +4,16 @@
     <%- include('partials/_head') %>
 
     <title>PasswordKeeper - Home </title>
+    <link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css" />
+
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   </head>
 
   <body>
-    <header>
-      <nav>
-        <div>
-          LOGO
-        </div>
-
-        <div class='dropdown'>
-          <button>
-            Categories (icon)
-          </button>
-          <div class='dropdown-content'>
-            <a href ='#'> Cat1</a>
-            <a href ='#'> Cat2</a>
-            <a href ='#'> Cat3</a>
-          </div>
-        </div>
-
-        <div class='nav-right'>
-          <div>Favourites Icon</div>
-          <div>User_Email(tempVar)</div>
-          <div>
-            <form method="POST" action="/logout">
-              <button type="submit">Log Out</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-    </header>
+    <%- include('../partials/header') %>
 
     <main>
       <h1> Landed </h1>

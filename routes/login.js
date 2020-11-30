@@ -12,7 +12,7 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    res.render('user_login');
+    res.redirect('/');
   });
 
   router.post("/", (req, res) => {
@@ -35,8 +35,7 @@ module.exports = (db) => {
   });
 
   router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.send({});
+    res.redirect('/');
   });
 
 

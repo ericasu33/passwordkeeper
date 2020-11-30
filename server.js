@@ -44,6 +44,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const widgetsRoutes = require("./routes/widgets");
 const loginRoutes = require("./routes/login");
+const registerRoutes = require("./routes/login");
 const sitesRoutes = require("./routes/sites");
 const orgRoutes = require("./routes/organizations");
 
@@ -52,6 +53,7 @@ const orgRoutes = require("./routes/organizations");
 app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/login", loginRoutes(db));
+app.use("/login", registerRoutes(db));
 app.use("/organization/:organization_id/sites", sitesRoutes(db));
 app.use("/organizations", orgRoutes(db));
 
