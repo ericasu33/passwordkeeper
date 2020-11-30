@@ -1,0 +1,11 @@
+.site {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #000000;
+  margin: 20px;
+}
+
+.logo-image {
+  width: 300px;
+  height: 300px;
+}
