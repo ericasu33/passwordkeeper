@@ -1,15 +1,28 @@
 const express = require('express');
 const router  = express.Router();
-const path = require('path');
 const { isUrl } = require('../db/helpers/organizations/helper_functions');
 const database = require('../db/helpers/organizations/export_all');
 
 module.exports = (db) => {
 
+  //=====Middleware=====//
+
+  const unauthorized = (req, res, next) => {
+    database.getUser(db, req.session.user_id)
+      .then(user => {
+        if (!user) {
+          console.log("DID AUTH KICK IN??", user);
+          return res.status(401).redirect('/');
+        } else {
+          next();
+        }
+      });
+  };
+
   //=====ORGANIZATIONS=====//
 
   //User sees all the organizations user belongs to
-  router.get("/", (req, res) => {
+  router.get("/", unauthorized, (req, res) => {
     const userId = req.session.user_id;
 
     database.getOrganizations(db, userId)
@@ -64,7 +77,9 @@ module.exports = (db) => {
       .then(orgId => {
         return database.linkUserToOrganization(db, userId, orgId)
           .then(data => {
-            res.send("😊");
+            res.status(200).send({
+              result: 'redirect',
+              url:'/organization'});
           });
       })
       .catch(err => {
@@ -157,16 +172,19 @@ module.exports = (db) => {
             .then(data => {
               const user = data.rows[0];
               if (user) {
-                return res.status(406).redirect(`/organizations/${organizationId}`);
+                database.resSendError(res, organizationId);
               } else {
                 return database.addUserToOrganization(db, userId, organizationId)
                   .then(data => {
-                    res.redirect(`/organizations/${organizationId}`);
+                    res.status(200).send({
+                      result: 'redirect',
+                      url:`/organization/${organizationId}`
+                    });
                   });
               }
             });
         } else {
-          return res.status(406).redirect(`/organizations/${organizationId}`);
+          database.resSendError(res, organizationId);
         }
       })
       .catch(err => {
@@ -175,7 +193,6 @@ module.exports = (db) => {
           .send(err);
       });
   });
-
 
   // Delete user
   router.delete("/:organization_id/:user_id/delete", (req, res) => {
