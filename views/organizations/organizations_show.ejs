@@ -20,7 +20,8 @@
 
         <div>
           <h1><%=organization.org_name %></h1>
-          <img src="<%=organization.logo_url %>">
+
+          <img class="logo-image" src="<%=organization.logo_url %>">
 
           <form method="POST" action="/organizations/<%=organization.organization_id %>">
 
@@ -30,8 +31,10 @@
               <label for="orgName">Organization Name
               <input type="text" name="orgName" placeholder="Organization Name">
               </label>
+
               <label for="logo_url">Organization Logo Image URL
-              <input type="text" class= "logo-url" name="logo_url" placeholder="http://">
+              <span>(auto resize to 300 x 300)</span>
+              <input type="text" name="logo_url" placeholder="http://">
               </label>
 
               <button type="submit" class="edit-url">Edit</button>
@@ -42,7 +45,7 @@
             <div>
               <h3>Add Users</h3>
               <label for="email">User Email
-              <input type="text" name="email" placeholder="User Email" required>
+              <input type="email" name="email" placeholder="User Email" required>
               </label>
 
               <button type="submit">Add</button>
@@ -65,24 +68,30 @@
                   <td><%= users[user].name %></td>
                   <td><%= users[user].email %></td>
                   <td>
+                  <% if (users[user].admin_privileges !== true)  { %>
                     <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
-                      <button type="submit" class="btn btn-outline-danger">Remove</button>
+                      <button type="submit"
+                      id="user-delete" class="btn btn-outline-danger">Remove</button>
                     </form>
+                    <% } %>
                   </td>
               </tr>
               <% } %>
             </tbody>
           </table>
 
-          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete">
+          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
             <h3>Delete Organization</h3>
             <button type="submit">Delete</button>
           </form>
-
         </div>
-
   </main>
-  <script type="text/javascript" src="about.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+  <footer>
+    <a href="/organizations">
+      <button type="submit">My Organizations</button>
+    </a>
+  </footer>
 </body>
 </html>

@@ -41,20 +41,21 @@
     <main>
       <div>
         <h3>Add Organization</h3>
-        <form method="POST" action="/organizations">
+        <form id="add-org" method="POST" action="/organizations">
           <div>
             <label for="name">Organization Name
-            <input type="text" name="name" placeholder="Organization Name">
+              <div class="error-min-input">
+                <p> &#9888 Invalid. Minimum character length is 1 (one). </p>
+              </div>
+              <input id="org-name" type="text" name="name" placeholder="Organization Name">
             </label>
 
-            <% if (locals.error) { %>
-              <div>
-                <p> Please input a valid url </p>
+            <label for="logo_url">Organization Logo Image URL
+              <span>(auto resize to 300 x 300)</span>
+              <div class="invalid-url">
+                <p> &#9888 Invalid Url. </p>
               </div>
-            <% } %>
-
-            <label for="logo_url">Organization Logo Image URL 
-            <input type="text" name="logo_url" placeholder="http://">
+            <input id="logo-url" type="text" name="logo_url" placeholder="http://">
             </label>
 
             <button type="submit">Add</button>
@@ -63,6 +64,14 @@
      </div>
     </main>
 
+    <footer>
+      <a href="/organizations">
+        <button type="submit">My Organizations</button>
+      </a>
+    </footer>
     
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/organization_new.js"></script>
   </body>
 </html>

@@ -28,3 +28,8 @@ $(document).ready(function() {
   editButton();
 });
 
+
+
+<script type="text/javascript" src="about.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+

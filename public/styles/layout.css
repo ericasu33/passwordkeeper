@@ -1,0 +1,35 @@
+body {
+  background-color: #EEE;
+}
+
+body h1 {
+  color: #244751;
+}
+
+main {
+  background-color: pink;
+}
+
+.sites {
+  background-color: blue;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+
+}
+
+.site-entry {
+  width: 30%;
+  margin: 5px;
+}
+
+.card-header{
+  font-weight: bold;
+}
+
+
+.btn {
+  margin: 15px;
+}
+
