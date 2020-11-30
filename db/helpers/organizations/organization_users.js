@@ -1,3 +1,11 @@
+const resSendError = (res, orgId) => {
+  res.status(406).send({
+    error: 'User is already a member',
+    result: 'redirect',
+    url:`/organization/${orgId}`
+  });
+};
+
 const findRegisteredUser = (db, userEmail) => {
   const query = `
   SELECT id
@@ -55,4 +63,5 @@ module.exports = {
   findUserInOrganization,
   addUserToOrganization,
   deleteUser,
+  resSendError,
 };

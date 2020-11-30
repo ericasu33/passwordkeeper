@@ -22,8 +22,7 @@ const createOrganization = (db, orgName, logoUrl) => {
 
   return db.query(query, queryParams)
     .then(data => {
-      const organization = data.rows[0];
-      const organizationId = organization.id;
+      const organizationId = data.rows[0].id;
       return organizationId;
     });
 
@@ -39,10 +38,7 @@ const linkUserToOrganization = (db, userId, orgId) => {
   const queryParams = [userId, orgId, "true"];
 
   return db.query(query, queryParams)
-    .then(data => {
-      console.log(data.rows);
-      return data.rows;
-    });
+    .then(data => data.rows);
 };
 
 

@@ -7,44 +7,38 @@
 
   <%- include('../partials/_head') %>
 
-  <title>PasswordKeeper - Edit Organization</title>
-
-
+  <title>PasswordKeeper - Organization Settings</title>
 
 </head>
 
 <body>
-
-
   <main>
-
         <div>
           <h1><%=organization.org_name %></h1>
 
           <img class="logo-image" src="<%=organization.logo_url %>">
 
-          <form method="POST" action="/organizations/<%=organization.organization_id %>">
-
-            <div>
+          <form id="submit-edit" method="POST" action="/organizations/<%=organization.organization_id %>">
+            <div id="edit-org">
               <h3>Edit Organization Details</h3>
-              <div class="error-container"></div>
               <label for="orgName">Organization Name
-              <input type="text" name="orgName" placeholder="Organization Name">
-              </label>
-              <label for="logo_url">Organization Logo Image URL
-              <span>(auto resize to 300 x 300)</span>
-              <input type="text" name="logo_url" placeholder="http://">
+                <input class="org-name" type="text" name="orgName" placeholder="Organization Name">
               </label>
 
-              <button type="submit" class="edit-url">Edit</button>
+              <label for="logo_url">Organization Logo Image URL
+                <span>(auto resize to 300 x 300)</span>
+                <input class="logo-url" type="text" name="logo_url" placeholder="http://">
+              </label>
+
+              <button type="submit">Edit</button>
             </div>
           </form>
 
-          <form method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
-            <div>
+          <form id="submit-user" method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
+            <div id="new-user">
               <h3>Add Users</h3>
               <label for="email">User Email
-              <input type="email" name="email" placeholder="User Email" required>
+              <input class="email-url" type="email" name="email" placeholder="User Email" required>
               </label>
 
               <button type="submit">Add</button>
@@ -94,7 +88,10 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/scripts/about.js"></script>
+
+  <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
+  <script type="text/javascript" src="/scripts/organizations/organization_edit.js"></script>
+  <script type="text/javascript" src="/scripts/organizations/organization_user.js"></script>
 
 </body>
 </html>

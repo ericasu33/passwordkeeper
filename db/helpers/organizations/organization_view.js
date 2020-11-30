@@ -10,11 +10,7 @@ const getOrganizations = (db, userId) => {
   const queryParam = [userId];
 
   return db.query(query, queryParam)
-    .then(data => {
-      const organizations = data.rows;
-      return organizations;
-    });
-  
+    .then(data => data.rows);
 };
 
 const getSites = (db, orgId) => {
@@ -27,11 +23,7 @@ const getSites = (db, orgId) => {
   const queryParams = [orgId];
 
   return db.query(query, queryParams)
-    .then(data => {
-      const sites = data.rows;
-      return sites;
-    });
-  
+    .then(data => data.rows);
 };
 
 module.exports = {

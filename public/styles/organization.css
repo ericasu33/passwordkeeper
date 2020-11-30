@@ -11,8 +11,10 @@
 }
 
 .error-min-input,
-.invalid-url {
+.invalid-url,
+.invalid-email,
+.error-user {
   display: none;
   color: #ff5f54;
-  font-size: 1.563rem;
+  font-size: 1rem;
 }
