@@ -3,6 +3,7 @@
   <head>
     <%- include('partials/_head') %>
 
+
     <!-- Bootstrap CSS -->
     <link href="/styles/layout.css" rel="stylesheet" type="text/css">
 
@@ -15,9 +16,7 @@
   </head>
 
   <body>
-    <header>
-
-    </header>
+     <header><%- include('partials/header') %></header>
 
     <main>
       <h1> Category </h1>
@@ -33,10 +32,12 @@
               <img src="<%= sites[site].image_url %>" alt="site logo image" /><br>
               <%= sites[site].login_url %><br>
               <div class="site-info">
-                <span>Username: <input type="text" id="pass" size="10" value="<%= sites[site].username %>"></span><br>
-                <span>Password: <input type="text" id="pass" size="10" value="<%= sites[site].password %>"></span>
+                <span>Username: <input type="text" id="<%= sites[site].username %>" size="10" value="<%= sites[site].username %>"></span>
                 <!-- The button used to copy the text -->
-                <button onclick="myFunction()"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+                <button onclick="myFunction('<%= sites[site].username %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+                <span>Password: <input type="text" id="<%= sites[site].password %>" size="10" value="<%= sites[site].password %>"></span>
+                <!-- The button used to copy the text -->
+                <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
               </div>
 
               <div id="buttons">
@@ -46,7 +47,7 @@
                 </div>
               </div>
 
-             <div class="card-footer text-muted"></div>
+
           </div>
 
 
@@ -79,10 +80,10 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
 
     <script type="text/javascript">
-      function myFunction() {
+      function myFunction(element) {
         console.log("copy text")
         /* Get the text field */
-        var copyText = document.getElementById("pass");
+        var copyText = document.getElementById(element);
         console.log(copyText)
 
         /* Select the text field */
