@@ -33,3 +33,14 @@ header {
   border: none;
   background-color: #f8f9fa!important;
 }
+
+.error-container {
+  color: #e9ecef;
+  display: flex;
+  align-items: center;
+  border-color: red;
+  border: solid;
+  background-color: white;
+  width: 100px;
+  height: fit-content;
+}

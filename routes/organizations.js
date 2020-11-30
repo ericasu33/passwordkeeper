@@ -6,7 +6,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const { isUrl, validation } = require('../public/scripts/organization_setting');
+const { isUrl } = require('../public/scripts/organization_setting');
 
 const methodOverride = require('method-override');
 router.use(methodOverride('_method'));
@@ -188,15 +188,12 @@ module.exports = (db) => {
     const logoUrl = req.body.logo_url;
 
 
-    const error = true;
+    //const error = true;
 
     /* if (!isUrl(logoUrl) || !logoUrl) {
       return res.render("./organizations/organizations_show");
     } */
 
-    if (validation(logoUrl) === false) {
-      return res.redirect(`/organizations/${organizationId}/1`);
-    }
     let query;
     const queryParams = [];
 
