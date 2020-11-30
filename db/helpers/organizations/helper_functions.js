@@ -54,10 +54,4 @@ editButton();
 
 module.exports = {
   isUrl,
-<<<<<<< HEAD:public/scripts/organization_setting.js
-  validation,
-
 };
-=======
-};
->>>>>>> 08b7d85b17c073a69b93929707c99eefee6085ff:db/helpers/organizations/helper_functions.js
