@@ -46,8 +46,6 @@ const deleteUser = (db, orgId, userId) => {
 
   const queryParams = [orgId, userId];
 
-  console.log("WHAT TF IS DELETED...", query, queryParams);
-
   return db.query(query, queryParams);
 };
 

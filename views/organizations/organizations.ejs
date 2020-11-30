@@ -39,31 +39,29 @@
     </header>
 
     <main>
-      <h1> Organizations </h1>
+      <h1> My Organizations </h1>
 
   <% for (const organization in organizations) { %>
       <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
         <button type="submit">
-          <div class='site'>
-            <img src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
+          <div class="site">
+            <img class="logo-image" src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
             <%= organizations[organization].name %>
             <%= organizations[organization].login_url %>
           </div>
         </button>
       </form>
-
+    <% if (organizations[organization].admin_privileges) { %>  
       <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
         <button type="submit">Settings</button>
       </form>
+    <% } %>
   <% } %>
-
-
 
     <a href = "/organizations/new"> 
       <button type="submit">Add</button>
     </a> 
     </main>
-
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>

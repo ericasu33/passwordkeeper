@@ -1,6 +1,6 @@
 const getOrganizations = (db, userId) => {
   const query = `
-  SELECT organization_id, name, logo_url
+  SELECT organization_id, name, logo_url, admin_privileges
   FROM organizations
   JOIN user_organizations_role ON organizations.id = user_organizations_role.organization_id
   WHERE user_id = $1

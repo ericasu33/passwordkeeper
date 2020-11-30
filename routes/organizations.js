@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { isUrl } = require('../public/scripts/organization_setting');
+const { isUrl } = require('../db/helpers/organizations/helper_functions');
 const database = require('../db/helpers/organizations/export_all');
 
 module.exports = (db) => {
@@ -179,7 +179,6 @@ module.exports = (db) => {
   router.delete("/:organization_id/:user_id/delete", (req, res) => {
     const organizationId = req.params.organization_id;
     const userId = req.params.user_id;
-    console.log("WHAT TF IS DELETED...");
     database.deleteUser(db, organizationId, userId)
       .then(data => {
         res.redirect(`/organizations/${organizationId}`);
