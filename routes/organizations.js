@@ -125,7 +125,7 @@ module.exports = (db) => {
           .send(err);
       });
   });
-    
+
   // Delete organization
   router.delete("/:organization_id/delete", (req, res) => {
     const organizationId = req.params.organization_id;

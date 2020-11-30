@@ -6,7 +6,7 @@
 
   <!-- CSS (load bootstrap from a CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/styles//sass/landing.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
   <style>
       body { padding-top:50px; }
   </style>
@@ -24,22 +24,19 @@
       <li class="nav-item">
         <a class="nav-link" id= "link" type="button" scroll-behaviour: smooth;>About</a>
       </li>
-      <li>
-        <a class="nav-link" href="/registration">Register</a>
-      </li>
-      <li>
+      <li class="Register-Login">
         <button class="nav-button" onclick="myFunction()">
-        Login
+        Register/Login
         </button>
-
       </li>
     </ul>
   </nav>
 </header>
 
 <main>
-    <div id="login" style= "display: none">
+    <div id="login" style= "display: none" >
       <%- include('user_login') %>
+      <%- include('user_registerations') %>
     </div>
     <div class="jumbotron">
         <h1>Keep your password safe with us</h1>

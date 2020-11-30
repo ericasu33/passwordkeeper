@@ -1,37 +1,77 @@
+/*
+ * All routes for Users are defined here
+ * Since this file is loaded in server.js into api/users,
+ *   these routes are mounted onto /users
+ * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
+ */
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router  = express.Router();
 
 
 module.exports = (db) => {
-  const addUser =  function(user) {
-    const data = [user.name, user.email, user.password];
+
+  router.get("/", (req, res) => {
+    res.render('user_registration');
+  });
+
+  router.post("/", (req, res) => {
+    const query = `
+    INSERT INTO users(name, email, password)
+    VALUES ($1, $2, $3) RETURNING *;
+  `;
+    const queryParams = [req.body.name, req.body.email, req.body.password];
     db.query(`
     INSERT INTO users(name, email, password)
     VALUES ($1, $2, $3) RETURNING *;
-  `, data)
-      .then(res => {
-        if (res.rows[0].name || res.rows[0].email) {
-          return res.rows[0];
-        } else {
-          return null;
-        }
-
+  `, queryParams)
+      .then(data => {
+        const user = data.rows[0];
+        req.session.user_id = user.id;
+        res.redirect('/organizations');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
       });
-  };
 
-  router.get("/register", (req, res) => {
-    const user = req.body;
-    addUser(user)
-      .then(user => {
-        if (!user) {
-          res.send({error: "error"});
-          return;
-        }
-        req.session.userId = user.id;
-        res.send("🤗");
-      });
-    res.render("user_registerations");
   });
 
+  return router;
 };
+
+
+  //const registerRoutes = require("./routes/registeration");
+  //app.use("/registeration", registerRoutes(db));
+
+
+
+
+  /* router.post("/register", (req, res) => {
+    const password = req.body.password;
+    const hashedPassword = bcrypt.hashSync(password, 10);
+    const newUser = {
+      email: req.body.email,
+      password: hashedPassword,
+    };
+    if (!newUser.email || !newUser.password) {
+      res.statusCode = 400;
+      return res.send("Email or Password was not found. Please try again!");
+    }
+    const foundUser = findUserByEmail(newUser.email, users);
+    if (foundUser) {
+      res.status(400).send("Email has been registered!");
+    }
+    if (!password) {
+      return res.status(403).send("Username or password not found!");
+    }
+    users[id] = newUser;
+    req.session.userID = newUser.id;
+    res.redirect("/organization");
+  }); */
+
+db.query(`
+    INSERT INTO users(name, email, password)
+    VALUES ($1, $2, $3) RETURNING *;
+  `, data)
