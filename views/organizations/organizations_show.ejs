@@ -38,7 +38,7 @@
             <div>
               <h3>Add Users</h3>
               <label for="email">User Email
-              <input type="text" name="email" placeholder="User Email" required>
+              <input type="email" name="email" placeholder="User Email" required>
               </label>
 
               <button type="submit">Add</button>
@@ -70,7 +70,7 @@
             </tbody>
           </table>  
 
-          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete">
+          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
             <h3>Delete Organization</h3>
             <button type="submit">Delete</button>
           </form>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
+
     <%- include('../partials/_head') %>
 
     <title>PasswordKeeper - Organizations </title>
@@ -45,7 +45,7 @@
       <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
         <button type="submit">
           <div class='site'>
-            <img src="<%= organizations[organization].logo_url %>" alt="site logo image" />
+            <img src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
             <%= organizations[organization].name %>
             <%= organizations[organization].login_url %>
           </div>
