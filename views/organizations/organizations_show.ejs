@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   <%- include('../partials/_head') %>
 
   <title>PasswordKeeper - Edit Organization</title>
+
+  <script type="text/javascript" src="../public/scripts/organization_setting.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
 
-  
+
   <main>
 
         <div>
           <h1><%=organization.org_name %></h1>
           <img src="<%=organization.logo_url %>">
-        
+
           <form method="POST" action="/organizations/<%=organization.organization_id %>">
 
             <div>
               <h3>Edit Organization Details</h3>
+
               <label for="orgName">Organization Name
               <input type="text" name="orgName" placeholder="Organization Name">
               </label>
-              
-              <label for="logo_url">Organization Logo Image URL 
-              <input type="text" name="logo_url" placeholder="http://">
+              <% if (locals.error) { %>
+                <div>
+                  <p> Please input a valid url </p>
+                </div>
+              <% } %>
+              <label for="logo_url">Organization Logo Image URL
+              <input type="text" class= "logo-url" name="logo_url" placeholder="http://">
               </label>
 
-              <button type="submit">Edit</button>
+              <button type="submit" class="edit-url">Edit</button>
             </div>
           </form>
 
@@ -68,7 +76,7 @@
               </tr>
               <% } %>
             </tbody>
-          </table>  
+          </table>
 
           <form method="POST" action="/organizations/<%= organization.organization_id %>/delete">
             <h3>Delete Organization</h3>
@@ -78,6 +86,6 @@
         </div>
 
   </main>
-  
+
 </body>
 </html>

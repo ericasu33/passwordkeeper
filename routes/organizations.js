@@ -6,7 +6,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const { isUrl } = require('../public/scripts/organization_setting');
+const { isUrl, validation } = require('../public/scripts/organization_setting');
 
 const methodOverride = require('method-override');
 router.use(methodOverride('_method'));
@@ -127,6 +127,7 @@ module.exports = (db) => {
   //Edit Org Page
   router.get("/:organization_id", (req, res) => {
     const organizationId = req.params.organization_id;
+    //const errorId = req.params.error_id;
     const userId = req.session.user_id;
 
     //get org info
@@ -157,6 +158,7 @@ module.exports = (db) => {
 
         db.query(queryUsers, queryParams)
           .then(data => {
+
             const users = data.rows;
             console.log("WHATS HERE in USERS??", users);
             const templateVars = {
@@ -167,13 +169,13 @@ module.exports = (db) => {
           })
           .catch(err => {
             res
-              .status(500)
+              .status(404)
               .send(err);
           });
       })
       .catch(err => {
         res
-          .status(500)
+          .status(404)
           .send(err);
       });
 
@@ -185,12 +187,16 @@ module.exports = (db) => {
     const organizationName = req.body.orgName;
     const logoUrl = req.body.logo_url;
 
-    // const error = true;
 
-    // if (!isUrl(logoUrl) || !logoUrl) {
-    //   return res.render("./organizations/organizations_show", { error });
-    // }
+    const error = true;
 
+    /* if (!isUrl(logoUrl) || !logoUrl) {
+      return res.render("./organizations/organizations_show");
+    } */
+
+    if (validation(logoUrl) === false) {
+      return res.redirect(`/organizations/${organizationId}/1`);
+    }
     let query;
     const queryParams = [];
 
@@ -204,7 +210,7 @@ module.exports = (db) => {
       `;
     } else if (organizationName) {
       queryParams.push(organizationName, organizationId);
-
+      console.log("org_id1", organizationId);
       query = `
       UPDATE organizations
       SET name = $1
@@ -212,7 +218,6 @@ module.exports = (db) => {
       `;
     } else if (logoUrl) {
       queryParams.push(logoUrl, organizationId);
-
       query = `
       UPDATE organizations
       SET logo_url = $1
@@ -222,7 +227,6 @@ module.exports = (db) => {
       return res.redirect(`/organizations/${organizationId}`);
     }
 
-
     console.log(query, queryParams);
     db.query(query, queryParams)
       .then(data => {
@@ -230,12 +234,14 @@ module.exports = (db) => {
       })
       .catch(err => {
         res
-          .status(500)
+          .status(404)
           .send(err);
       });
+
+
   });
 
-  
+
   //delete organization
   router.post("/:organization_id/delete", (req, res) => {
     const organization_id = req.params.organization_id;
@@ -287,7 +293,7 @@ module.exports = (db) => {
         console.log("HERE IS USERID", userId);
 
         const queryIfExist = `
-        SELECT id 
+        SELECT id
         FROM user_organizations_role
         WHERE user_id = $1 AND organization_id = $2;
         `;
@@ -341,9 +347,9 @@ module.exports = (db) => {
   router.delete("/:organization_id/:user_id/delete", (req, res) => {
     const organizationId = req.params.organization_id;
     const userId = req.params.user_id;
-    
+
     const query = `
-    DELETE FROM user_organizations_role 
+    DELETE FROM user_organizations_role
     WHERE organization_id = $1 AND user_id = $2;
     `;
 

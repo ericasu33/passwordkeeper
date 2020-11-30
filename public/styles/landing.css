@@ -1,0 +1,35 @@
+.container-fluid {
+  display: flex;
+  background-color: #e9ecef;
+  padding: 4rem 2rem;
+}
+
+.description{
+  padding-right: 20px;
+}
+.img-thumbnail {
+  width: auto;
+  align-self: flex-start;
+}
+
+
+header {
+  position: sticky;
+  top: 0;
+  height: 90;
+  color: white ;
+  scroll-padding-bottom: 10px;
+  display : flex;
+  justify-content: space-between;
+}
+
+.Register-Login {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-button {
+  color: rgba(0,0,0,.5);
+  border: none;
+  background-color: #f8f9fa!important;
+}
