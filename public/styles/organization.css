@@ -1,13 +1,54 @@
-.site {
-  width: 300px;
-  height: 300px;
-  border: 2px solid #000000;
-  margin: 20px;
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  background-color: #545149;
+  font-size: 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow-x: hidden;
 }
+
+main {
+  background-color: rgb(224, 222, 223);
+  width: 80%;
+  padding: 10px;
+}
+main h1 {
+  color: #244751;
+}
+
+.sites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.site-entry {
+  width: 30%;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.site-entry button {
+  border: none;
+}
+.card-header{
+  font-weight: bold;
+}
+
 
 .logo-image {
   width: 300px;
   height: 300px;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px;
 }
 
 .error-min-input,
