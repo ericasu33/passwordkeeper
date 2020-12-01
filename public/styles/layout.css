@@ -56,7 +56,9 @@ main {
   margin: 15px;
 }
 
-.add-new {
+#adding {
+  display: flex;
+  flex-direction: row;
   padding-top: 20px;
-  }
 }
+
