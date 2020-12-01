@@ -14,7 +14,7 @@
     </ul>
     <div>
       <form  class= "form-inline justify-content-center" method="POST" action="/login/logout">
-        <label style="width: 200px; margin: 5px;" > Logged In As: <%=locals.email%> </label>
+        <label style="width: 200px; margin: 5px; color: rgba(0,0,0,.5);" > Logged In As: <%=locals.name%> </label>
         <button type="submit">Log Out</button>
       </form>
   </nav>
@@ -22,13 +22,4 @@
 
 
 
-<link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css" />
-
-<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-</head>
-
-<body>
-<%- include('../partials/header') %>
+<!-- <div class=" left-nav"></div> -->
