@@ -32,15 +32,31 @@ main {
 
 .site-entry {
   width: 30%;
-  margin: 5px;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.site-info {
+  background-color: rgb(215, 215, 238);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .card-header{
   font-weight: bold;
 }
 
-
 .btn {
   margin: 15px;
 }
 
+.add-new {
+  padding-top: 20px;
+  }
+}

@@ -3,6 +3,11 @@
   <head>
     <%- include('partials/_head') %>
 
+    <link href="/styles/layout.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
     <title>PasswordKeeper - Home </title>
   </head>
 
@@ -38,9 +43,9 @@
     </header>
 
     <main>
-      <h1> Landed </h1>
+      <h1> Edit Info for: <%= site.name %></h1>
 
-      <form method="POST" action="/organization/sites/:site/update">
+      <form method="POST" action="/organization/organization_id/sites/:site/update">
         <label for="newsite">Site name: </label>
           <input class="form-control" type="text" name="name" value="<%= site.name %> " style="width: 300px; margin: 1em">
         <label for="username">username: </label>
@@ -51,10 +56,10 @@
           <input class="form-control" type="password" name="password" value="<%= site.password %>" style="width: 300px; margin: 1em">
         <label for="category">category: </label>
           <input class="form-control" type="text" value="<%= site.category_id %>" name="category" style="width: 300px; margin: 1em">
-        <button type="submit">Update fields</button>
+        <button type="submit" class="btn btn-info">Update fields</button>
       </form>
 
-      <a href="/organization/sites/%>"><button class="btn btn-info" >Cancel</button></a>
+      <a href="/organization/:organization_id/sites/"><button class="btn btn-danger" >Cancel</button></a>
 
 
 
