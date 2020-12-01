@@ -17,7 +17,7 @@ $(document).ready(function() {
 
   $("#new-org").append(errorOrg(), errorUrl());
   $(".org-name").focus();
-  
+
 
   $("form").on("submit", function(event) {
     event.preventDefault();
@@ -36,7 +36,7 @@ $(document).ready(function() {
       $(".logo-url").focus();
       return;
     }
-    
+
     $.ajax({
       method: "POST",
       url: "/organizations",
@@ -53,7 +53,7 @@ $(document).ready(function() {
   // Remove error message once validation passes
   $(".org-name").on("input", function() {
     const orgNameLength = $(".org-name").val().length;
-  
+
     if (orgNameLength > 0) {
       $(".invalid-url, .error-min-input").hide();
     }
@@ -61,7 +61,7 @@ $(document).ready(function() {
 
   $(".logo-url").on("input", function() {
     const urlLength = $(".logo-url").val().length;
-  
+
     if (urlLength > 0) {
       $(".invalid-url, .error-min-input").hide();
     }
