@@ -5,62 +5,63 @@
     <%- include('../partials/_head') %>
 
     <title>PasswordKeeper - Organizations </title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+
+    <link href="/styles/organization.css" rel="stylesheet" type="text/css">
+    <link href="/styles/header.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
   </head>
 
   <body>
-    <header>
-      <nav>
-        <div>
-          LOGO
-        </div>
 
-        <div class='dropdown'>
-          <button>
-            Categories (icon)
-          </button>
-          <div class='dropdown-content'>
-            <a href ='#'> Cat1</a>
-            <a href ='#'> Cat2</a>
-            <a href ='#'> Cat3</a>
-          </div>
-        </div>
+      <%- include('../partials/header') %>
 
-        <div class='nav-right'>
-          <div>Favourites Icon</div>
-          <div>User_Email(tempVar)</div>
-          <div>
-            <form method="POST" action="/logout">
-              <button type="submit">Log Out</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-    </header>
 
     <main>
       <h1> My Organizations </h1>
+      <div class="sites">
+        <% for (const organization in organizations) { %>
+          <div class="test">
+          <div class="card text-center site-entry">
 
-  <% for (const organization in organizations) { %>
-      <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
-        <button type="submit">
-          <div class="site">
-            <img class="logo-image" src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
-            <%= organizations[organization].name %>
-            <%= organizations[organization].login_url %>
+                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
+                  <button type="submit" >
+
+                    <div class="card-header">
+                    <%= organizations[organization].name %>
+                    </div>
+
+                    <img class="logo-image" src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
+                    <div class="card-logo">
+                      <%= organizations[organization].login_url %>
+                    </div>
+
+                  </button>
+
+                </form>
           </div>
-        </button>
-      </form>
-    <% if (organizations[organization].admin_privileges) { %>
-      <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
-        <button type="submit">Settings</button>
-      </form>
-    <% } %>
-  <% } %>
+          <% if (organizations[organization].admin_privileges) { %>
+            <div class="setting-form">
+              <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
+                <button type="submit" id="setting-button">Settings</button>
+              </form>
+            </div>
 
-    <a href = "/organizations/new">
-      <button type="submit">Add</button>
-    </a>
+          <% } %>
+        </div>
+          <% } %>
+      </div>
+
+    <!-- <div class="org-add"> -->
+      <a href = "/organizations/new">
+        <button type="submit" id="btn">Add Organization</button>
+      </a>
+    <!-- </div> -->
+
     </main>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
