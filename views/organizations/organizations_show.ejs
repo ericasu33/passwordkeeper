@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
 
   <link href="/styles/layout.css" rel="stylesheet" type="text/css">
@@ -66,18 +69,17 @@
                   <td><%= users[user].email %></td>
                   <td>
                   <% if (users[user].admin_privileges !== true)  { %>
-                    <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
-                      <button type="submit"
-                      id="user-delete" class="btn btn-outline-danger">Remove</button>
+                    <form class="del-user-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
+                      <button type="submit" class="btn btn-outline-danger">Remove</button>
                     </form>
-                    <% } %>
+                  <% } %>
                   </td>
               </tr>
               <% } %>
             </tbody>
           </table>
 
-          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
+          <form class="del-org-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
             <h3>Delete Organization</h3>
             <button type="submit">Delete</button>
           </form>
@@ -92,6 +94,7 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
   <script type="text/javascript" src="/scripts/organizations/organization_edit.js"></script>
