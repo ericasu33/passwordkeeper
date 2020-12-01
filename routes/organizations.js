@@ -11,13 +11,19 @@ module.exports = (db) => {
     database.getUser(db, req.session.user_id)
       .then(user => {
         if (!user) {
-          console.log("DID AUTH KICK IN??", user);
           return res.status(401).redirect('/');
         } else {
           next();
         }
-      });
+      })
+      .catch(err => err);
   };
+
+  //=====Error=====//
+
+  router.get('/error', (req, res) => {
+    res.status(404).render('./organizations/error_404');
+  });
 
   //=====ORGANIZATIONS=====//
 
@@ -37,12 +43,30 @@ module.exports = (db) => {
   });
 
   // User sees all the websites that the particular organization has
-  router.get("/:organization_id/sites", (req, res) => {
+  router.get("/:organization_id/sites", unauthorized, (req, res) => {
     const orgId = req.params.organization_id;
+    const userId = req.session.user_id;
 
-    database.getSites(db, orgId)
-      .then(sites => {
-        res.render("sites", { sites });
+    database.getUsersForOrganization(db, orgId)
+      .then(users => {
+        let authUser = true;
+        for (const user of users) {
+          if (user.id === userId) {
+            return authUser;
+          }
+        }
+        authUser = false;
+        return authUser;
+      })
+      .then(authUser => {
+        if (!authUser) {
+          return res.status(401).redirect("/organizations");
+        } else {
+          return database.getSites(db, orgId)
+            .then(sites => {
+              res.render("sites", { sites });
+            });
+        }
       })
       .catch(err => {
         res
@@ -50,12 +74,12 @@ module.exports = (db) => {
           .send(err);
       });
   });
+  
 
   //=====NEW ORGANIZATION=====//
 
-  router.get("/new", (req, res) => {
+  router.get("/new", unauthorized, (req, res) => {
     res.render("./organizations/organizations_new");
-    // res.sendFile('/vagrant/passwordkeeper/public/organizations_new.html');
   });
 
 
@@ -87,36 +111,55 @@ module.exports = (db) => {
           .status(500)
           .send(err);
       });
-
   });
 
   //=====EDIT ORGANIZATION & USERS=====//
 
-  router.get("/:organization_id", (req, res) => {
+  router.get("/:organization_id", unauthorized, (req, res) => {
     const organizationId = req.params.organization_id;
     const userId = req.session.user_id;
 
-    database.getOrganization(db, userId, organizationId)
-      .then(organization => {
-        const orgId = organization.organization_id;
+    // Logged in and check if user accessing unauthorized :organization_id
+    database.getUsersForOrganization(db, organizationId)
+      .then(users => {
+        if (users.length < 1) {
+          return res.redirect('/organizations/error');
+        }
 
-        return database.getUsersForOrganization(db, orgId)
-          .then(users => {
-            const templateVars = {
-              organization,
-              users,
-            };
-            res.render("./organizations/organizations_show", templateVars);
-          });
+        let authUser = true;
+        for (const user of users) {
+          if (user.id === userId && user.admin_privileges === true) {
+            return authUser;
+          }
+        }
+        authUser = false;
+        return authUser;
+      })
+      .then(authUser => {
+        if (!authUser) {
+          return res.status(401).redirect("/organizations");
+        } else {
+          return database.getOrganization(db, userId, organizationId)
+            .then(organization => {
+              const orgId = organization.organization_id;
+    
+              return database.getUsersForOrganization(db, orgId)
+                .then(users => {
+                  const templateVars = {
+                    organization,
+                    users,
+                  };
+                  res.render("./organizations/organizations_show", templateVars);
+                });
+            });
+        }
       })
       .catch(err => {
-        res
-          .status(500)
-          .send(err);
+        return res.status(404).redirect('/organizations/error');
       });
   });
 
-  // User edit organization details
+  // Edit organization details
   router.post("/:organization_id", (req, res) => {
     const organizationId = req.params.organization_id;
     const organizationName = req.body.orgName;
@@ -156,7 +199,7 @@ module.exports = (db) => {
       });
   });
 
-  // Add users
+  // Add Users
   router.put("/:organization_id", (req, res) => {
     const userEmail = req.body.email;
     const organizationId = req.params.organization_id;
@@ -165,6 +208,7 @@ module.exports = (db) => {
       return res.status(406).redirect(`/organizations/${organizationId}`);
     }
 
+    // Chk if user exist in db, and if added to organization
     database.findRegisteredUser(db, userEmail)
       .then(userId => {
         if (userId) {
@@ -194,7 +238,7 @@ module.exports = (db) => {
       });
   });
 
-  // Delete user
+  // Delete User
   router.delete("/:organization_id/:user_id/delete", (req, res) => {
     const organizationId = req.params.organization_id;
     const userId = req.params.user_id;
@@ -207,6 +251,11 @@ module.exports = (db) => {
           .status(500)
           .send(err);
       });
+  });
+
+  //give 404 if non logged in user enter randomly in the address bar
+  router.use((req, res) => {
+    return res.redirect('/organizations/error');
   });
 
   return router;
