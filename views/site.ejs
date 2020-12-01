@@ -11,36 +11,10 @@
     <title>PasswordKeeper - Home </title>
   </head>
 
+  <header><%- include('partials/header') %></header>
+
   <body>
-    <header>
-      <nav>
-        <div>
-          LOGO
-        </div>
 
-        <div class='dropdown'>
-          <button>
-            Categories (icon)
-          </button>
-          <div class='dropdown-content'>
-            <a href ='#'> Cat1</a>
-            <a href ='#'> Cat2</a>
-            <a href ='#'> Cat3</a>
-          </div>
-        </div>
-
-        <div class='nav-right'>
-          <div>Favourites Icon</div>
-          <div>User_Email(tempVar)</div>
-          <div>
-            <form method="POST" action="/logout">
-              <button type="submit">Log Out</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-    </header>
 
     <main>
       <h1> Edit Info for: <%= site.name %></h1>
