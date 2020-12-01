@@ -14,13 +14,13 @@ module.exports = (db) => {
 
   // Display all the websites
   router.get("/", (req, res) => {
+    console.log("HEYYYY")
+    console.log(req.params);
     let query = `SELECT * FROM websites`;
     console.log(query);
     db.query(query)
       .then(data => {
         const sites = data.rows;
-        console.log(sites.name);
-        //res.json ({sites})
         res.render("sites", {sites});
       })
       .catch(err => {
