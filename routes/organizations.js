@@ -74,7 +74,7 @@ module.exports = (db) => {
           .send(err);
       });
   });
-  
+
 
   //=====NEW ORGANIZATION=====//
 
@@ -142,7 +142,7 @@ module.exports = (db) => {
           return database.getOrganization(db, userId, organizationId)
             .then(organization => {
               const orgId = organization.organization_id;
-    
+
               return database.getUsersForOrganization(db, orgId)
                 .then(users => {
                   const templateVars = {

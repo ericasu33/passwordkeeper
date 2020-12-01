@@ -19,7 +19,7 @@
     <main>
       <h1> Edit Info for: <%= site.name %></h1>
 
-      <form method="POST" action="/organization/organization_id/sites/:site/update">
+      <form method="POST" action="/organization/<%= orgId %>/sites/<%= site.name %>/update">
         <label for="newsite">Site name: </label>
           <input class="form-control" type="text" name="name" value="<%= site.name %> " style="width: 300px; margin: 1em">
         <label for="username">username: </label>
@@ -33,7 +33,7 @@
         <button type="submit" class="btn btn-info">Update fields</button>
       </form>
 
-      <a href="/organization/:organization_id/sites/"><button class="btn btn-danger" >Cancel</button></a>
+      <a href="/organization/<%= orgId %>/sites/"><button class="btn btn-danger" >Cancel</button></a>
 
 
 

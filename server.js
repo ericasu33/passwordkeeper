@@ -54,7 +54,7 @@ app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/login", loginRoutes(db));
 app.use("/login", registerRoutes(db));
-app.use("/organization/:organization_id/sites", sitesRoutes(db));
+app.use("/organization", sitesRoutes(db));
 app.use("/organizations", orgRoutes(db));
 
 
