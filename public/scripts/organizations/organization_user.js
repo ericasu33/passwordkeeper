@@ -19,9 +19,10 @@ $(document).ready(function() {
   $(".email-url").focus();
   
 
+  // Add User
   $("#submit-user").on("submit", function(event) {
     event.preventDefault();
-
+    
     const emailContent = $(".email-url").val();
 
     if (!emailContent || !isEmail(emailContent)) {
@@ -49,6 +50,32 @@ $(document).ready(function() {
   
     if (emailLength > 0) {
       $(".invalid-email").hide();
+    }
+  });
+
+  // Delete User
+  $(".del-user-confirm").confirm({
+    icon: 'fa fa-warning',
+    title: "Remove User",
+    content: "Are you sure you would like to remove this user?",
+    type: "red",
+    buttons: {
+      Remove: {
+        btnClass: "btn-danger",
+        action: function() {
+          const postUrl = $(".del-user-confirm").attr("action");
+          return $.ajax({
+            method: "POST",
+            url: postUrl,
+          })
+            .then(function() {
+              window.location.replace(window.location.pathname);
+            });
+        }
+      },
+      Cancel:{
+        keys:["esc"],
+      },
     }
   });
 });
