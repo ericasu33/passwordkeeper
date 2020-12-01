@@ -17,7 +17,7 @@ $(document).ready(function() {
 
   $("#submit-user").append(errorEmail(), errorUser());
   $(".email-url").focus();
-  
+
 
   $("#submit-user").on("submit", function(event) {
     event.preventDefault();
@@ -29,7 +29,7 @@ $(document).ready(function() {
       $(".email-url").focus();
       return;
     }
-    
+
     $.ajax({
       method: "PUT",
       url: window.location.pathname,
@@ -46,7 +46,7 @@ $(document).ready(function() {
   // Remove error message once validation passes
   $(".email-url").on("input", function() {
     const emailLength = $(".email-url").val().length;
-  
+
     if (emailLength > 0) {
       $(".invalid-email").hide();
     }
