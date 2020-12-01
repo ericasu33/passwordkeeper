@@ -1,4 +1,4 @@
-body {
+ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,9 +14,12 @@ main {
   background-color: rgb(224, 222, 223);
   width: 80%;
   padding: 10px;
+  padding-bottom: 400px;
 }
 main h1 {
   color: #244751;
+  padding: 20px 0 0 20px;
+  margin-bottom: 50px;
 }
 
 .sites {
@@ -25,30 +28,48 @@ main h1 {
   justify-content: space-around;
 }
 
-.site-entry {
-  width: 30%;
-  margin: 15px;
-  border-radius: 10px;
+.test {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .site-entry button {
   border: none;
+  padding-left: 0;
+  padding-right: 0;
+
 }
+
 .card-header{
   font-weight: bold;
 }
 
-
 .logo-image {
   width: 300px;
   height: 300px;
+  padding: 10px;
+}
+.setting-form {
+  width: 100%;
+  margin-top: 10px
 }
 
-.btn {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  margin: 15px;
+#setting-button {
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #17a2b8;
+}
+
+
+#btn {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 60px;
+  background-color: cornflowerblue;
+
+
 }
 
 .error-min-input,
@@ -59,3 +80,4 @@ main h1 {
   color: #ff5f54;
   font-size: 1rem;
 }
+

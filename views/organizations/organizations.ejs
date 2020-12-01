@@ -10,23 +10,25 @@
 
 
     <link href="/styles/organization.css" rel="stylesheet" type="text/css">
+    <link href="/styles/header.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   </head>
 
   <body>
-    <header class="header-all-pages">
+
       <%- include('../partials/header') %>
-    </header>
 
 
     <main>
       <h1> My Organizations </h1>
       <div class="sites">
         <% for (const organization in organizations) { %>
+          <div class="test">
           <div class="card text-center site-entry">
-                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites"></form>
+
+                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
                   <button type="submit" >
 
                     <div class="card-header">
@@ -40,21 +42,26 @@
 
                   </button>
 
-            </form>
-              <% if (organizations[organization].admin_privileges) { %>
-                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>" id= "Settings-form">
-                  <button type="submit" id="setting-button">Settings</button>
                 </form>
-              <% } %>
           </div>
+          <% if (organizations[organization].admin_privileges) { %>
+            <div class="setting-form">
+              <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
+                <button type="submit" id="setting-button">Settings</button>
+              </form>
+            </div>
 
+          <% } %>
+        </div>
           <% } %>
       </div>
 
+    <!-- <div class="org-add"> -->
+      <a href = "/organizations/new">
+        <button type="submit" id="btn">Add Organization</button>
+      </a>
+    <!-- </div> -->
 
-    <a href = "/organizations/new">
-      <button type="submit">Add</button>
-    </a>
     </main>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
