@@ -25,7 +25,8 @@ $(document).ready(function() {
 
     if (urlContent && !isUrl(urlContent)) {
       $(".invalid-url").show();
-      $("#logo-url").focus();
+      $(".logo-url").val("");
+      $(".logo-url").focus();
       return;
     }
     
@@ -51,8 +52,8 @@ $(document).ready(function() {
   $(".logo-url").on("input", function() {
     const urlLength = $(".logo-url").val().length;
   
-    if (urlLength > 0) {
-      $(".error-min-input").hide();
+    if (urlLength >= 0) {
+      $(".invalid-url").hide();
     }
   });
 
@@ -66,7 +67,7 @@ $(document).ready(function() {
       Delete: {
         btnClass: "btn-danger",
         action: function() {
-          const postUrl = $(".del-org-confirm").attr("action");
+          const postUrl = $(".del-org-confirm").parent().attr("action");
           return $.ajax({
             method: "POST",
             url: postUrl,

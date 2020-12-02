@@ -89,24 +89,23 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     const orgName = req.body.name;
     const logoUrl = req.body.logo_url;
-    //CHANGED "/organizations/new" to "/organizations/error"
+    
     if (!orgName) {
-      return res.status(406).redirect("/organizations/error");
+      return res.redirect("/organizations/new");
     }
 
     if (logoUrl && !isUrl(logoUrl)) {
-      return res.status(406).redirect("/organizations/error");
+      return res.redirect("/organizations/new");
     }
 
     database.createOrganization(db, orgName, logoUrl)
       .then(orgId => {
         return database.linkUserToOrganization(db, userId, orgId)
           .then(data => {
-            res.status(200).redirect("/organizations");
-
+            res.status(200).send({
+              result: 'redirect',
+              url:'/organizations'});
           });
-
-
       })
       .catch(err => {
         res
@@ -224,7 +223,7 @@ module.exports = (db) => {
                   .then(data => {
                     res.status(200).send({
                       result: 'redirect',
-                      url:`/organization/${organizationId}`
+                      url:`/organizations/${organizationId}`
                     });
                   });
               }
@@ -244,9 +243,12 @@ module.exports = (db) => {
   router.delete("/:organization_id/:user_id/delete", (req, res) => {
     const organizationId = req.params.organization_id;
     const userId = req.params.user_id;
-    database.deleteUser(db, organizationId, userId)
+    database.deleteUser(db, userId, organizationId)
       .then(data => {
-        res.redirect(`/organizations/${organizationId}`);
+        res.status(200).send({
+          result: 'redirect',
+          url:`/organizations/${organizationId}`
+        });
       })
       .catch(err => {
         res
@@ -255,7 +257,41 @@ module.exports = (db) => {
       });
   });
 
-  //give 404 if non logged in user enter randomly in the address bar
+  // Transfer Ownership
+  router.put("/:organization_id/transfer", (req, res) => {
+    const organizationId = req.params.organization_id;
+    const transferorId = req.session.user_id;
+    const transfereeId = Number(req.body.user_id);
+    const userName = req.body.user_name;
+    const userEmail = req.body.email;
+
+    // Validation
+    database.getUsersForOrganization(db, organizationId)
+      .then(users => {
+        for (const user of users) {
+          if (transfereeId === user.id && userName === user.name && userEmail === user.email) {
+            return database.giveOwnership(db, transfereeId, organizationId)
+              .then(data => {
+                return database.removeOwnership(db, transferorId, organizationId)
+                  .then(data => {
+                    res.status(200).send({
+                      result: 'redirect',
+                      url:`/organizations/${organizationId}`
+                    });
+                  });
+              });
+          }
+        }
+        database.resSendError(res, organizationId);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  });
+
+  // Give 404 if non logged in user enter randomly in the address bar
   router.use((req, res) => {
     return res.redirect('/organizations/error');
   });

@@ -124,6 +124,24 @@ main h1 {
   font-size: 1rem;
 }
 
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .warning {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .small-font {
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons{
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons button{
+  text-transform: uppercase;
+  font-weight: 700;
+}
 
 #add-org {
   width: 80%;
@@ -195,3 +213,4 @@ main h1 {
 @media only screen and (max-width: 960px) {
 
 }
+
