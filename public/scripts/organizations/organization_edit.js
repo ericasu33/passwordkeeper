@@ -67,7 +67,7 @@ $(document).ready(function() {
       Delete: {
         btnClass: "btn-danger",
         action: function() {
-          const postUrl = $(".del-org-confirm").attr("action");
+          const postUrl = $(".del-org-confirm").parent().attr("action");
           return $.ajax({
             method: "POST",
             url: postUrl,

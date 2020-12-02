@@ -64,8 +64,8 @@
                   <td><%= users[user].email %></td>
                   <td>
                   <% if (users[user].admin_privileges !== true)  { %>
-                    <form class="del-user-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
-                      <button class="btn btn-outline-danger" type="submit">Remove</button>
+                    <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
+                      <button class="btn btn-outline-danger del-user-confirm" type="submit">Remove</button>
                     </form>
                   <% } %>
                   </td>
@@ -78,8 +78,8 @@
             <button class="btn btn-outline-danger transfer-ownership" type="submit">Transfer Ownership</button>
           </div>
 
-          <form class="del-org-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-            <button class="btn btn-outline-danger" type="submit">Delete Organization</button>
+          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
+            <button class="btn btn-outline-danger del-org-confirm" type="submit">Delete Organization</button>
           </form>
         </div>
   </main>

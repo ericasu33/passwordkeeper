@@ -75,10 +75,27 @@ main h1 {
 .error-min-input,
 .invalid-url,
 .invalid-email,
-.error-user,
-.invalid-transfer {
+.error-user {
   display: none;
   color: #ff5f54;
   font-size: 1rem;
 }
 
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .warning {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .small-font {
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons{
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons button{
+  text-transform: uppercase;
+  font-weight: 700;
+}
