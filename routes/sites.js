@@ -36,9 +36,8 @@ module.exports = (db) => {
   router.post("/:organization_id/sites", (req, res) => {
     const record = req.body;
     const orgId = req.params.organization_id;
-    console.log(req.session);
-    console.log(req.params);
     console.log(record);
+    console.log(orgId)
 
     const params = [orgId, record.category, record.name, record.username, record.password, record.email];
     const query = `INSERT INTO websites (organization_id, category_id, name, username, password, email) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;

@@ -57,7 +57,7 @@
 
       <div class="add-new">
         <h2> Add New Site </h2>
-        <form method="POST" action="/organization/:organization_id/sites">
+        <form method="POST" action="/organization/<%= orgId%>/sites">
           <label for="newsite">Site name: </label>
             <input class="form-control" type="text" name="name" placeholder="http://" style="width: 300px; margin: 1em">
           <label for="username">username: </label>
