@@ -19,7 +19,7 @@
     <main>
       <h1> Edit Info for: <%= site.name %></h1>
 
-      <form method="POST" action="/organization/<%= orgId %>/sites/<%= site.name %>/update">
+      <form method="POST" action="/organization/<%= orgId %>/sites/<%= site.id %>/update">
         <label for="newsite">Site name: </label>
           <input class="form-control" type="text" name="name" value="<%= site.name %> " style="width: 300px; margin: 1em">
         <label for="username">username: </label>

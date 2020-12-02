@@ -60,13 +60,13 @@ module.exports = (db) => {
   // Deletes an entry
   router.post("/:organization_id/sites/:site/delete", (req, res) => {
     console.log(req.params.site);
-    const site = [req.params.site];
+    const siteId = [req.params.site];
     const orgId = req.params.organization_id;
 
-    const query = `DELETE FROM websites WHERE name=$1`;
+    const query = `DELETE FROM websites WHERE id=$1`;
     console.log(query);
 
-    db.query(query, site)
+    db.query(query, siteId)
       .then(data => {
         console.log(data.rows[0]);
         res.redirect(`/organization/${orgId}/sites`);
@@ -83,17 +83,18 @@ module.exports = (db) => {
   // Shows the details of a site so it can be updated
   router.get("/:organization_id/sites/:site", (req, res) => {
     console.log(`Req params site: ${req.params.site}`);
-    const sitename = [req.params.site];
+    const siteId = [req.params.site];
     const orgId = req.params.organization_id;
 
-    const query = `SELECT * FROM websites WHERE name=$1`;
+    const query = `SELECT * FROM websites WHERE id=$1`;
 
     console.log(`Query: ${query}`);
-    console.log(sitename);
+    console.log(siteId);
 
-    db.query(query, sitename)
+    db.query(query, siteId)
       .then(data => {
         const site = data.rows[0]
+        console.log(data.rows)
         global_site_id = site.id;
         console.log("Global site id: " + global_site_id);
         res.render("site", {site, orgId});
@@ -111,7 +112,7 @@ module.exports = (db) => {
     site = [req.body];
     const orgId = req.params.organization_id;
     console.log(orgId);
-    const params = [req.body.name, req.body.username, req.body.email, req.body.category, req.body.password, global_site_id]
+    const params = [req.body.name, req.body.username, req.body.email, req.body.category, req.body.password, req.params.site]
 
     const query = `UPDATE websites SET name=$1, username=$2, email=$3, category_id=$4, password=$5  WHERE id=$6 RETURNING *`;
     console.log(query);
