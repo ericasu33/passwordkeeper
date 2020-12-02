@@ -30,7 +30,7 @@ main h1 {
   padding: 20px 0 0 20px;
 }
 
-.org-header #btn {
+.org-header .btn {
   margin:0;
   font-size: 20px;
   font-weight: bold;
@@ -75,8 +75,8 @@ main h1 {
 }
 
 .logo-image {
-  width: 300px;
-  height: 300px;
+  width: 25vw;
+  height: 25vw;
   padding: 10px;
 }
 .setting-form {
@@ -106,13 +106,16 @@ main h1 {
 }
 
 
-#btn {
+.btn {
   width: 100%;
   border-radius: 20px;
   margin-top: 60px;
   background-color: cornflowerblue;
+}
 
-
+.btn:hover {
+  box-shadow: 5px 5px #afc9f6;
+  cursor: pointer;
 }
 
 .error-min-input,
@@ -138,10 +141,11 @@ main h1 {
   margin-top: 20px;
 }
 
-#submit-new {
+.submit-new {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 .org-url {
@@ -155,7 +159,7 @@ main h1 {
   font-size: 20px;
 }
 
-.logo-url {
+.logo-url, .logo-name, .name-url, .email-url {
   display: block;
   margin: 16px;
     width: 300px;
@@ -171,27 +175,49 @@ main h1 {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-#org-btn{
+.org-btn{
   display: flex;
   justify-content: flex-start;
 
 }
-#org-add-btn {
+.org-add-btn {
   height: 40px;
   padding-right: 30px;
   padding-left: 30px;
-  margin-top: 30px;
+  margin-top: 16px;
   width: 100%;
   border: none;
   border-radius: 20px;
   background-color: #17a2b8;
   font-weight: bold;
   font-size: 20px;
+}
+
+.org-add-btn:hover {
+  box-shadow: 5px 5px #afc9f6;
   cursor: pointer;
 }
 
 
 
 @media only screen and (max-width: 960px) {
+  main .org-header {
 
+    margin-bottom: 50px;
+  }
+
+
+
+  .btn {
+    height: fit-content;
+    width: auto;
+  }
+  .submit-new {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .org-btn {
+    margin-left: 20px;
+  }
 }

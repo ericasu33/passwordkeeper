@@ -16,18 +16,21 @@ $(document).ready(function() {
   };
 
   $("#new-org").append(errorOrg(), errorUrl());
-  $("#org-name").focus();
 
+  $("#btn").on("click", function(event) {
+    event.preventDefault();
+    $(".org-name").focus();
 
+  });
   $("#submit-new").on("submit", function(event) {
     event.preventDefault();
-    const orgNameLength = $("#org-name").val().length;
+    const orgNameLength = $(".org-name").val().length;
     const urlContent = $(".logo-url").val();
     console.log("orgName", orgNameLength);
     console.log("urlContent", urlContent);
     if (orgNameLength < 1) {
       $(".error-min-input").show();
-      $("#org-name").focus();
+      $(".org-name").focus();
       return;
     }
 
@@ -51,8 +54,8 @@ $(document).ready(function() {
   });
 
   // Remove error message once validation passes
-  $("#org-name").on("input", function() {
-    const orgNameLength = $("#org-name").val().length;
+  $(".org-name").on("input", function() {
+    const orgNameLength = $(".org-name").val().length;
 
     if (orgNameLength > 0) {
       $(".invalid-url, .error-min-input").hide();
