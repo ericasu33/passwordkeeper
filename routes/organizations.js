@@ -74,7 +74,7 @@ module.exports = (db) => {
           .send(err);
       });
   });
-  
+
 
   //=====NEW ORGANIZATION=====//
 
@@ -88,23 +88,25 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     const orgName = req.body.name;
     const logoUrl = req.body.logo_url;
-
+    //CHANGED "/organizations/new" to "/organizations/error"
     if (!orgName) {
-      return res.status(406).redirect("/organizations/new");
+      return res.status(406).redirect("/organizations/error");
     }
 
     if (logoUrl && !isUrl(logoUrl)) {
-      return res.status(406).redirect("/organizations/new");
+      return res.status(406).redirect("/organizations/error");
     }
 
     database.createOrganization(db, orgName, logoUrl)
       .then(orgId => {
         return database.linkUserToOrganization(db, userId, orgId)
           .then(data => {
-            res.status(200).send({
+            res.status(200).redirect("/organizations");
+          });
+            /* send({
               result: 'redirect',
               url:'/organization'});
-          });
+          }); */
       })
       .catch(err => {
         res
@@ -142,7 +144,7 @@ module.exports = (db) => {
           return database.getOrganization(db, userId, organizationId)
             .then(organization => {
               const orgId = organization.organization_id;
-    
+
               return database.getUsersForOrganization(db, orgId)
                 .then(users => {
                   const templateVars = {
