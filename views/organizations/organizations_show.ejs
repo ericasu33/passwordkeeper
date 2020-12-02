@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
+  <%- include('../partials/_head') %>
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css"> -->
   <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/organization.css" type="text/css" />
-
-  <link href="/styles/layout.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
 
   <title>PasswordKeeper - Organization Settings</title>
 
@@ -45,16 +39,16 @@
           <form id="submit-user" method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
             <div id="new-user">
               <h3>Add Users</h3>
-              <label for="email">User Email
-              <input class="email-url" type="email" name="email" placeholder="User Email" required>
+              <label for="email">Regisered User Email
+              <input class="email-url" type="email" name="email" placeholder="Email" required>
               </label>
 
               <button type="submit">Add</button>
             </div>
           </form>
 
-          <table class="table">
-            <thead>
+          <table class="table table-bordered">
+            <thead class="thead-primary">
               <tr>
                 <th scope="col">User ID</th>
                 <th scope="col">User Name</th>
@@ -71,7 +65,7 @@
                   <td>
                   <% if (users[user].admin_privileges !== true)  { %>
                     <form class="del-user-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
-                      <button type="submit" class="btn btn-outline-danger">Remove</button>
+                      <button class="btn btn-outline-danger" type="submit">Remove</button>
                     </form>
                   <% } %>
                   </td>
@@ -80,9 +74,12 @@
             </tbody>
           </table>
 
+          <div class="ownership-error">
+            <button class="btn btn-outline-danger transfer-ownership" type="submit">Transfer Ownership</button>
+          </div>
+
           <form class="del-org-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-            <h3>Delete Organization</h3>
-            <button type="submit">Delete</button>
+            <button class="btn btn-outline-danger" type="submit">Delete Organization</button>
           </form>
         </div>
   </main>
@@ -95,7 +92,7 @@
   </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
   <script type="text/javascript" src="/scripts/organizations/organization_edit.js"></script>

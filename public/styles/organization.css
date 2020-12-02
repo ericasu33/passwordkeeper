@@ -75,7 +75,8 @@ main h1 {
 .error-min-input,
 .invalid-url,
 .invalid-email,
-.error-user {
+.error-user,
+.invalid-transfer {
   display: none;
   color: #ff5f54;
   font-size: 1rem;
