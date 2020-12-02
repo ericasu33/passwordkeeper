@@ -28,8 +28,13 @@
           <input class="form-control" type="text" name="email" value="<%= site.email %>"  style="width: 300px; margin: 1em">
         <label for="password">password: </label>
           <input class="form-control" type="password" name="password" value="<%= site.password %>" style="width: 300px; margin: 1em">
-        <label for="category">category: </label>
-          <input class="form-control" type="text" value="<%= site.category_id %>" name="category" style="width: 300px; margin: 1em">
+        <label for="category">category: </label><br>
+        <select name="category" id="category_id" value="<%= site.category_id %>" style="width: 300px; margin: 1em">
+          <option value=""></option>
+          <option value="1" selected="selected">Social Media</option>
+          <option value="2">Apps</option>
+          <option value="3">Software</option>
+        </select><br>
         <button type="submit" class="btn btn-info">Update fields</button>
       </form>
 
