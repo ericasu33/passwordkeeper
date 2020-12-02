@@ -74,6 +74,9 @@ $(document).ready(function() {
           })
             .then(function() {
               window.location.replace(window.location.pathname);
+            })
+            .catch(err => {
+              console.log("Error", err);
             });
         }
       },
@@ -95,19 +98,19 @@ $(document).ready(function() {
     '<form id="transfer-details" method="POST" action="/organizations/<%= organization.organization_id %>/transfer?_method=PUT">' +
 
     '<div class="form-group">' +
-    '<label for="user_id">(required) User ID' +
-    '<input class="form-control form-control-lg user_id" type="text" name="user_id" required>' +
+    '<label for="user_id">User ID' +
+    '<input class="form-control form-control-lg user_id" type="text" name="user_id" placeholder="required" required>' +
     '</label>' +
     '</div>' +
 
     '<div class="form-group">' +
-    '<label for="user_name">(required) User Name' +
-    '<input class="form-control form-control-lg user_name" type="text" name="user_name" required>' +
+    '<label for="user_name">User Name' +
+    '<input class="form-control form-control-lg user_name" type="text" name="user_name" placeholder="required" required>' +
     '</div>' +
 
     '<div class="form-group">' +
-    '<label for="email">(required) User Email' +
-    '<input class="form-control form-control-lg email" type="email" name="email" required>' +
+    '<label for="email">User Email' +
+    '<input class="form-control form-control-lg email" type="email" name="email" placeholder="required" required>' +
     '</div>' +
     '</form>',
     buttons: {
@@ -133,7 +136,9 @@ $(document).ready(function() {
               window.location.replace("/organizations");
             })
             .catch(err => {
-              this.setContentAppend('<p class="warning"> ERROR: &#9888 Please input the correct information.</p>');
+              this.setContentAppend('<span class="warning invalid-transfer"> ERROR: &#9888 Please input the correct information.</span>');
+
+              this.$content.find('input').val("");
             });
           return false;
         },
@@ -141,7 +146,19 @@ $(document).ready(function() {
       cancel: {
         keys:["esc"],
       },
+    },
+    onContentReady: function() {
+      const jc = this;
+      this.$content.find('input').on('input', function() {
+        const inputLength = $(this).val().length;
+
+        if (inputLength > 0) {
+          const errorMsg = jc.$content.find("span");
+          errorMsg.remove();
+        }
+      });
     }
+
   });
 
 });

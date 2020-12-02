@@ -138,7 +138,7 @@ module.exports = (db) => {
       })
       .then(authUser => {
         if (!authUser) {
-          return res.status(401).redirect("/organizations");
+          return res.redirect('/organizations/error');
         } else {
           return database.getOrganization(db, userId, organizationId)
             .then(organization => {
@@ -156,7 +156,9 @@ module.exports = (db) => {
         }
       })
       .catch(err => {
-        return res.status(404).redirect('/organizations/error');
+        res
+          .status(500)
+          .send(err);
       });
   });
 
@@ -167,11 +169,11 @@ module.exports = (db) => {
     const logoUrl = req.body.logo_url;
 
     if (!organizationName && !logoUrl) {
-      return res.status(406).redirect(`/organizations/${organizationId}`);
+      return res.redirect(`/organizations/${organizationId}`);
     }
 
     if (logoUrl && !isUrl(logoUrl)) {
-      return res.status(406).redirect(`/organizations/${organizationId}`);
+      return res.redirect(`/organizations/${organizationId}`);
     }
 
     database.updateOrganizationDetails(db, organizationId, organizationName, logoUrl)
@@ -206,7 +208,7 @@ module.exports = (db) => {
     const organizationId = req.params.organization_id;
 
     if (!userEmail) {
-      return res.status(406).redirect(`/organizations/${organizationId}`);
+      return res.redirect(`/organizations/${organizationId}`);
     }
 
     // Chk if user exist in db, and if added to organization
@@ -234,7 +236,7 @@ module.exports = (db) => {
       })
       .catch(err => {
         res
-          .status(500)
+          .status(406)
           .send(err);
       });
   });
