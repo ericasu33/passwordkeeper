@@ -10,6 +10,7 @@
   overflow-x: hidden;
 }
 
+
 main {
   background-color: rgb(224, 222, 223);
   width: 80%;
@@ -54,13 +55,19 @@ main h1 {
     flex-direction: column;
     align-items: center;
     margin-bottom: 50px;
+    padding-right: 10px;
+
 }
 
 .site-entry button {
   border: none;
   padding-left: 0;
   padding-right: 0;
+  cursor: pointer;
+}
 
+.site-entry button:hover {
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 .card-header{

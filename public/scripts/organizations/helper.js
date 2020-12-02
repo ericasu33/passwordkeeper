@@ -7,6 +7,7 @@ const isUrl = str => {
   }
 };
 
+
 const isEmail = email => {
   const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   if (email.match(mailformat)) {
