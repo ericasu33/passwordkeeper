@@ -1,7 +1,10 @@
 .header-all-pages {
   width: 80%;
-    padding-bottom: 10px;
-    position: sticky;
+  padding-bottom: 10px;
+  position: sticky;
+}
+.header-all-pages nav {
+  background-color: slategray;
 }
 
 #log-out{
@@ -9,11 +12,24 @@
   border-color: #dc3545;
   color: white;
   border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 .brand {
-  font-size: 20px;
+  font-size: 30px;
   font-weight: bold;
   font-family: monospace;
-  color: midnightblue;
+  color: darkblue;
+}
+
+.navbar-nav {
+  padding-left: 20px;
+}
+
+#home-link, #about-link, #org-link {
+  font-size: 20px;
+  font-family: monospace;
+  color: cornflowerblue;
+  padding-left: 20px;
 }

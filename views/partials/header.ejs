@@ -3,18 +3,18 @@
     <a class="brand" href="/">PasswordKeeper</a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="/organizations">Home</a>
+        <a class="nav-link" id= "home-link" href="/organizations">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id= "link" type="button" href="/organizations" scroll-behaviour: smooth;>Organizations</a>
+        <a class="nav-link" id= "org-link" type="button" href="/organizations" scroll-behaviour: smooth;>Organizations</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id= "link" type="button" href= '/#about' scroll-behaviour: smooth;>About</a>
+        <a class="nav-link" id= "about-link" type="button" href= '/#about' scroll-behaviour: smooth;>About</a>
       </li>
     </ul>
     <div>
       <form  class= "form-inline justify-content-center" method="POST" action="/login/logout">
-        <label style="width: 200px; margin: 5px; color: rgba(0,0,0,.5);" > Logged In As: <%=locals.name%> </label>
+        <label style="width: 200px; margin: 5px; color: cornflowerblue; font-size: 20px;" > Logged In As: <%=locals.name%> </label>
         <button type="submit" id="log-out">Log Out</button>
       </form>
   </nav>

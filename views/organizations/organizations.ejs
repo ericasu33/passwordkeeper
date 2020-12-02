@@ -18,53 +18,61 @@
 
   <body>
 
+
       <%- include('../partials/header') %>
 
 
+
     <main>
-      <h1> My Organizations </h1>
-      <div class="sites">
-        <% for (const organization in organizations) { %>
-          <div class="test">
-          <div class="card text-center site-entry">
-
-                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
-                  <button type="submit" >
-
-                    <div class="card-header">
-                    <%= organizations[organization].name %>
-                    </div>
-
-                    <img class="logo-image" src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
-                    <div class="card-logo">
-                      <%= organizations[organization].login_url %>
-                    </div>
-
-                  </button>
-
-                </form>
+        <div class="container">
+          <div class="org-header">
+            <h1> My Organizations </h1>
+            <a href = "/organizations/new">
+            <a type="submit" id="btn" href="#add-org">Add Organization</a>
           </div>
-          <% if (organizations[organization].admin_privileges) { %>
-            <div class="setting-form">
-              <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
-                <button type="submit" id="setting-button">Settings</button>
-              </form>
+        <div class="sites">
+          <% for (const organization in organizations) { %>
+            <div class="test">
+            <div class="card text-center site-entry">
+
+                  <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
+                    <button type="submit" >
+
+                      <div class="card-header">
+                      <%= organizations[organization].name %>
+                      </div>
+
+                      <img class="logo-image" src="<%= organizations[organization].logo_url %>" alt="organization logo image" />
+                      <div class="card-logo">
+                        <%= organizations[organization].login_url %>
+                      </div>
+
+                    </button>
+
+                  </form>
             </div>
+            <% if (organizations[organization].admin_privileges) { %>
+              <div class="setting-form">
+                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
+                  <button type="submit" class="setting-button">Settings</button>
+                </form>
+              </div>
 
-          <% } %>
+            <% } %>
+          </div>
+            <% } %>
         </div>
-          <% } %>
-      </div>
+        </div>
 
-    <!-- <div class="org-add"> -->
-      <a href = "/organizations/new">
-        <button type="submit" id="btn">Add Organization</button>
-      </a>
-    <!-- </div> -->
 
     </main>
+    <div class="container-fluid" id='add-org'>
+        <%- include('organizations_new') %>
+    </div>
+         <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+          <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
+          <script type="text/javascript" src="/scripts/organizations/organization_new.js"></script>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+          <script type="text/javascript" src="/scripts/app.js"></script>
   </body>
 </html>
