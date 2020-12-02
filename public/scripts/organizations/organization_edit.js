@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+  // Edit Organization Details
   const errorUrl = () => {
     return `
     <div class="invalid-url">
@@ -51,6 +53,32 @@ $(document).ready(function() {
   
     if (urlLength > 0) {
       $(".error-min-input").hide();
+    }
+  });
+
+  // Delete Organization
+  $(".del-org-confirm").confirm({
+    icon: 'fa fa-warning',
+    title: "Delete Organization",
+    content: "Are you sure you would like to delete the organization?",
+    type: "red",
+    buttons: {
+      Delete: {
+        btnClass: "btn-danger",
+        action: function() {
+          const postUrl = $(".del-org-confirm").attr("action");
+          return $.ajax({
+            method: "POST",
+            url: postUrl,
+          })
+            .then(function() {
+              window.location.replace("/organizations");
+            });
+        }
+      },
+      Cancel:{
+        keys:["esc"],
+      },
     }
   });
 });
