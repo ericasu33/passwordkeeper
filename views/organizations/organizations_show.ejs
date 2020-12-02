@@ -21,13 +21,6 @@
           <div class= "org-setting-header">
           <h1><%=organization.org_name %></h1>
           <img class="logo-image" src="<%=organization.logo_url %>" alt="logo image">
-
-          <div>
-            <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-              <button type="submit" class="org-delete-btn">Delete Organization</button>
-            </form>
-          </div>
-
           </div>
 
           <hr>
@@ -36,13 +29,13 @@
               <div>
                 <h1>Edit Organization Details</h1>
                 <div class="org-input">
-                    <form id="submit-new" method="POST" action="/organizations/<%=organization.organization_id %>">
+                    <form id="submit-edit" method="POST" action="/organizations/<%=organization.organization_id %>">
                       <div id="new-org">
                         <label for="orgName" class="org-url">
                           <p class="par-inp">
                             Organization Name:
                           </p>
-                          <input class="logo-url org-name" type="text" name="orgName" placeholder="Organization Name">
+                          <input class="org-name" type="text" name="orgName">
                         </label>
                       </div>
                       <div>
@@ -78,7 +71,7 @@
               <div id="add-user">
                 <div>
                   <label for="email" class="par-inp">Registered User Email
-                  <input class="logo-url email-url" type="email" name="email" placeholder="Email" required>
+                  <input class="email-url" type="email" name="email" required>
                   </label>
                 </div>
                 
