@@ -1,80 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+<main class="add-main">
+    <div>
+      <h1>Add Organization</h1>
+      <div class="org-input">
+          <form id="submit-new" method="POST" action="/organizations">
+            <div id="new-org">
+              <label for="name" class="org-url">
+                <p class="par-inp">
+                  Organization Name:
+                </p>
+                <input class="logo-name" id= "org-name" type="text"  name="name" placeholder="Organization Name">
+              </label>
+            </div>
+            <div>
+              <label for="logo_url" class="org-url">
+                <div>
+                  <p class="par-inp">
+                    Organization Logo Image URL
+                    (PNG & JPG Only):
+                  </p>
+                </div>
+                <div>
+                  <input class="logo-url" type="text"  name="logo_url" placeholder="http://">
+                </div>
 
-    <%- include('../partials/_head') %>
+              </label>
+            </div>
 
-    <title>PasswordKeeper - New Organization</title>
+            <div id="ord-btn">
+              <button type="submit" id="org-add-btn">Add</button>
+            </div>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
+          </form>
+      </div>
+    </div>
+</main>
 
-    <link href="/styles/layout.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  </head>
-
-  <body>
-    <header>
-      <nav>
-        <div>
-          LOGO
-        </div>
-
-        <div class='dropdown'>
-          <button>
-            Categories (icon)
-          </button>
-          <div class='dropdown-content'>
-            <a href ='#'> Cat1</a>
-            <a href ='#'> Cat2</a>
-            <a href ='#'> Cat3</a>
-          </div>
-        </div>
-
-        <div class='nav-right'>
-          <div>Favourites Icon</div>
-          <div>User_Email(tempVar)</div>
-          <div>
-            <form method="POST" action="/logout">
-              <button type="submit">Log Out</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-
-    </header>
-
-    <main>
-      <div>
-        <h1>Add Organization</h1>
-        <form id="submit-new" method="POST" action="/organizations">
-          <div id="new-org">
-            <label for="name">Organization Name
-              <input class="org-name" type="text" name="name" placeholder="Organization Name">
-            </label>
-
-            <label for="logo_url">Organization Logo Image URL
-              <span>(auto resize to 300 x 300)</span>
-              <input class="logo-url" type="text" name="logo_url" placeholder="http://">
-            </label>
-
-            <button type="submit">Add</button>
-          </div>
-        </form>
-     </div>
-    </main>
-
-    <footer>
-      <a href="/organizations">
-        <button type="submit">My Organizations</button>
-      </a>
-    </footer>
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
-    <script type="text/javascript" src="/scripts/organizations/organization_new.js"></script>
-  </body>
-</html>

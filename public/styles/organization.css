@@ -10,35 +10,64 @@
   overflow-x: hidden;
 }
 
+
 main {
   background-color: rgb(224, 222, 223);
   width: 80%;
   padding: 10px;
   padding-bottom: 400px;
 }
+main .org-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 50px;
+}
+
 main h1 {
   color: #244751;
   padding: 20px 0 0 20px;
-  margin-bottom: 50px;
+}
+
+.org-header #btn {
+  margin:0;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #17a2b8;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  color: black;
+
 }
 
 .sites {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .test {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
+    padding-right: 10px;
+
 }
 
 .site-entry button {
   border: none;
   padding-left: 0;
   padding-right: 0;
+  cursor: pointer;
+}
 
+.site-entry button:hover {
+  box-shadow: 1px 1px 1px 1px black;
 }
 
 .card-header{
@@ -55,11 +84,25 @@ main h1 {
   margin-top: 10px
 }
 
-#setting-button {
+.setting-form form {
+  margin: 0 auto;
+  display: flex;
+}
+
+.setting-button {
+  height: 40px;
+  margin: 0 auto;
   width: 100%;
   border: none;
   border-radius: 20px;
   background-color: #17a2b8;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.setting-button:hover {
+  box-shadow: 5px 5px #afc9f6;
+  cursor: pointer;
 }
 
 
@@ -81,3 +124,74 @@ main h1 {
   font-size: 1rem;
 }
 
+
+#add-org {
+  width: 80%;
+  margin: 20px;
+  padding: 0;
+
+}
+
+.add-main {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#submit-new {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.org-url {
+  display: flex;
+  flex-direction: column;
+}
+
+.par-inp {
+  margin-bottom: 0;
+  padding-left: 20px;
+  font-size: 20px;
+}
+
+.logo-url {
+  display: block;
+  margin: 16px;
+    width: 300px;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+#org-btn{
+  display: flex;
+  justify-content: flex-start;
+
+}
+#org-add-btn {
+  height: 40px;
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-top: 30px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #17a2b8;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 960px) {
+
+}

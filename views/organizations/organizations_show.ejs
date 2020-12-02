@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
 
   <link href="/styles/layout.css" rel="stylesheet" type="text/css">
+  <link href="/styles/organization.css" rel="stylesheet" type="text/css">
+  <link href="/styles/organization-setting.css" rel="stylesheet" type="text/css">
+  <link href="/styles/header.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
@@ -19,38 +22,81 @@
 </head>
 
 <body>
+  <%- include('../partials/header') %>
   <main>
+
         <div>
+          <div class= "org-setting-header">
           <h1><%=organization.org_name %></h1>
-
           <img class="logo-image" src="<%=organization.logo_url %>">
+          <div>
+            <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
+              <button type="submit" class="org-delete-btn">Delete Organization</button>
+            </form>
+          </div>
 
-          <form id="submit-edit" method="POST" action="/organizations/<%=organization.organization_id %>">
-            <div id="edit-org">
-              <h3>Edit Organization Details</h3>
-              <label for="orgName">Organization Name
-                <input class="org-name" type="text" name="orgName" placeholder="Organization Name">
-              </label>
+          </div>
 
-              <label for="logo_url">Organization Logo Image URL
-                <span>(auto resize to 300 x 300)</span>
-                <input class="logo-url" type="text" name="logo_url" placeholder="http://">
-              </label>
+          <hr>
+          <div id="edit-org">
+            <main class="add-main">
+              <div>
+                <h1>Edit Organization</h1>
+                <div class="org-input">
+                    <form id="submit-new" method="POST" action="/organizations/<%=organization.organization_id %>">
+                      <div id="new-org">
+                        <label for="name" class="org-url">
+                          <p class="par-inp">
+                            Organization Name:
+                          </p>
+                          <input class="logo-url" type="text" name="name" placeholder="Organization Name">
+                        </label>
+                      </div>
+                      <div>
+                        <label for="logo_url" class="org-url">
+                          <div>
+                            <p class="par-inp">
+                              Organization Logo Image URL
+                              (PNG & JPG Only):
+                            </p>
+                          </div>
+                          <div>
+                            <input class="logo-url" type="text" name="logo_url" placeholder="http://">
+                          </div>
+                        </label>
+                      </div>
 
-              <button type="submit">Edit</button>
-            </div>
-          </form>
+                      <div id="ord-btn">
+                        <button type="submit" id="org-add-btn">Edit</button>
+                      </div>
+
+
+                    </form>
+                    <hr>
+                </div>
+              </div>
+          </main>
+          </div>
+
 
           <form id="submit-user" method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
             <div id="new-user">
-              <h3>Add Users</h3>
-              <label for="email">User Email
-              <input class="email-url" type="email" name="email" placeholder="User Email" required>
-              </label>
+              <h1>Add Users</h1>
+              <div id="add-user">
+                <div>
+                <label for="email" class="par-inp">User Email
+                <input class="logo-url" type="email" name="email" placeholder="User Email" required>
+                </label>
+              </div>
+              <div id="ord-btn">
+                <button type="submit" id="org-add-btn">Add</button>
+              </div>
+              </div>
 
-              <button type="submit">Add</button>
+
             </div>
           </form>
+          <hr>
 
           <table class="table">
             <thead>
@@ -78,11 +124,6 @@
               <% } %>
             </tbody>
           </table>
-
-          <form class="del-org-confirm" method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-            <h3>Delete Organization</h3>
-            <button type="submit">Delete</button>
-          </form>
         </div>
   </main>
 
