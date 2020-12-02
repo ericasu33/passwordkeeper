@@ -44,6 +44,7 @@ module.exports = (db) => {
 
   // User sees all the websites that the particular organization has
   router.get("/:organization_id/sites", unauthorized, (req, res) => {
+    console.log(req.params);
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
 
@@ -64,7 +65,7 @@ module.exports = (db) => {
         } else {
           return database.getSites(db, orgId)
             .then(sites => {
-              res.render("sites", { sites });
+              res.render("sites", {sites: sites, orgId: orgId});
             });
         }
       })
@@ -102,11 +103,10 @@ module.exports = (db) => {
         return database.linkUserToOrganization(db, userId, orgId)
           .then(data => {
             res.status(200).redirect("/organizations");
+
           });
-            /* send({
-              result: 'redirect',
-              url:'/organization'});
-          }); */
+
+
       })
       .catch(err => {
         res
