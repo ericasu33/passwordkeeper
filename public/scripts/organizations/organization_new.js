@@ -16,6 +16,10 @@ $(document).ready(function() {
   };
 
   $("#new-org").append(errorOrg(), errorUrl());
+<<<<<<< HEAD
+=======
+  $(".org-name").focus();
+>>>>>>> 438430bf7007e73e9dbebe5e613b7e506fa976b9
 
   $("#btn").on("click", function(event) {
     event.preventDefault();
@@ -24,10 +28,13 @@ $(document).ready(function() {
   });
   $("#submit-new").on("submit", function(event) {
     event.preventDefault();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 438430bf7007e73e9dbebe5e613b7e506fa976b9
     const orgNameLength = $(".org-name").val().length;
     const urlContent = $(".logo-url").val();
-    console.log("orgName", orgNameLength);
-    console.log("urlContent", urlContent);
+
     if (orgNameLength < 1) {
       $(".error-min-input").show();
       $(".org-name").focus();

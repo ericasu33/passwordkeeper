@@ -15,24 +15,6 @@ const getOrganization = (db, userId, organizationId) => {
     });
 };
 
-const getUsersForOrganization = (db, orgId) => {
-  const query = `
-  SELECT users.id, name, email, admin_privileges
-  FROM users
-  JOIN user_organizations_role ON user_organizations_role.user_id = users.id
-  WHERE organization_id = $1
-  ORDER BY users.id;
-  `;
-
-  const queryParams = [orgId];
-
-  return db.query(query, queryParams)
-    .then(data => {
-      const users = data.rows;
-      return users;
-    });
-};
-
 const updateOrganizationDetails = (db, orgId, orgName, logoUrl) => {
   let query = `UPDATE organizations`;
   const queryParams = [];
@@ -76,7 +58,6 @@ const deleteOrganization = (db, orgId) => {
 
 module.exports = {
   getOrganization,
-  getUsersForOrganization,
   updateOrganizationDetails,
   deleteOrganization,
 };

@@ -2,8 +2,26 @@ const resSendError = (res, orgId) => {
   res.status(406).send({
     error: 'User is already a member',
     result: 'redirect',
-    url:`/organization/${orgId}`
+    url:`/organizations/${orgId}`
   });
+};
+
+const getUsersForOrganization = (db, orgId) => {
+  const query = `
+  SELECT users.id, name, email, admin_privileges
+  FROM users
+  JOIN user_organizations_role ON user_organizations_role.user_id = users.id
+  WHERE organization_id = $1
+  ORDER BY users.id;
+  `;
+
+  const queryParams = [orgId];
+
+  return db.query(query, queryParams)
+    .then(data => {
+      const users = data.rows;
+      return users;
+    });
 };
 
 const findRegisteredUser = (db, userEmail) => {
@@ -46,14 +64,37 @@ const addUserToOrganization = (db, userId, orgId,) => {
   return db.query(query, queryParams);
 };
 
-const deleteUser = (db, orgId, userId) => {
+const deleteUser = (db, userId, orgId) => {
   const query = `
-    DELETE FROM user_organizations_role 
-    WHERE organization_id = $1 AND user_id = $2;
-    `;
+  DELETE FROM user_organizations_role 
+  WHERE user_id = $1 AND organization_id = $2;
+  `;
 
-  const queryParams = [orgId, userId];
+  const queryParams = [userId, orgId];
 
+  return db.query(query, queryParams);
+};
+
+const giveOwnership = (db, transfereeId, orgId) => {
+  const query = `
+  UPDATE user_organizations_role
+  SET admin_privileges = true
+  WHERE user_id = $1 AND organization_id = $2;
+  `;
+
+  const queryParams = [transfereeId, orgId];
+  
+  return db.query(query, queryParams);
+};
+
+const removeOwnership = (db, transferorId, orgId) => {
+  const query = `
+  UPDATE user_organizations_role
+  SET admin_privileges = false
+  WHERE user_id = $1 AND organization_id = $2;
+  `;
+
+  const queryParams = [transferorId, orgId];
   return db.query(query, queryParams);
 };
 
@@ -62,6 +103,9 @@ module.exports = {
   findRegisteredUser,
   findUserInOrganization,
   addUserToOrganization,
+  getUsersForOrganization,
   deleteUser,
   resSendError,
+  giveOwnership,
+  removeOwnership,
 };

@@ -30,15 +30,15 @@
           <input class="form-control" type="password" name="password" value="<%= site.password %>" style="width: 300px; margin: 1em">
         <label for="category">category: </label><br>
         <select name="category" id="category_id" value="<%= site.category_id %>" style="width: 300px; margin: 1em">
-          <option value=""></option>
-          <option value="1" selected="selected">Social Media</option>
-          <option value="2">Apps</option>
-          <option value="3">Software</option>
+          <option value="" selected=<%=site.category_id == null%>></option>
+          <option value="1" selected=<%=site.category_id == 1%>>Social Media</option>
+          <option value="2" selected=<%=site.category_id == 2%>>Apps</option>
+          <option value="3" selected=<%=site.category_id == 3%>>Software</option>
         </select><br>
         <button type="submit" class="btn btn-info">Update fields</button>
       </form>
 
-      <a href="/organization/<%= orgId %>/sites/"><button class="btn btn-danger" >Cancel</button></a>
+      <a href="/organization/<%= orgId %>/sites/%>"><button class="btn btn-danger" >Cancel</button></a>
 
 
 
