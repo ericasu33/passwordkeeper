@@ -5,7 +5,7 @@
   <title>PasswordKeeper</title>
 
   <%- include('./partials/_head') %>
-  
+
   <!-- CSS (load bootstrap from a CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -17,25 +17,25 @@
         <div>
           <a id="brand" href="/">PasswordKeeper</a>
         </div>
-        
+
         <div>
           <a type="button" href= '/#about' scroll-behaviour: smooth;>About</a>
         </div>
-  
+
         <div>
           <a type="button" href="/organizations" scroll-behaviour: smooth;>Organizations</a>
         </div>
       </div>
-  
+
       <div class="nav-user-logout">
         <div class="nav-user">
           <i class="fa fa-user-astronaut fa-2x"></i>
-        
+
           <div class="nav-user-email">
             <%= email %>
           </div>
         </div>
-  
+
         <div>
           <form method="POST" action="/login/logout">
             <button type="submit" id="logout" name="logout">
@@ -44,10 +44,10 @@
             </button>
           </form>
         </div>
-  
+
       </div>
     </nav>
-  
+
   </header>
 
 <main>

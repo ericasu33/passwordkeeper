@@ -21,14 +21,13 @@ module.exports = (db) => {
     console.log("diplay sites get request");
     const orgId = [req.params.organization_id];
     console.log(orgId);
-    const userId = req.session.user_id;
+
 
     let query = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
     console.log(query);
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-        
         return findUserEmail(db, userId)
           .then(email => {
             return getUserAdminPriv(db, userId, orgId[0])
