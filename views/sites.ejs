@@ -30,7 +30,7 @@
           key = sites[site].category_id
           if (!categoryIdsAndNames.hasOwnProperty(key)){
             console.log(sites[site])
-            categoryIdsAndNames[key] = sites[site].id;
+            categoryIdsAndNames[key] = sites[site].category_name;
           }
         }
 
@@ -91,10 +91,10 @@
 
           <label for="category">category: </label><br>
           <select name="category" id="category_id" style="width: 300px; margin: 1em">
-            <option value=""></option>
-            <option value="1">Social Media</option>
-            <option value="2">Apps</option>
-            <option value="3">Software</option>
+            <% for (i in categoryIdsAndNames){  %>
+              <option value="<%= i %>"><%= categoryIdsAndNames[i] %></option>
+            <% } %>
+
           </select><br>
 
           <label for="password">password: </label><span style="visibility: hidden" id=
