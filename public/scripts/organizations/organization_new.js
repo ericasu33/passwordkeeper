@@ -1,4 +1,3 @@
-const url = require('url');
 $(document).ready(function() {
   const errorOrg = () => {
     return `
@@ -18,38 +17,15 @@ $(document).ready(function() {
 
   $("#new-org").append(errorOrg(), errorUrl());
 
-  $(".btn").on("click", function() {
-    $(".org-name").focus();
-  });
-
-  $("#submit-new").on("submit", function(event) {
+  $("#new-add-btn").on("click", function(event) {
     event.preventDefault();
     $(".org-name").focus();
   });
-
-  /* $('.logo-url').on("change",function() {
-    const fileInput = $(this);
-    if (fileInput.length && fileInput[0].image && fileInput[0].image.length) {
-      const url = window.URL || window.webkitURL;
-      const image = new Image();
-      image.onload = function() {
-        alert('Valid Image');
-      };
-      image.onerror = function() {
-        $(".invalid-url").show();
-        $(".org-name").focus();
-        return;
-      };
-      image.src = url.createObjectURL(fileInput[0].files[0]);
-    }
-  }); */
-
 
   $(".submit-new").on("submit", function(event) {
     event.preventDefault();
     const orgNameLength = $(".org-name").val().length;
     const urlContent = $(".logo-url").val();
-    console.log(url.parse(urlContent, true));
     if (orgNameLength < 1) {
       $(".error-min-input").show();
       $(".org-name").focus();
@@ -65,7 +41,7 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       url: "/organizations",
-      data: $("#submit-new").serialize(),
+      data: $(".submit-new").serialize(),
     })
       .then(function() {
         window.location.replace('/organizations');

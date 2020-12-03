@@ -21,7 +21,7 @@ const isEmail = email => {
 
 const  checkUrl = (url) => {
   const request = new XMLHttpRequest;
-  request.open('GET', url, true);
+  request.open('HEAD', url, true);
   request.send();
   request.onreadystatechange = function() {
     if (request.status === 200) {
