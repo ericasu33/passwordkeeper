@@ -1,23 +1,42 @@
-<header class="header-all-pages">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="brand" href="/">PasswordKeeper</a>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" id= "home-link" href="/organizations">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id= "org-link" type="button" href="/organizations" scroll-behaviour: smooth;>Organizations</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id= "about-link" type="button" href= '/#about' scroll-behaviour: smooth;>About</a>
-      </li>
-    </ul>
-    <div>
-      <form  class= "form-inline justify-content-center" method="POST" action="/login/logout">
-        <label style="width: 200px; margin: 5px; color: cornflowerblue; font-size: 20px;" > Logged In As: <%= email %> </label>
-        <button type="submit" id="log-out">Log Out</button>
-      </form>
+<header>
+  <nav>
+    <div class="nav-links">
+      <div>
+        <a id="brand" href="/">PasswordKeeper</a>
+      </div>
+      
+    <% if(!email) { %> 
+      <div>
+        <a type="button" href= '/#about' scroll-behaviour: smooth;>About</a>
+      </div>
+    <% } %>
+
+      <div>
+        <a type="button" href="/organizations" scroll-behaviour: smooth;>Organizations</a>
+      </div>
+    </div>
+
+    <div class="nav-user-logout">
+      <div class="nav-user">
+        <i class="fa fa-user-astronaut fa-2x"></i>
+      
+        <div class="nav-user-email">
+          <%= email %>
+        </div>
+      </div>
+
+      <div>
+        <form method="POST" action="/login/logout">
+          <button type="submit" id="logout" name="logout">
+            <span class="logout-text">Logout</span>
+            <i class="fa fa-rocket"></i>
+          </button>
+        </form>
+      </div>
+
+    </div>
   </nav>
+
 </header>
 
 

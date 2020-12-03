@@ -16,7 +16,11 @@ module.exports = (db) => {
           next();
         }
       })
-      .catch(err => err);
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
   };
 
   //=====Error=====//
@@ -51,7 +55,6 @@ module.exports = (db) => {
 
   // User sees all the websites that the particular organization has
   router.get("/:organization_id/sites", unauthorized, (req, res) => {
-    console.log(req.params);
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
 

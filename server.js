@@ -13,6 +13,7 @@ const morgan     = require('morgan');
 const methodOverride = require('method-override');
 
 
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -61,8 +62,25 @@ app.use("/organizations", orgRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+const { findUserEmail } = require('./db/helpers/organizations/organization_users');
+
 app.get("/", (req, res) => {
-  res.render("landing");
+  const userId = req.session.user_id;
+
+  if (userId) {
+    console.log(userId);
+    findUserEmail(db, userId)
+      .then(email => {
+        res.render("landing_logged_in", { email });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
+  } else {
+    res.render("landing");
+  }
 });
 
 app.listen(PORT, () => {

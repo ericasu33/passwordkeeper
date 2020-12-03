@@ -1,35 +1,101 @@
-.header-all-pages {
+header {
   width: 80%;
-  padding-bottom: 10px;
   position: sticky;
 }
-.header-all-pages nav {
-  background-color: slategray;
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid cornflowerblue;
+  padding: 2rem;
+  margin: 1rem 0 1rem 0;
 }
 
-#log-out{
-  background-color: #dc3545;
-  border-color: #dc3545;
-  color: white;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.brand {
-  font-size: 30px;
+.nav-links div {
+  margin: 0 2.5rem 0 0;
+}
+
+.nav-links a {
+  font-size: 1.563rem;
+  font-family: monospace;
+  color: rgb(70, 68, 68);
+  text-decoration: none;
+}
+
+#brand {
+  font-size: 1.953rem;
   font-weight: bold;
   font-family: monospace;
   color: darkblue;
 }
 
-.navbar-nav {
-  padding-left: 20px;
+.nav-user-logout {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(70, 68, 68);
 }
 
-#home-link, #about-link, #org-link {
-  font-size: 20px;
-  font-family: monospace;
+.nav-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-user-email {
+  margin: 0 1rem 0 1rem;
+  font-size: 1.25rem;
+}
+
+#logout {
+  position: relative;
+  display: inline-block;
+  border-color: darkblue;
   color: cornflowerblue;
-  padding-left: 20px;
+  border-radius: 5px;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.logout-text {
+  visibility: hidden;
+  width: 4rem;
+  background-color: rgb(70, 68, 68);
+  color: #fff;
+  text-align: center;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  padding: 3px 0;
+
+  /* Position the text */
+  position: absolute;
+  z-index: 1;
+  bottom: 115%;
+  left: 50%;
+  margin-left: -2rem;
+}
+
+/* Pseudo Selectors */
+
+.nav-links a:hover {
+  color: cornflowerblue;
+  text-decoration: none;
+}
+
+#brand:hover {
+  color: cornflowerblue;
+}
+
+#logout:hover {
+  color: white;
+  background-color: cornflowerblue;
+}
+
+#logout:hover .logout-text {
+  visibility: visible;
 }
