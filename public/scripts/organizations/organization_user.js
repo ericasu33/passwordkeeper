@@ -38,7 +38,8 @@ $(document).ready(function() {
       data: $("#submit-user").serialize(),
     })
       .then(function() {
-        window.location.replace(window.location.pathname);
+        window.location.reload();
+        window.location.replace(window.location.pathname + "#usertable");
       })
       .catch(err => {
         $(".error-user").show();
