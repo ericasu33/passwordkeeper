@@ -27,7 +27,17 @@ const getSites = (db, orgId) => {
     .then(data => data.rows);
 };
 
+const getCategories = (db) => {
+  const query = `
+  SELECT * FROM categories;
+  `;
+
+  return db.query(query)
+    .then(data => data.rows);
+};
+
 module.exports = {
   getOrganizations,
   getSites,
+  getCategories,
 };
