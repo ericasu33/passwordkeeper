@@ -20,6 +20,7 @@ module.exports = (db) => {
   router.get("/:organization_id/sites", (req, res) => {
     console.log("diplay sites get request");
     const orgId = [req.params.organization_id];
+    const userId = req.session.user_id;
     console.log(orgId);
 
 
