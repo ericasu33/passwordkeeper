@@ -57,7 +57,7 @@ module.exports = (db) => {
   router.get("/:organization_id/sites", unauthorized, (req, res) => {
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
-
+    
     database.getUsersForOrganization(db, orgId)
       .then(users => {
         let authUser = true;
