@@ -7,7 +7,7 @@
     <title>PasswordKeeper - Organizations </title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    
+
   </head>
 
   <body>
@@ -17,8 +17,8 @@
         <div class="container">
           <div class="org-header">
             <h1> My Organizations </h1>
-            <a href = "/organizations/new">
-            <a type="submit" class="btn" href="#add-org">Add Organization</a>
+            <a href = "/organizations/new"></a>
+            <a type="submit" class="btn" id="new-add-btn" href="#add-org">New</a>
           </div>
         <div class="sites">
           <% for (const organization in organizations) { %>
@@ -59,10 +59,10 @@
     <div class="container-fluid" id='add-org'>
         <%- include('organizations_new') %>
     </div>
-         <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-          <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
-          <script type="text/javascript" src="/scripts/organizations/organization_new.js"></script>
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
+    <script type="text/javascript" src="/scripts/organizations/organization_new.js"></script>
 
-          <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
   </body>
 </html>

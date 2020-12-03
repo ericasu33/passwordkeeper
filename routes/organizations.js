@@ -106,7 +106,7 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     const orgName = req.body.name;
     const logoUrl = req.body.logo_url;
-    
+
     if (!orgName) {
       return res.redirect("/organizations/new");
     }
