@@ -19,6 +19,12 @@
   margin: 1rem;
 }
 
+.org-edit-logo-img {
+  width: 25vw;
+  height: 25vw;
+  object-fit: contain;
+}
+
 .org-edit-content-layout {
   border-bottom: 2px solid #244751;
   padding: 3rem;

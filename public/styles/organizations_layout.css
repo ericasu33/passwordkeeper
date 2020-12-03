@@ -29,13 +29,6 @@ main h1 {
   padding: 20px 0 0 20px;
 }
 
-.logo-image {
-  width: 25vw;
-  height: 25vw;
-  padding: 10px;
-  object-fit: contain;
-}
-
 .par-inp {
   margin-bottom: 0;
   padding-left: 20px;

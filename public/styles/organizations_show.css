@@ -40,6 +40,13 @@
   font-weight: bold;
 }
 
+.logo-image {
+  width: 25vw;
+  height: 25vw;
+  padding: 10px;
+  object-fit: contain;
+}
+
 /* Organization Settings Button */
 
 .setting-form {
