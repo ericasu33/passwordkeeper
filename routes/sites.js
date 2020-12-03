@@ -23,12 +23,32 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     console.log(orgId);
 
+    // Promise.all([db.query(query1, siteId), db.query(query2)])
+    //   .then(([data, cats, email]) => {
+    //     const site = data.rows[0];
+    //     const categories = cats.rows;
 
-    let query = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
-    console.log(query);
-    db.query(query, orgId)
-      .then(data => {
+    //     console.log(data.rows);
+
+    //         const templateVars = {
+    //           site,
+    //           orgId,
+    //           categories,
+    //           email,
+    //         }
+
+    //         res.render("site", templateVars);
+
+    //   })
+
+
+    let query1 = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
+    let query2 = `SELECT * FROM categories`
+    console.log(query1);
+    Promise.all([db.query(query1, orgId), db.query(query2)])
+      .then(([data, cats]) => {
         const sites = data.rows;
+        const categories = cats.rows;
 
         return findUserEmail(db, userId)
           .then(email => {
@@ -36,6 +56,7 @@ module.exports = (db) => {
               .then(admin => {
                 const templateVars = {
                   sites,
+                  categories,
                   orgId,
                   email,
                   admin,

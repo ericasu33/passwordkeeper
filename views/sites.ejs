@@ -35,18 +35,20 @@
         }
 
         console.log(categoryIdsAndNames)
+        console.log(categories);
 
-        for (i in categoryIdsAndNames){
-          console.log(categoryIdsAndNames[i])
+        for (category in categories){
+          console.log(categories[category].id)
+
      %>
 
       <div class="category">
 
-        <h1> Category Name <%= categoryIdsAndNames[i] %></h1>
+        <h1> Category Name <%= categories[category].name %></h1>
 
           <div class="sites">
             <%for (const site in sites) {
-              if(sites[site].category_id == i) { %>
+              if(sites[site].category_id === categories[category].id) { %>
 
               <div class="card text-center site-entry">
                 <div class="card-header"><h3><a href="http://<%= sites[site].login_url %>"><%= sites[site].name %></a></h3></div>
@@ -95,8 +97,8 @@
 
           <label for="category">category: </label><br>
           <select name="category" id="category_id" style="width: 300px; margin: 1em">
-            <% for (i in categoryIdsAndNames){  %>
-              <option value="<%= i %>"><%= categoryIdsAndNames[i] %></option>
+            <% for (category in categories){  %>
+              <option value="<%= category %>"><%= categories[category].name %></option>
             <% } %>
 
           </select><br>
