@@ -16,22 +16,32 @@ $(document).ready(function() {
   };
 
   $("#new-org").append(errorOrg(), errorUrl());
-<<<<<<< HEAD
-=======
-  $(".org-name").focus();
->>>>>>> 438430bf7007e73e9dbebe5e613b7e506fa976b9
 
-  $("#btn").on("click", function(event) {
+  $(".btn").on("click", function(event) {
     event.preventDefault();
     $(".org-name").focus();
-
   });
-  $("#submit-new").on("submit", function(event) {
-    event.preventDefault();
-<<<<<<< HEAD
-=======
 
->>>>>>> 438430bf7007e73e9dbebe5e613b7e506fa976b9
+  $('.logo-url').on("change",function() {
+    const fileInput = $(this);
+    if (fileInput.length && fileInput[0].files && fileInput[0].files.length) {
+      const url = window.URL || window.webkitURL;
+      const image = new Image();
+      image.onload = function() {
+        alert('Valid Image');
+      };
+      image.onerror = function() {
+        $(".invalid-url").show();
+        $(".org-name").focus();
+        return;
+      };
+      image.src = url.createObjectURL(fileInput[0].files[0]);
+    }
+  });
+
+
+  $(".submit-new").on("submit", function(event) {
+    event.preventDefault();
     const orgNameLength = $(".org-name").val().length;
     const urlContent = $(".logo-url").val();
 
@@ -77,3 +87,7 @@ $(document).ready(function() {
     }
   });
 });
+
+
+
+

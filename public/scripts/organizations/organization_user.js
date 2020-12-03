@@ -21,7 +21,7 @@ $(document).ready(function() {
   // Add User
   $("#submit-user").on("submit", function(event) {
     event.preventDefault();
-    
+
     const emailContent = $(".email-url").val();
 
     if (!emailContent || !isEmail(emailContent)) {

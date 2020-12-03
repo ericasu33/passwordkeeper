@@ -20,50 +20,17 @@
         <div>
           <img class="logo-image img-setting" src="<%=organization.logo_url %>">
           <div class= "org-setting-header">
-          <h1><%=organization.org_name %></h1>
-          <img class="logo-image" src="<%=organization.logo_url %>" alt="logo image">
->>>>>>> 438430bf7007e73e9dbebe5e613b7e506fa976b9
+              <h1><%=organization.org_name %></h1>
+              <div>
+                <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
+                  <button type="submit" class="org-delete-btn">Delete Organization</button>
+                </form>
+              </div>
           </div>
 
           <hr>
-          <div id="edit-org">
-            <main class="add-main">
-              <div>
-                <h1>Edit Organization Details</h1>
-                <div class="org-input">
-                    <form id="submit-edit" method="POST" action="/organizations/<%=organization.organization_id %>">
-                      <div id="new-org">
-                        <label for="orgName" class="org-url">
-                          <p class="par-inp">
-                            Organization Name:
-                          </p>
-                          <input class="org-name" type="text" name="orgName">
-                        </label>
-                      </div>
-                      <div>
-                        <label for="logo_url" class="org-url">
-                          <div>
-                            <p class="par-inp">
-                              Organization Logo Image URL
-                              (PNG & JPG Only):
-                            </p>
-                          </div>
-                          <div>
-                            <input class="logo-url" type="text" name="logo_url" placeholder="http://">
-                          </div>
-                        </label>
-                      </div>
 
-                      <div id="ord-btn">
-                        <button type="submit" id="org-add-btn">Edit</button>
-                      </div>
-
-
-                    </form>
-                    <hr>
-                </div>
-              </div>
-          </main>
+            <%- include('organizations_edit') %>
           </div>
 
 
@@ -115,10 +82,6 @@
           <div class="ownership-error">
             <button class="btn btn-outline-danger transfer-ownership" type="submit">Transfer Ownership</button>
           </div>
-
-          <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-            <button class="btn btn-outline-danger del-org-confirm" type="submit">Delete Organization</button>
-          </form>
         </div>
   </main>
 
@@ -133,18 +96,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
   <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
+  <script type="text/javascript" src="/scripts/organization-setting.js"></script>
   <script type="text/javascript" src="/scripts/organizations/organization_edit.js"></script>
   <script type="text/javascript" src="/scripts/organizations/organization_user.js"></script>
 
+
 </body>
 </html>
-
-
-
-
-<h1><%=organization.org_name %></h1>
-<div>
-  <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-    <button type="submit" class="org-delete-btn">Delete Organization</button>
-  </form>
-</div>
