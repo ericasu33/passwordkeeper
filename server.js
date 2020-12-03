@@ -64,7 +64,6 @@ app.get("/", (req, res) => {
   const userId = req.session.user_id;
 
   if (userId) {
-    console.log(userId);
     findUserEmail(db, userId)
       .then(email => {
         res.render("landing_logged_in", { email });

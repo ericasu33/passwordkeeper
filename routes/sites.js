@@ -7,7 +7,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const { findUserEmail } = require('../db/helpers/organizations/organization_users');
+const { findUserEmail, getUserAdminPriv } = require('../db/helpers/organizations/organization_users');
 
 
 module.exports = (db) => {
@@ -24,15 +24,8 @@ module.exports = (db) => {
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-        return findUserEmail(db, userId)
-          .then(email => {
-            const templateVars = {
-              sites,
-              orgId,
-              email,
-            };
-            res.render("sites", templateVars);
-          });
+  
+        res.render("sites", { sites, orgId });
       })
       .catch(err => {
         res
