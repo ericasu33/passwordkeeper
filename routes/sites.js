@@ -28,7 +28,7 @@ module.exports = (db) => {
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-        
+
         return findUserEmail(db, userId)
           .then(email => {
             return getUserAdminPriv(db, userId, orgId[0])
@@ -57,8 +57,8 @@ module.exports = (db) => {
     console.log(record);
     console.log(orgId);
 
-    const params = [orgId, record.category, record.name, record.username, record.password, record.email];
-    const query = `INSERT INTO websites (organization_id, category_id, name, username, password, email) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+    const params = [orgId, record.category, record.name, record.username, record.password, record.email, record.login_url];
+    const query = `INSERT INTO websites (organization_id, category_id, name, username, password, email, login_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
 
     console.log(query);
     db.query(query, params)
