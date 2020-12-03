@@ -75,17 +75,21 @@ module.exports = (db) => {
         } else {
           return database.getSites(db, orgId)
             .then(sites => {
-              return database.findUserEmail(db, userId)
-                .then(email => {
-                  return database.getUserAdminPriv(db, userId, orgId)
-                    .then(admin => {
-                      const templateVars = {
-                        sites,
-                        orgId,
-                        email,
-                        admin,
-                      };
-                      res.render("sites", templateVars);
+              return database.getCategories(db)
+                .then(categories => {
+                  return database.findUserEmail(db, userId)
+                    .then(email => {
+                      return database.getUserAdminPriv(db, userId, orgId)
+                        .then(admin => {
+                          const templateVars = {
+                            sites,
+                            categories,
+                            orgId,
+                            email,
+                            admin,
+                          };
+                          res.render("sites", templateVars);
+                        });
                     });
                 });
             });
