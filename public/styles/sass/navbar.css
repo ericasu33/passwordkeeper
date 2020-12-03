@@ -31,7 +31,7 @@ header .Register-Login {
 header .nav-button {
   color: rgba(0, 0, 0, 0.5);
   border: none;
-  background-color: black;
+  background-color: transparent;
 }
 
 .container-fluid {
