@@ -174,7 +174,7 @@ module.exports = (db) => {
                         users,
                         email,
                       };
-                      res.render("./organizations/organizations_show", templateVars);
+                      res.render("./organizations/organization_edit", templateVars);
                     });
                 });
             });
