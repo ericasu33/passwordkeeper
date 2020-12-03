@@ -58,6 +58,11 @@ main {
 #adding {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   padding-top: 20px;
 }
 
+
+.add-new span{
+  color: red;
+}

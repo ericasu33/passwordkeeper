@@ -1,13 +1,12 @@
 /*
- * All routes for Widgets are defined here
- * Since this file is loaded in server.js into api/sites,
+ * All routes for sites are defined here
+ * Since this file is loaded in server.js
  *   these routes are mounted onto /sites
  */
 
 const express = require('express');
 const router  = express.Router();
 
-let global_site_id = 0;
 
 
 module.exports = (db) => {
