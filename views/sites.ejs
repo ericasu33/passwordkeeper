@@ -17,42 +17,62 @@
 
   <body>
 
-  <%- include('partials/header') %>
+  <%- include('partials/_header') %>
 
 
     <main>
-      <h1> Category </h1>
 
+      <%  let categoryIdsAndNames = {};
+          let key = '';
+          console.log("rendering sites.ejs...")
 
-      <div class="sites">
+        for (const site in sites) {
+          key = sites[site].category_id
+          if (!categoryIdsAndNames.hasOwnProperty(key)){
+            console.log(sites[site])
+            categoryIdsAndNames[key] = sites[site].id;
+          }
+        }
 
-        <% for (const site in sites) { %>
+        console.log(categoryIdsAndNames)
 
-          <div class="card text-center site-entry">
-            <div class="card-header"><%= sites[site].name %></div>
-            <div class="card-body">
-              <img src="<%= sites[site].image_url %>" alt="site logo image" /><br>
-              <%= sites[site].login_url %><br>
-              <div class="site-info">
-                <span>Username: <input type="text" id="<%= sites[site].username %>" size="10" value="<%= sites[site].username %>"></span>
-                <!-- The button used to copy the text -->
-                <button onclick="myFunction('<%= sites[site].username %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
-                <span>Password: <input type="text" id="<%= sites[site].password %>" size="10" value="<%= sites[site].password %>"></span>
-                <!-- The button used to copy the text -->
-                <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+        for (i in categoryIdsAndNames){
+          console.log(categoryIdsAndNames[i])
+     %>
+
+      <div class="category">
+
+        <h1> Category Name <%= categoryIdsAndNames[i] %></h1>
+
+          <div class="sites">
+            <%for (const site in sites) {
+              if(sites[site].category_id == i) { %>
+
+              <div class="card text-center site-entry">
+                <div class="card-header"><%= sites[site].name %></div>
+                <div class="card-body">
+                  <img src="<%= sites[site].image_url %>" alt="site logo image" /><br>
+                  <%= sites[site].login_url %><br>
+                  <div class="site-info">
+                    <span>Username: <input type="text" id="<%= sites[site].username %>" size="10" value="<%= sites[site].username %>"></span>
+                    <!-- The button used to copy the text -->
+                    <button onclick="myFunction('<%= sites[site].username %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+                    <span>Password: <input type="text" id="<%= sites[site].password %>" size="10" value="<%= sites[site].password %>"></span>
+                    <!-- The button used to copy the text -->
+                    <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
+                  </div>
+                  <div id="buttons">
+                    <a href="/organization/<%= orgId %>/sites/<%= sites[site].id %>"><button class="btn btn-info" >Update</button></a>
+
+                    <form method="POST" action="/organization/<%= orgId %>/sites/<%= sites[site].id %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
+                    </div>
+                  </div>
+                  <br>
+
               </div>
-              <div id="buttons">
-                <a href="/organization/<%= orgId %>/sites/<%= sites[site].id %>"><button class="btn btn-info" >Update</button></a>
 
-                <form method="POST" action="/organization/<%= orgId %>/sites/<%= sites[site].id %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
-                </div>
-              </div>
+          <%} } } %>
 
-
-          </div>
-
-
-          <% } %>
       </div>
 
       <div id="adding">
@@ -107,7 +127,6 @@
 
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
 
 
 

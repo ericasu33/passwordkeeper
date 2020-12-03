@@ -24,6 +24,25 @@ const getUsersForOrganization = (db, orgId) => {
     });
 };
 
+const getUserAdminPriv = (db, userId, orgId) => {
+  const query = `
+  SELECT admin_privileges
+  FROM user_organizations_role
+  WHERE user_id = $1 AND organization_id = $2;
+  `;
+
+  const queryParams = [userId, orgId];
+
+  console.log(query, queryParams);
+
+  return db.query(query, queryParams)
+    .then(data => {
+      const adminPriv = data.rows[0].admin_privileges;
+      return adminPriv;
+    });
+};
+
+
 const findUserEmail = (db, userId) => {
   const query = `
   SELECT email
@@ -118,6 +137,7 @@ module.exports = {
   findRegisteredUser,
   findUserEmail,
   findUserInOrganization,
+  getUserAdminPriv,
   addUserToOrganization,
   getUsersForOrganization,
   deleteUser,
