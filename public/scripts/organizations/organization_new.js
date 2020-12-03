@@ -15,7 +15,7 @@ $(document).ready(function() {
     `;
   };
 
-  $("#new-org").append(errorOrg(), errorUrl());
+  $(".org-input").append(errorOrg(), errorUrl());
 
   $("#new-add-btn").on("click", function(event) {
     event.preventDefault();

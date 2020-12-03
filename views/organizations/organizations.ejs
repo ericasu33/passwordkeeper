@@ -15,19 +15,21 @@
 
     <main class="main-layout">
         <div class="container">
+          
           <div class="org-header">
             <h1> My Organizations </h1>
             <a href = "/organizations/new"></a>
             <a type="submit" class="btn" id="new-add-btn" href="#add-org">New</a>
           </div>
-        <div class="sites">
-          <% for (const organization in organizations) { %>
-            <div class="test">
-            <div class="card text-center site-entry">
+
+          <div class="sites">
+            <% for (const organization in organizations) { %>
+              <div class="orgs-show">
+                <div class="card text-center site-entry">
 
                   <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>/sites">
-                    <button type="submit" >
 
+                    <button type="submit" >
                       <div class="card-header">
                       <%= organizations[organization].name %>
                       </div>
@@ -38,33 +40,29 @@
                       <div class="card-logo">
                         <%= organizations[organization].login_url %>
                       </div>
-
                     </button>
 
                   </form>
-            </div>
-            <% if (organizations[organization].admin_privileges) { %>
-              <div class="setting-form">
-                <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
-                  <button type="submit" class="setting-button">Settings</button>
-                </form>
-              </div>
+                </div>
 
+               <% if (organizations[organization].admin_privileges) { %>
+                <div class="setting-form">
+                  <form method="GET" action="/organizations/<%= organizations[organization].organization_id %>">
+                    <button type="submit" class="setting-button">Settings</button>
+                  </form>
+                </div>
+               <% } %>
+             </div>
             <% } %>
           </div>
-            <% } %>
         </div>
-        </div>
-
-
     </main>
+    
     <div class="container-fluid" id='add-org'>
         <%- include('organizations_new') %>
     </div>
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/organizations/helper.js"></script>
-    <script type="text/javascript" src="/scripts/organizations/organization_new.js"></script>
 
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <%- include('../partials/_footer_org') %>
+
   </body>
 </html>
