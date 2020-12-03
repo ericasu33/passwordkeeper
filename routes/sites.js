@@ -19,12 +19,12 @@ module.exports = (db) => {
     console.log(orgId);
     const userId = req.session.user_id;
 
-    let query = `SELECT * FROM websites WHERE organization_id=$1`;
+    let query = `SELECT * FROM websites JOIN categories ON categories.id = category_id WHERE organization_id=$1 `;
     console.log(query);
     db.query(query, [orgId])
       .then(data => {
         const sites = data.rows;
-
+        console.log(sites);
         return findUserEmail(db, userId)
           .then(email => {
             const templateVars = {
