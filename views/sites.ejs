@@ -61,11 +61,13 @@
                     <!-- The button used to copy the text -->
                     <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
                   </div>
+                <% if (admin) { %> 
                   <div id="buttons">
                     <a href="/organization/<%= orgId %>/sites/<%= sites[site].id %>"><button class="btn btn-info" >Update</button></a>
 
                     <form method="POST" action="/organization/<%= orgId %>/sites/<%= sites[site].id %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
                     </div>
+                <% } %>  
                   </div>
                   <br>
 

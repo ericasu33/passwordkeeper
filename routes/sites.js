@@ -24,8 +24,19 @@ module.exports = (db) => {
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-  
-        res.render("sites", { sites, orgId });
+        return findUserEmail(db, userId)
+          .then(email => {
+            return getUserAdminPriv(db, userId, orgId[0])
+              .then(admin => {
+                const templateVars = {
+                  sites,
+                  orgId,
+                  email,
+                  admin,
+                };
+                res.render("sites", templateVars);
+              });
+          });
       })
       .catch(err => {
         res
