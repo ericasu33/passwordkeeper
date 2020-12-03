@@ -59,7 +59,7 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding-top: 20px;
+  padding-top: 80px;
 }
 
 

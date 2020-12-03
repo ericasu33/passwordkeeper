@@ -15,16 +15,15 @@ module.exports = (db) => {
   // Display all the websites
   router.get("/:organization_id/sites", (req, res) => {
     console.log("diplay sites get request");
-    const orgId = req.params.organization_id;
+    const orgId = [req.params.organization_id];
     console.log(orgId);
     const userId = req.session.user_id;
 
-    let query = `SELECT * FROM websites WHERE organization_id=$1`;
+    let query = `SELECT websites.*, categories.name AS category_name FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
     console.log(query);
-    db.query(query, [orgId])
+    db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-
         return findUserEmail(db, userId)
           .then(email => {
             const templateVars = {
