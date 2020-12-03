@@ -4,10 +4,10 @@
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
+
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router  = express.Router();
-
 
 module.exports = (db) => {
 

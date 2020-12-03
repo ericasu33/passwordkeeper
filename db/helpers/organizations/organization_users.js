@@ -24,6 +24,21 @@ const getUsersForOrganization = (db, orgId) => {
     });
 };
 
+const findUserEmail = (db, userId) => {
+  const query = `
+  SELECT email
+  FROM users
+  WHERE id = $1;
+  `;
+
+  const queryParams = [userId];
+
+  return db.query(query, queryParams)
+    .then(data => {
+      return userEmail = data.rows[0].email;
+    });
+};
+
 const findRegisteredUser = (db, userEmail) => {
   const query = `
   SELECT id
@@ -101,6 +116,7 @@ const removeOwnership = (db, transferorId, orgId) => {
 
 module.exports = {
   findRegisteredUser,
+  findUserEmail,
   findUserInOrganization,
   addUserToOrganization,
   getUsersForOrganization,

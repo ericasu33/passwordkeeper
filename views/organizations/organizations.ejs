@@ -7,28 +7,18 @@
     <title>PasswordKeeper - Organizations </title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
-    <link href="/styles/organization.css" rel="stylesheet" type="text/css">
-    <link href="/styles/header.css" rel="stylesheet" type="text/css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
+    
   </head>
 
   <body>
-
-
       <%- include('../partials/header') %>
-
-
 
     <main>
         <div class="container">
           <div class="org-header">
             <h1> My Organizations </h1>
             <a href = "/organizations/new">
-            <a type="submit" id="btn" href="#add-org">Add Organization</a>
+            <a type="submit" class="btn" href="#add-org">Add Organization</a>
           </div>
         <div class="sites">
           <% for (const organization in organizations) { %>
