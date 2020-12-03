@@ -4,6 +4,10 @@
  *   these routes are mounted onto /sites
  */
 
+
+// Promise.all([db.query(websitesQ, ...), db.query(categoriesQ, ...)]).then(([websitesData, categoriesData]) => { ...
+
+
 const express = require('express');
 const router  = express.Router();
 
@@ -19,12 +23,24 @@ module.exports = (db) => {
     console.log(orgId);
 
 
-    let query = `SELECT websites.*, categories.name AS category_name FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
+    let query = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
     console.log(query);
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-        res.render("sites", { sites, orgId });
+        return findUserEmail(db, userId)
+          .then(email => {
+            return getUserAdminPriv(db, userId, orgId[0])
+              .then(admin => {
+                const templateVars = {
+                  sites,
+                  orgId,
+                  email,
+                  admin,
+                };
+                res.render("sites", templateVars);
+              });
+          });
       })
       .catch(err => {
         res
