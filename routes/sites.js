@@ -104,33 +104,37 @@ module.exports = (db) => {
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
 
-    const query = `SELECT * FROM websites WHERE id=$1`;
+    const query1 = `SELECT * FROM websites WHERE id=$1`;
+    const query2 = `SELECT * FROM categories`;
 
-    console.log(`Query: ${query}`);
+    console.log(`Query: ${query1}`);
     console.log(siteId);
 
-    db.query(query, siteId)
-      .then(data => {
+    Promise.all([db.query(query1, siteId), db.query(query2), findUserEmail(db, userId)])
+      .then(([data, cats, email]) => {
         const site = data.rows[0];
-        console.log(data.rows);
-        global_site_id = site.id;
-        console.log("Global site id: " + global_site_id);
+        const categories = cats.rows;
 
-        return findUserEmail(db, userId)
-          .then(email => {
+        console.log(data.rows);
+
             const templateVars = {
               site,
               orgId,
+              categories,
               email,
-            };
+            }
+
             res.render("site", templateVars);
-          });
+
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
+
+
   });
 
   // Update a site entry
@@ -139,9 +143,9 @@ module.exports = (db) => {
     site = [req.body];
     const orgId = req.params.organization_id;
     console.log(orgId);
-    const params = [req.body.name, req.body.username, req.body.email, req.body.category, req.body.password, req.params.site];
+    const params = [req.body.name, req.body.login_url, req.body.username, req.body.email, req.body.category, req.body.password, req.params.site];
 
-    const query = `UPDATE websites SET name=$1, username=$2, email=$3, category_id=$4, password=$5  WHERE id=$6 RETURNING *`;
+    const query = `UPDATE websites SET name=$1, login_url=$2, username=$3, email=$4, category_id=$5, password=$6  WHERE id=$7 RETURNING *`;
     console.log(query);
 
     db.query(query, params)

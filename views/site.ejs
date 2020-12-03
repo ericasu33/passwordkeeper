@@ -19,9 +19,13 @@
     <main>
       <h1> Edit Info for: <%= site.name %></h1>
 
+      <% console.log(categories) %>
+
       <form method="POST" action="/organization/<%= orgId %>/sites/<%= site.id %>/update">
         <label for="newsite">Site name: </label>
           <input class="form-control" type="text" name="name" value="<%= site.name %> " style="width: 300px; margin: 1em">
+        <label for="login_url">Login URL: </label>
+          <input class="form-control" type="text" name="login_url" value="<%= site.login_url %> " style="width: 300px; margin: 1em">
         <label for="username">username: </label>
           <input class="form-control" type="text" name="username" value="<%= site.username %>"  style="width: 300px; margin: 1em">
         <label for="email">email: </label>
@@ -30,10 +34,9 @@
           <input class="form-control" type="password" name="password" value="<%= site.password %>" style="width: 300px; margin: 1em">
         <label for="category">category: </label><br>
         <select name="category" id="category_id" value="<%= site.category_id %>" style="width: 300px; margin: 1em">
-          <option value="" selected=<%=site.category_id == null%>></option>
-          <option value="1" selected=<%=site.category_id == 1%>>Social Media</option>
-          <option value="2" selected=<%=site.category_id == 2%>>Apps</option>
-          <option value="3" selected=<%=site.category_id == 3%>>Software</option>
+          <% for (category of categories) { %>
+          <option value="<%= category.id %>"><%= category.name %></option>
+          <% } %>
         </select><br>
         <button type="submit" class="btn btn-info">Update fields</button>
       </form>

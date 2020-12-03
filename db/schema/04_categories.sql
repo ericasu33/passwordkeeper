@@ -2,6 +2,5 @@ DROP TABLE IF EXISTS categories CASCADE;
 
 CREATE TABLE categories (
   id SERIAL PRIMARY KEY NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
   name VARCHAR(100) NOT NULL
 );
