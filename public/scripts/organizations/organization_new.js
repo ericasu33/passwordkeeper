@@ -17,7 +17,11 @@ $(document).ready(function() {
 
   $("#new-org").append(errorOrg(), errorUrl());
 
-  $(".btn").on("click", function(event) {
+  $(".btn").on("click", function() {
+    $(".org-name").focus();
+  });
+
+  $("#submit-new").on("submit", function(event) {
     event.preventDefault();
     $(".org-name").focus();
   });

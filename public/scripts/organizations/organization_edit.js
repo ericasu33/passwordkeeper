@@ -10,7 +10,7 @@ $(document).ready(function() {
   };
 
   $("#edit-org").append(errorUrl());
-  $(".org-name").focus();
+  // $(".org-name").focus();
 
   $("#submit-edit").on("submit", function(event) {
     event.preventDefault();

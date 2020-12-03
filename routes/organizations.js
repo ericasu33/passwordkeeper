@@ -16,7 +16,11 @@ module.exports = (db) => {
           next();
         }
       })
-      .catch(err => err);
+      .catch(err => {
+        res
+          .status(500)
+          .send(err);
+      });
   };
 
   //=====Error=====//
@@ -30,10 +34,17 @@ module.exports = (db) => {
   //User sees all the organizations user belongs to
   router.get("/", unauthorized, (req, res) => {
     const userId = req.session.user_id;
-
+          
     database.getOrganizations(db, userId)
       .then(organizations => {
-        res.render("./organizations/organizations", { organizations });
+        return database.findUserEmail(db, userId)
+          .then(email => {
+            const templateVars = {
+              organizations,
+              email,
+            };
+            res.render("./organizations/organizations", templateVars);
+          });
       })
       .catch(err => {
         res
@@ -44,7 +55,6 @@ module.exports = (db) => {
 
   // User sees all the websites that the particular organization has
   router.get("/:organization_id/sites", unauthorized, (req, res) => {
-    console.log(req.params);
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
 
@@ -65,7 +75,15 @@ module.exports = (db) => {
         } else {
           return database.getSites(db, orgId)
             .then(sites => {
-              res.render("sites", {sites: sites, orgId: orgId});
+              return database.findUserEmail(db, userId)
+                .then(email => {
+                  const templateVars = {
+                    sites,
+                    orgId,
+                    email,
+                  };
+                  res.render("sites", templateVars);
+                });
             });
         }
       })
@@ -82,7 +100,6 @@ module.exports = (db) => {
   router.get("/new", unauthorized, (req, res) => {
     res.render("./organizations/organizations_new");
   });
-
 
   // User creates new organization
   router.post("/", (req, res) => {
@@ -146,11 +163,15 @@ module.exports = (db) => {
 
               return database.getUsersForOrganization(db, orgId)
                 .then(users => {
-                  const templateVars = {
-                    organization,
-                    users,
-                  };
-                  res.render("./organizations/organizations_show", templateVars);
+                  return database.findUserEmail(db, userId)
+                    .then(email => {
+                      const templateVars = {
+                        organization,
+                        users,
+                        email,
+                      };
+                      res.render("./organizations/organizations_show", templateVars);
+                    });
                 });
             });
         }

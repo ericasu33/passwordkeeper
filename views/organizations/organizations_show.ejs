@@ -2,13 +2,9 @@
 <html lang="en">
 <head>
   <%- include('../partials/_head') %>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- <link rel="stylesheet" href="/styles/layout.css" type="text/css"> -->
-  <link rel="stylesheet" href="/styles/landing.css" type="text/css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
+ 
   <title>PasswordKeeper - Organization Settings</title>
 
 </head>
@@ -63,7 +59,7 @@
             </thead>
             <tbody>
               <% for (const user in users) { %>
-              <tr>
+              <tr id="usertable">
                   <td><%= users[user].id %></td>
                   <td><%= users[user].name %></td>
                   <td><%= users[user].email %></td>

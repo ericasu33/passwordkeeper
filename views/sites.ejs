@@ -16,7 +16,9 @@
   </head>
 
   <body>
-     <header><%- include('partials/header') %></header>
+
+  <%- include('partials/header') %>
+
 
     <main>
       <h1> Category </h1>
@@ -57,13 +59,16 @@
 
       <div class="add-new">
         <h2> Add New Site </h2>
-        <form method="POST" action="/organization/<%= orgId%>/sites">
-          <label for="newsite">Site name: </label>
+        <form id="formAddNew" method="POST" onsubmit="return ValidationEvent()" action="/organization/<%= orgId%>/sites">
+          <label for="newsite">Site name: </label><span style="visibility: hidden" id="nameError"> Must enter a name</span><br>
             <input class="form-control" type="text" name="name" placeholder="http://" style="width: 300px; margin: 1em">
-          <label for="username">username: </label>
+
+          <label for="username">username: </label><span style="visibility: hidden" id="usernameError"> Must enter a username</span><br>
             <input class="form-control" type="text" name="username" placeholder="Jane Doe"  style="width: 300px; margin: 1em">
-          <label for="email">email: </label>
-            <input class="form-control" type="text" name="email" placeholder="abc@example.com"  style="width: 300px; margin: 1em">
+
+          <label for="email">email: </label><span style="visibility: hidden" id="emailError"> Must enter an email</span><br>
+            <input class="form-control" type="email" name="email" placeholder="abc@example.com"  style="width: 300px; margin: 1em">
+
           <label for="category">category: </label><br>
           <select name="category" id="category_id" style="width: 300px; margin: 1em">
             <option value=""></option>
@@ -71,15 +76,18 @@
             <option value="2">Apps</option>
             <option value="3">Software</option>
           </select><br>
-          <label for="password">password: </label>
+
+          <label for="password">password: </label><span style="visibility: hidden" id=
+          "passwordError"> Must enter a password</span><br>
             <input class="form-control" id="passinput" type="password" name="password" style="width: 300px; margin: 1em">
+
             <input type="button" class="btn btn-dark" id="showPass" value="Show Password">
           <button type="submit" class="btn btn-info">Add Site</button>
         </form>
       </div>
 
       <div class="add-new">
-        <h4>Password Requirements</h4>
+        <h2>Password Requirements</h2>
         <form id="passwordmaker">
           <input type="checkbox" name="lowercase" checked>
           <label for="lowercase"> lower case</label><br>
@@ -122,6 +130,40 @@
         /* Alert the copied text */
         alert("Copied the text: " + copyText.value);
       }
+
+      function ValidationEvent() {
+        const form = document.forms["formAddNew"];
+        const nameVal = document.getElementById("nameError");
+        const usernameVal = document.getElementById("usernameError");
+        const emailVal = document.getElementById("emailError");
+        const passwordVal = document.getElementById("passwordError");
+        if(!form["name"].value) {
+          nameVal.style = "visibility:visibile"
+          return false;
+        } else {
+          nameVal.style = "visibility:hidden"
+        }
+        if(!form["username"].value) {
+          usernameVal.style = "visibility:visibile"
+          return false;
+        } else {
+          usernameVal.style = "visibility:hidden"
+        }
+        if(!form["password"].value) {
+          passwordVal.style = "visibility:visibile"
+          return false;
+        } else {
+          passwordVal.style = "visibility:hidden"
+        }
+        if(!form["email"].value) {
+          emailVal.style = "visibility:visibile"
+          return false;
+        } else {
+          emailVal.style = "visibility:hidden"
+        }
+        return true;
+      }
+
 
       function generatePassword(selectArray) {
 
@@ -172,6 +214,7 @@
             y.value = "Show Password"
           }
         })
+
       });
 
     </script>
