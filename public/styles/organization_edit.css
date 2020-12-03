@@ -1,0 +1,136 @@
+/* Organization Edit */
+
+.org-edit-layout {
+  background-color: rgb(224, 222, 223);
+  width: 80%;
+  padding: 10px;
+}
+
+.org-edit-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 0 2rem 0;
+  border-bottom: 2px solid #244751;
+}
+
+.org-edit-title {
+  margin: 1rem;
+}
+
+.org-edit-content-layout {
+  border-bottom: 2px solid #244751;
+  padding: 3rem;
+}
+
+.org-edit-content-layout2 {
+  padding: 3rem;
+}
+
+.org-edit-heading {
+  margin-bottom: 2rem;
+  color: #244751;
+}
+
+.org-delete-btn {
+  min-height: 40px;
+  padding-right: 30px;
+  margin-top: 30px;
+  width: fit-content;
+  border: none;
+  border-radius: 20px;
+  background-color: #dc3545;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+#submit-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Organization User */
+
+#add-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#add-user > div {
+  margin-right: 2rem;
+}
+
+.add-user-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+table.table-bordered {
+  text-align: center;
+}
+
+table.table-bordered > thead > tr > th{
+  border:1px solid #244751;
+  text-transform: uppercase;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid #244751;
+}
+
+.btn:hover {
+  box-shadow: 5px 5px #afc9f6;
+  cursor: pointer;
+}
+
+
+/* Used in Javascript */
+
+.error-min-input,
+.invalid-url,
+.invalid-email,
+.error-user {
+  display: none;
+  color: #e7281a;
+  font-size: 1rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content {
+  margin-left: 2rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .warning {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .small-font {
+  font-size: 0.8rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons{
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-buttons button{
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+
+
+
+
+
+
+
+

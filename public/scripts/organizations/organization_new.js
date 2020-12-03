@@ -15,13 +15,9 @@ $(document).ready(function() {
     `;
   };
 
-  $("#new-org").append(errorOrg(), errorUrl());
+  $(".org-input").append(errorOrg(), errorUrl());
 
-  $(".btn").on("click", function() {
-    $(".org-name").focus();
-  });
-
-  $("#submit-new").on("submit", function(event) {
+  $("#new-add-btn").on("click", function(event) {
     event.preventDefault();
     $(".org-name").focus();
   });
@@ -64,7 +60,7 @@ $(document).ready(function() {
     $.ajax({
       method: "POST",
       url: "/organizations",
-      data: $("#submit-new").serialize(),
+      data: $(".submit-new").serialize(),
     })
       .then(function() {
         window.location.replace('/organizations');
