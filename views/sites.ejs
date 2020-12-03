@@ -35,24 +35,25 @@
         }
 
         console.log(categoryIdsAndNames)
+        console.log(categories);
 
-        for (i in categoryIdsAndNames){
-          console.log(categoryIdsAndNames[i])
+        for (category in categories){
+          console.log(categories[category].id)
+
      %>
 
       <div class="category">
 
-        <h1> Category Name <%= categoryIdsAndNames[i] %></h1>
+        <h1> Category Name <%= categories[category].name %></h1>
 
           <div class="sites">
             <%for (const site in sites) {
-              if(sites[site].category_id == i) { %>
+              if(sites[site].category_id === categories[category].id) { %>
 
               <div class="card text-center site-entry">
-                <div class="card-header"><%= sites[site].name %></div>
+                <div class="card-header"><h3><a href="http://<%= sites[site].login_url %>"><%= sites[site].name %></a></h3></div>
                 <div class="card-body">
-                  <img src="<%= sites[site].image_url %>" alt="site logo image" /><br>
-                  <%= sites[site].login_url %><br>
+                  <!-- <img src="<%= sites[site].image_url %>" alt="site logo image" /><br> -->
                   <div class="site-info">
                     <span>Username: <input type="text" id="<%= sites[site].username %>" size="10" value="<%= sites[site].username %>"></span>
                     <!-- The button used to copy the text -->
@@ -61,13 +62,13 @@
                     <!-- The button used to copy the text -->
                     <button onclick="myFunction('<%= sites[site].password %>')"><img src="/images/clipboard-copy.webp" width="15"></button><br>
                   </div>
-                <% if (admin) { %> 
+                <% if (admin) { %>
                   <div id="buttons">
                     <a href="/organization/<%= orgId %>/sites/<%= sites[site].id %>"><button class="btn btn-info" >Update</button></a>
 
                     <form method="POST" action="/organization/<%= orgId %>/sites/<%= sites[site].id %>/delete"><input type="submit" class="btn btn-danger" value="Delete"></form>
                     </div>
-                <% } %>  
+                <% } %>
                   </div>
                   <br>
 
@@ -83,7 +84,10 @@
         <h2> Add New Site </h2>
         <form id="formAddNew" method="POST" onsubmit="return ValidationEvent()" action="/organization/<%= orgId%>/sites">
           <label for="newsite">Site name: </label><span style="visibility: hidden" id="nameError"> Must enter a name</span><br>
-            <input class="form-control" type="text" name="name" placeholder="http://" style="width: 300px; margin: 1em">
+            <input class="form-control" type="text" name="name" placeholder="Site" style="width: 300px; margin: 1em">
+
+          <label for="loginurl">Login URL: </label><span style="visibility: hidden" id="urlError"> Must enter a URL</span><br>
+            <input class="form-control" type="text" name="login_url" placeholder="http://" style="width: 300px; margin: 1em">
 
           <label for="username">username: </label><span style="visibility: hidden" id="usernameError"> Must enter a username</span><br>
             <input class="form-control" type="text" name="username" placeholder="Jane Doe"  style="width: 300px; margin: 1em">
@@ -93,8 +97,8 @@
 
           <label for="category">category: </label><br>
           <select name="category" id="category_id" style="width: 300px; margin: 1em">
-            <% for (i in categoryIdsAndNames){  %>
-              <option value="<%= i %>"><%= categoryIdsAndNames[i] %></option>
+            <% for (category in categories){  %>
+              <option value="<%= category %>"><%= categories[category].name %></option>
             <% } %>
 
           </select><br>

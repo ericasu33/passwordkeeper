@@ -15,8 +15,9 @@ const getOrganizations = (db, userId) => {
 
 const getSites = (db, orgId) => {
   const query = `
-  SELECT *
+  SELECT categories.name AS category_name, websites.*
   FROM websites
+  JOIN categories ON categories.id = websites.category_id
   WHERE organization_id = $1;
   `;
 

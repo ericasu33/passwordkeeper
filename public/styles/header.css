@@ -1,7 +1,10 @@
+#landing-page-header {
+  width: 100%;
+}
+
 header {
   width: 80%;
-  position: sticky;
-}
+}  
 
 header nav {
   display: flex;

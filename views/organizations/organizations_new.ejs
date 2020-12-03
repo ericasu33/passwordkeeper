@@ -1,17 +1,29 @@
 <main class="main-layout add-main">
     <div>
       <h1>Add Organization</h1>
+
       <div class="org-input">
-          <form class="submit-new" method="POST" action="/organizations">
-            <div id="new-org">
-              <label for="name" class="org-url">
+        <form class="submit-new" method="POST" action="/organizations">
+          <div>
+            <label for="name" class="org-url">
+              <p class="par-inp">
+                Organization Name:
+              </p>
+
+              <input class="logo-name org-name"
+              type="text"  name="name" placeholder="Name">
+            </label>
+          </div>
+
+          <div>
+            <label for="logo_url" class="org-url">
+              <div>
                 <p class="par-inp">
-                  Organization Name:
+                  Organization Logo Image URL
+                  (PNG & JPG Only):
                 </p>
-                <input class="logo-name org-name"
-                type="text"  name="name" placeholder="Name">
-              </label>
-            </div>
+              </div>
+
               <div>
                 <label for="logo_url" class="org-url">
                   <div>
@@ -25,11 +37,13 @@
 
                 </label>
               </div>
-            <div class="org-btn">
-              <button type="submit" class="org-add-btn">Add</button>
-            </div>
+            </label>
+          </div>
 
-          </form>
+          <div class="add-org-btn">
+            <button type="submit" class="org-add-btn">Add</button>
+          </div>
+        </form>
       </div>
     </div>
 </main>
