@@ -1,20 +1,14 @@
- body {
+body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  background-color: #545149;
   font-size: 40px;
   font-family: 'Source Sans Pro', sans-serif;
   overflow-x: hidden;
 }
 
-.org-setting-header {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-}
 
 .org-delete-btn {
   min-height: 40px;
@@ -31,33 +25,13 @@
   cursor: pointer;
 }
 
-
-
-hr {
-  border: none;
-  height: 3px;
-  background: #244751;
-
-}
-
-#new-user {
-  margin: 20px;
-
-}
-
-#add-user {
-  display: flex;
-  flex-direction: row;
-  justify-content: baseline;
-  align-items: center;
-}
-
-main {
+.main-layout {
   background-color: rgb(224, 222, 223);
   width: 80%;
   padding: 10px;
   padding-bottom: 400px;
 }
+
 main .org-header {
   display: flex;
   flex-direction: row;
@@ -120,6 +94,7 @@ main h1 {
   width: 25vw;
   height: 25vw;
   padding: 10px;
+  object-fit: contain;
 }
 .setting-form {
   width: 100%;
@@ -148,12 +123,75 @@ main h1 {
   cursor: pointer;
 }
 
+/* organization_show */
 
-.btn {
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 60px;
-  background-color: cornflowerblue;
+.org-edit-layout {
+  background-color: rgb(224, 222, 223);
+  width: 80%;
+  padding: 10px;
+}
+
+.org-edit-header {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 0 2rem 0;
+  border-bottom: 2px solid #244751;
+}
+
+.org-edit-title {
+  margin: 1rem;
+}
+
+.org-edit-content-layout {
+  border-bottom: 2px solid #244751;
+  padding: 3rem;
+}
+
+.org-edit-content-layout2 {
+  padding: 3rem;
+}
+
+.org-edit-heading {
+  margin-bottom: 2rem;
+  color: #244751;
+}
+
+#submit-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#add-user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#add-user > div {
+  margin-right: 2rem;
+}
+
+.add-user-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+table.table-bordered {
+  text-align: center;
+}
+
+table.table-bordered > thead > tr > th{
+  border:1px solid #244751;
+  text-transform: uppercase;
+}
+table.table-bordered > tbody > tr > td{
+  border:1px solid #244751;
 }
 
 .btn:hover {
@@ -166,8 +204,12 @@ main h1 {
 .invalid-email,
 .error-user {
   display: none;
-  color: #ff5f54;
+  color: #e7281a;
   font-size: 1rem;
+}
+
+.jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content {
+  margin-left: 2rem;
 }
 
 .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content .warning {
@@ -202,7 +244,7 @@ main h1 {
   margin-top: 20px;
 }
 
-.submit-new, #submit-edit {
+.submit-new {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -236,11 +278,12 @@ main h1 {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+
 .org-btn{
   display: flex;
   justify-content: flex-start;
-
 }
+
 .org-add-btn, #org-edit-btn , #org-add-btn{
   height: 40px;
   padding-right: 30px;
