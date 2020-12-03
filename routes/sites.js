@@ -28,7 +28,7 @@ module.exports = (db) => {
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-
+        
         return findUserEmail(db, userId)
           .then(email => {
             return getUserAdminPriv(db, userId, orgId[0])
