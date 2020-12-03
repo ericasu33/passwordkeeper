@@ -77,9 +77,10 @@ module.exports = (db) => {
     const record = req.body;
     const orgId = req.params.organization_id;
     console.log(record);
+    console.log(record.category_id)
     console.log(orgId);
 
-    const params = [orgId, record.category, record.name, record.username, record.password, record.email, record.login_url];
+    const params = [orgId, record.category_id, record.name, record.username, record.password, record.email, record.login_url];
     const query = `INSERT INTO websites (organization_id, category_id, name, username, password, email, login_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
 
     console.log(query);
