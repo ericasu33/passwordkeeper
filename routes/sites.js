@@ -28,15 +28,18 @@ module.exports = (db) => {
     db.query(query, orgId)
       .then(data => {
         const sites = data.rows;
-        console.log(sites);
         return findUserEmail(db, userId)
           .then(email => {
-            const templateVars = {
-              sites,
-              orgId,
-              email,
-            };
-            res.render("sites", templateVars);
+            return getUserAdminPriv(db, userId, orgId[0])
+              .then(admin => {
+                const templateVars = {
+                  sites,
+                  orgId,
+                  email,
+                  admin,
+                };
+                res.render("sites", templateVars);
+              });
           });
       })
       .catch(err => {

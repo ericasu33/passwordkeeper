@@ -79,7 +79,6 @@ module.exports = (db) => {
                 .then(email => {
                   return database.getUserAdminPriv(db, userId, orgId)
                     .then(admin => {
-                      console.log("ADMIN", admin);
                       const templateVars = {
                         sites,
                         orgId,
