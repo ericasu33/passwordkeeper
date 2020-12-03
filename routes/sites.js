@@ -11,7 +11,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const { findUserEmail } = require('../db/helpers/organizations/organization_users');
+const { findUserEmail, getUserAdminPriv } = require('../db/helpers/organizations/organization_users');
 
 
 module.exports = (db) => {

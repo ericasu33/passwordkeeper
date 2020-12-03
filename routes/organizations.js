@@ -77,12 +77,17 @@ module.exports = (db) => {
             .then(sites => {
               return database.findUserEmail(db, userId)
                 .then(email => {
-                  const templateVars = {
-                    sites,
-                    orgId,
-                    email,
-                  };
-                  res.render("sites", templateVars);
+                  return database.getUserAdminPriv(db, userId, orgId)
+                    .then(admin => {
+                      console.log("ADMIN", admin);
+                      const templateVars = {
+                        sites,
+                        orgId,
+                        email,
+                        admin,
+                      };
+                      res.render("sites", templateVars);
+                    });
                 });
             });
         }

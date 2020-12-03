@@ -10,83 +10,125 @@
 </head>
 
 <body>
-  <%- include('../partials/header') %>
-  <main>
-
-        <div>
-          <img class="logo-image img-setting" src="<%=organization.logo_url %>">
-          <div class= "org-setting-header">
-              <h1><%=organization.org_name %></h1>
-              <div>
-                <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
-                  <button type="submit" class="org-delete-btn">Delete Organization</button>
-                </form>
-              </div>
+  <%- include('../partials/_header') %>
+  <main class="org-edit-layout">
+    <section class="org-edit-header">
+      
+      <div class= "org-edit-title">
+          <h1><%=organization.org_name %></h1>
+          <div>
+            <form method="POST" action="/organizations/<%= organization.organization_id %>/delete?_method=DELETE">
+              <button type="submit" class="org-delete-btn del-org-confirm">Delete Organization</button>
+            </form>
           </div>
+      </div>
 
-          <hr>
+      <div class="card">
+        <img class="logo-image img-setting" src="<%=organization.logo_url %>">
+      </div>
+    </section>
 
-            <%- include('organizations_edit') %>
-          </div>
-
-
-          <form id="submit-user" method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
-            <div id="new-user">
-              <h1>Add Users</h1>
-              <div id="add-user">
+    <section class="org-edit-content-layout">
+      <div id="edit-org">
+          <h2 class="org-edit-heading">Edit Organization Details</h2>
+          
+            <form id="submit-edit" method="POST" action="/organizations/<%=organization.organization_id %>">
                 <div>
-                  <label for="email" class="par-inp">Registered User Email
-                  <input class="email-url" type="email" name="email" required>
+                  <label for="orgName">
+                    <p class="par-inp">
+                      Organization Name:
+                    </p>
+                    <input class="org-name" type="text" name="orgName">
+                  </label>
+                </div>
+  
+                <div>
+                  <label for="logo_url">
+                    <div>
+                      <p class="par-inp">
+                        Organization Logo Image URL:
+                      </p>
+                    </div>
+                    <div>
+                      <input class="logo-url" type="text" name="logo_url" placeholder="http://">
+                    </div>
                   </label>
                 </div>
 
-                <div id="ord-btn">
-                  <button type="submit" id="org-add-btn">Add</button>
-                </div>
+              <div class="edit-btn-style">
+                <button type="submit" id="org-edit-btn">Edit</button>
               </div>
-            </div>
-          </form>
-          <hr>
+            </form>
+      </div>
+    </section>
 
-          <table class="table table-bordered">
-            <thead class="thead-primary">
-              <tr>
-                <th scope="col">User ID</th>
-                <th scope="col">User Name</th>
-                <th scope="col">User Email</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% for (const user in users) { %>
-              <tr id="usertable">
-                  <td><%= users[user].id %></td>
-                  <td><%= users[user].name %></td>
-                  <td><%= users[user].email %></td>
-                  <td>
-                  <% if (users[user].admin_privileges !== true)  { %>
-                    <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
-                      <button class="btn btn-outline-danger del-user-confirm" type="submit">Remove</button>
-                    </form>
-                  <% } %>
-                  </td>
-              </tr>
-              <% } %>
-            </tbody>
-          </table>
+    <section class="org-edit-content-layout">
+      <div>
 
-          <div class="ownership-error">
+        <div class="add-user-header">
+          <h2 class="org-edit-heading">Add Users</h2>
+        
+          <div>
             <button class="btn btn-outline-danger transfer-ownership" type="submit">Transfer Ownership</button>
           </div>
+          
         </div>
+
+        <form id="submit-user" method="POST" action="/organizations/<%= organization.organization_id %>?_method=PUT">
+            <div id="add-user">
+              <div>
+                <label for="email">
+                  <p class="par-inp">
+                    Registered User Email
+                  </p>
+                <input class="email-url" type="email" name="email" required>
+                </label>
+              </div>
+              
+  
+              <div>
+                <button type="submit" id="org-add-btn">Add</button>
+              </div>
+            </div>
+          </div>
+        </form>
+  
+       
+      </div>
+    </section>
+
+    <section class="org-edit-content-layout2">
+      <h2 class="org-edit-heading">Current Users</h2>
+
+      <table class="table table-bordered">
+        <thead class="thead-primary">
+          <tr>
+            <th scope="col">User ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">User Email</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (const user in users) { %>
+          <tr id="usertable">
+              <td><%= users[user].id %></td>
+              <td><%= users[user].name %></td>
+              <td><%= users[user].email %></td>
+              <td>
+              <% if (users[user].admin_privileges !== true)  { %>
+                <form method="POST" action="/organizations/<%= organization.organization_id %>/<%= users[user].id %>/delete?_method=DELETE">
+                  <button class="btn btn-outline-danger del-user-confirm" type="submit">Remove</button>
+                </form>
+              <% } %>
+              </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    
+    </section>
   </main>
-
-
-  <footer>
-    <a href="/organizations">
-      <button type="submit">My Organizations</button>
-    </a>
-  </footer>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
