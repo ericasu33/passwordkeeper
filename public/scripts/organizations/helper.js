@@ -17,3 +17,25 @@ const isEmail = email => {
     return false;
   }
 };
+
+
+const  checkUrl = (url) => {
+  const request = new XMLHttpRequest;
+  request.open('HEAD', url, true);
+  request.send();
+  request.onreadystatechange = function() {
+    if (request.status === 200) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+};
+
+//Then I use the function to check and append the data to the page
+const url = url + '.jpg';
+if (checkUrl(url)) {
+
+} else {
+  //do nothing
+}

@@ -1,0 +1,102 @@
+.org-header .btn {
+  margin:0;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #17a2b8;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  color: #fff;
+}
+
+.orgs-show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  padding-right: 10px;
+}
+
+.sites {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.site-entry button {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+  cursor: pointer;
+}
+
+.site-entry button:hover {
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+.card-header{
+  font-weight: bold;
+}
+
+/* Organization Settings Button */
+
+.setting-form {
+  width: 100%;
+  margin-top: 10px
+}
+
+.setting-form form {
+  margin: 0 auto;
+  display: flex;
+}
+
+.setting-button {
+  height: 40px;
+  margin: 0 auto;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #17a2b8;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+}
+
+.setting-button:hover {
+  box-shadow: 5px 5px #afc9f6;
+  cursor: pointer;
+}
+
+/* Add Organization */
+
+#add-org {
+  width: 80%;
+  margin: 20px;
+  padding: 0;
+}
+
+.add-org-btn{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.add-main {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.submit-new {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.org-url {
+  display: flex;
+  flex-direction: column;
+}

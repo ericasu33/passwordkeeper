@@ -34,7 +34,7 @@ module.exports = (db) => {
   //User sees all the organizations user belongs to
   router.get("/", unauthorized, (req, res) => {
     const userId = req.session.user_id;
-          
+
     database.getOrganizations(db, userId)
       .then(organizations => {
         return database.findUserEmail(db, userId)
@@ -174,7 +174,7 @@ module.exports = (db) => {
                         users,
                         email,
                       };
-                      res.render("./organizations/organizations_show", templateVars);
+                      res.render("./organizations/organization_edit", templateVars);
                     });
                 });
             });

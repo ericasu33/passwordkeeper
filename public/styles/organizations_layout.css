@@ -1,0 +1,106 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  font-size: 40px;
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow-x: hidden;
+}
+
+.main-layout {
+  background-color: rgb(224, 222, 223);
+  width: 80%;
+  padding: 10px;
+  padding-bottom: 400px;
+}
+
+main .org-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 50px;
+}
+
+main h1 {
+  color: #244751;
+  padding: 20px 0 0 20px;
+}
+
+.logo-image {
+  width: 25vw;
+  height: 25vw;
+  padding: 10px;
+  object-fit: contain;
+}
+
+.par-inp {
+  margin-bottom: 0;
+  padding-left: 20px;
+  font-size: 20px;
+}
+
+.logo-url,
+.logo-name, 
+.name-url, 
+.email-url, 
+.org-name {
+  display: block;
+  margin: 16px;
+    width: 300px;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.org-add-btn, 
+.org-edit-btn {
+  height: 40px;
+  padding-right: 30px;
+  padding-left: 30px;
+  margin-top: 16px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  background-color: #17a2b8;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.org-add-btn:hover {
+  box-shadow: 5px 5px #afc9f6;
+  cursor: pointer;
+}
+
+/* Medai Queries */
+
+@media only screen and (max-width: 960px) {
+  main .org-header {
+    margin-bottom: 50px;
+  }
+
+  .new-add-btn {
+    height: fit-content;
+    width: auto;
+    color: #fff;
+  }
+  .submit-new {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .org-btn {
+    margin-left: 20px;
+  }
+}

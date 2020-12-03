@@ -91,8 +91,8 @@ main h1 {
 }
 
 .logo-image {
-  width: 25vw;
-  height: 25vw;
+  width: 300px;
+  height: 200px;
   padding: 10px;
   object-fit: contain;
 }
