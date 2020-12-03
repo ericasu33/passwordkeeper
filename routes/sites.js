@@ -43,7 +43,7 @@ module.exports = (db) => {
 
 
     let query1 = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
-    let query2 = `SELECT * FROM categories`
+    let query2 = `SELECT * FROM categories`;
     console.log(query1);
     Promise.all([db.query(query1, orgId), db.query(query2)])
       .then(([data, cats]) => {
@@ -77,7 +77,7 @@ module.exports = (db) => {
     const record = req.body;
     const orgId = req.params.organization_id;
     console.log(record);
-    console.log(record.category_id)
+    console.log(record.category_id);
     console.log(orgId);
 
     const params = [orgId, record.category_id, record.name, record.username, record.password, record.email, record.login_url];
@@ -140,14 +140,14 @@ module.exports = (db) => {
 
         console.log(data.rows);
 
-            const templateVars = {
-              site,
-              orgId,
-              categories,
-              email,
-            }
+        const templateVars = {
+          site,
+          orgId,
+          categories,
+          email,
+        };
 
-            res.render("site", templateVars);
+        res.render("site", templateVars);
 
       })
       .catch(err => {
