@@ -145,6 +145,9 @@ header nav {
 
 .container-fluid .description {
   padding-right: 20px;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 25px;
 }
 
 .container-fluid .img-thumbnail {

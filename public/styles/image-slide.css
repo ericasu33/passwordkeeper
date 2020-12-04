@@ -41,7 +41,8 @@
 
 /* Caption text */
 .text {
-  color: cornflowerblue;
+  color: black;
+  font-weight: bold;
   font-size: 15px;
   padding: 8px 12px;
   position: absolute;
