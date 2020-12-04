@@ -1,7 +1,6 @@
 const createOrganization = (db, orgName, logoUrl) => {
   let query;
   const queryParams = [];
-
   if (orgName && !logoUrl) {
     queryParams.push(orgName);
 

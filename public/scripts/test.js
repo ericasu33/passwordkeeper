@@ -15,7 +15,14 @@ $(document).ready(function() {
     `;
   };
 
-  $(".org-input").append(errorOrg(), errorUrl());
+  /* const catImage = () => {
+    console.log("MEOOWWWWWWW");
+    return `<img class="cat" src="https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512" alt="default cat picture"`;
+  };
+ */
+  /* $(".default-img").append(catImage()); */
+
+  $("#new-org").append(errorOrg(), errorUrl());
 
   $("#new-add-btn").on("click", function(event) {
     event.preventDefault();
@@ -26,11 +33,24 @@ $(document).ready(function() {
     event.preventDefault();
     const orgNameLength = $(".org-name").val().length;
     const urlContent = $(".logo-url").val();
+    /* if ($(".logo-url").val() === "") {
+      alert("hereee");
+      $(".logo-url").val("https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512");
+    }
+    alert($(".logo-url").val()); */
+    /* et urlContent = $(".logo-url").val(); */
+
     if (orgNameLength < 1) {
       $(".error-min-input").show();
       $(".org-name").focus();
       return;
     }
+    /* if (urlContent === "") {
+      alert("insiddeee");
+      urlContent = "https://facebookbrand.com/wp-content/uploads/2019/04/f_logo_RGB-Hex-Blue_512.png?w=512&h=512";
+    } else {
+      alert("hiiiiiiiii", urlContent);
+    } */
 
     if (urlContent && !isUrl(urlContent)) {
       $(".invalid-url").show();
@@ -68,5 +88,3 @@ $(document).ready(function() {
     }
   });
 });
-
-

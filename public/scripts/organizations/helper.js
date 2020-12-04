@@ -19,7 +19,7 @@ const isEmail = email => {
 };
 
 
-const  checkUrl = (url) => {
+/* const  checkUrl = (url) => {
   const request = new XMLHttpRequest;
   request.open('HEAD', url, true);
   request.send();
@@ -38,4 +38,4 @@ if (checkUrl(url)) {
 
 } else {
   //do nothing
-}
+} */

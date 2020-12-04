@@ -3,35 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>PasswordKeeper</title>
+  <%- include('./partials/_head') %>
 
   <!-- CSS (load bootstrap from a CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/styles/image-slide.css" type="text/css"/>
-  <link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css"/>
+  <!-- <link rel="stylesheet" href="/styles/sass/navbar.css" type="text/css"/> -->
   <style>
       body { padding-top:50px; }
   </style>
 
 </head>
 <body class="container">
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">PasswordKeeper</a>
+
+  <header class = "landing-header">
+    <nav>
+      <div class="nav-links">
+        <div>
+          <a id="brand" href="/">PasswordKeeper</a>
+        </div>
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/organizations">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id= "link" type="button" href= '#about' scroll-behaviour: smooth;>About</a>
-          </li>
-          <li class="Register-Login">
-            <button class="nav-button">
-            Register/Login
-            </button>
-          </li>
+          <div id = "items">
+            <li class="nav-item">
+              <a class="nav-link" href="/organizations">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id= "link" type="button" href= '#about' scroll-behaviour: smooth;>About</a>
+            </li>
+            <li class="Register-Login">
+              <button class="nav-button">
+              Register/Login
+              </button>
+            </li>
+          </div>
+
         </ul>
-      </nav>
-    </header>
+      </div>
+    </nav>
+  </header>
 
 
 <main>
@@ -41,26 +50,26 @@
     </div>
     <div class="jumbotron">
         <h2>Welcome to PasswordKeeper</h2>
-        <p>Keep your password safe with us</p>
+        <h4>Collect All Your Company's Passwords Safely</h4>
         <div class="slideshow-container">
 
           <!-- Full-width images with number and caption text -->
           <div class="mySlides">
-            <div class="numbertext">1 / 3</div>
+
             <img src = "/images/landing-pic.png" style="width:100%"/>
-            <div class="text">Caption Text</div>
+            <div class="text">Build Your Organization</div>
           </div>
 
           <div class="mySlides">
-            <div class="numbertext">2 / 3</div>
-            <img src = "/images/home-pic1.jpg" style="width:100%"/>
-            <div class="text">Caption Two</div>
+
+            <img src = "/images/setting-page.png" style="width:100%"/>
+            <div class="text" >Add the Employee</div>
           </div>
 
           <div class="mySlides">
-            <div class="numbertext">3 / 3</div>
-            <img src = "/images/landing-pic.png" style="width:100%"/>
-            <div class="text">Caption Three</div>
+
+            <img src = "/images/webistes-page.png" style="width:100%"/>
+            <div class="text">Share Different Website Password's with Employee</div>
           </div>
 
           <!-- Next and previous buttons -->
@@ -79,10 +88,10 @@
 
     <div class="container-fluid" id='about'>
       <div>
-        <p><b>What is a password manager?</b></p>
-        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit necessitatibus iste facere, quae perferendis architecto, id cumque maiores minima maxime consectetur deleniti voluptates reiciendis? Optio atque provident in non magnam?</p>
+        <h2><b>What is PasswordKeeper?</b></h2>
+        <h4 class="description">   PasswordKeeper is a website build by three LightHouse Labs Peers for their midterm project where corporations and organizations can keep thri password collection safe and be able to share it with other Employees. This will cut off major delays related for user authintication for certain website access of companies. Register and get access to this amazing website.</h4>
       </div>
-      <img src = "/images/1.jpg"  class="img-thumbnail"/>
+      <img src = "/images/images.jpeg"  class="img-thumbnail"/>
     </div>
 
 </main>
