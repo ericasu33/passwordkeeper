@@ -21,12 +21,18 @@ main {
   padding: 10px;
 }
 
+.category {
+  padding: 15px;
+}
+
+.cat-header {
+  color:rgb(23, 23, 44);
+}
+
 .sites {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
-
 }
 
 .site-entry {
@@ -47,6 +53,10 @@ main {
   justify-content: space-around;
 }
 
+.update-button {
+  width: 100px;
+}
+
 .card-header{
   font-weight: bold;
 }
@@ -58,7 +68,8 @@ main {
 #adding {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 80px;
   padding-top: 80px;
 }
 
