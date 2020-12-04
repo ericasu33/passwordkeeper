@@ -60,6 +60,12 @@ Go to `localhost:8080` in your web browser to see the page
 - bcrypt
 - method-override
 
+### CDN
+
+- bootstrap
+- fontawesome
+- jquery-confirm 
+
 
 ## Visit Website 
 
