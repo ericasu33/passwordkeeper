@@ -4,9 +4,9 @@
 
 ## Description
 
-This project is a midterm project chosen because of it's useful applications for large companies and cooperates to be able to save and share password between their employee.
+This project is a midterm project chosen because of it's useful applications for large companies and cooperates to be able to save and share password between their employees.
 
-PasswordKeeper is a website that can be used for many to many user organizations applications. where each user can be assigned to as many organizations and each organization can share their password between as many users they want. Only organiations Owners update, delete or add anything related to the organizations. Owners can also transfer ownership to another user assigned to the organization to take the role.
+PasswordKeeper is a website that can be used for many to many organizations-users applications. where each user can be assigned to as many organizations and each organization can share their password between as many users they want. Only organiation Owner's can  update, delete or add anything related to their organization. Owners can also transfer ownership to another user assigned to the organization to take the ownership.
 
 Due to a time constraint of 7 days, our team decided to prioritize functionality over the front end looks. We made this decision understanding that the program has to work, and work as expected.
 
