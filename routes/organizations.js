@@ -162,9 +162,7 @@ module.exports = (db) => {
           });
       })
       .catch(err => {
-        res
-          .status(500)
-          .send(err);
+        return res.redirect('/organizations/error');
       });
   });
 
