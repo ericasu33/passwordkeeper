@@ -11,7 +11,7 @@
 const express = require('express');
 const router  = express.Router();
 
-const { findUserEmail, getUserAdminPriv } = require('../db/helpers/organizations/organization_users');
+const { getUserForOrganization } = require('../db/helpers/organizations/organization_users');
 
 
 module.exports = (db) => {
@@ -45,25 +45,28 @@ module.exports = (db) => {
     let query1 = `SELECT categories.name AS category_name, websites.*  FROM websites JOIN categories ON categories.id=websites.category_id WHERE websites.organization_id=$1`;
     let query2 = `SELECT * FROM categories`;
     console.log(query1);
-    Promise.all([db.query(query1, orgId), db.query(query2)])
-      .then(([data, cats]) => {
+
+    const user = getUserForOrganization(db, userId, orgId[0]);
+
+    Promise.all([db.query(query1, orgId), db.query(query2), user])
+      .then(([data, cats, user]) => {
         const sites = data.rows;
         const categories = cats.rows;
+        const email = user[0].email;
+        const admin = user[0].admin_privileges;
 
-        return findUserEmail(db, userId)
-          .then(email => {
-            return getUserAdminPriv(db, userId, orgId[0])
-              .then(admin => {
-                const templateVars = {
-                  sites,
-                  categories,
-                  orgId,
-                  email,
-                  admin,
-                };
-                res.render("sites", templateVars);
-              });
-          });
+        console.log("WHAT DOES USER give", user);
+        console.log("EMAIL", email);
+        console.log("ADMIN", admin);
+
+        const templateVars = {
+          sites,
+          categories,
+          orgId,
+          email,
+          admin,
+        };
+        return res.render("sites", templateVars);
       })
       .catch(err => {
         res
@@ -133,11 +136,11 @@ module.exports = (db) => {
     console.log(`Query: ${query1}`);
     console.log(siteId);
 
-    Promise.all([db.query(query1, siteId), db.query(query2), findUserEmail(db, userId)])
-      .then(([data, cats, email]) => {
+    Promise.all([db.query(query1, siteId), db.query(query2), getUserForOrganization(db, userId, orgId)])
+      .then(([data, cats, user]) => {
         const site = data.rows[0];
         const categories = cats.rows;
-
+        const email = user[0].email;
         console.log(data.rows);
 
         const templateVars = {

@@ -58,42 +58,28 @@ module.exports = (db) => {
     const orgId = req.params.organization_id;
     const userId = req.session.user_id;
     
-    database.getUsersForOrganization(db, orgId)
-      .then(users => {
-        let authUser = true;
-        for (const user of users) {
-          if (user.id === userId) {
-            return authUser;
-          }
+    database.getUserForOrganization(db, userId, orgId)
+      .then(userArr => {
+        if (userArr.length < 1) {
+          return res.redirect("/organizations");
         }
-        authUser = false;
-        return authUser;
-      })
-      .then(authUser => {
-        if (!authUser) {
-          return res.status(401).redirect("/organizations");
-        } else {
-          return database.getSites(db, orgId)
-            .then(sites => {
-              return database.getCategories(db)
-                .then(categories => {
-                  return database.findUserEmail(db, userId)
-                    .then(email => {
-                      return database.getUserAdminPriv(db, userId, orgId)
-                        .then(admin => {
-                          const templateVars = {
-                            sites,
-                            categories,
-                            orgId,
-                            email,
-                            admin,
-                          };
-                          res.render("sites", templateVars);
-                        });
-                    });
-                });
-            });
-        }
+
+        const user = userArr[0];
+        const email = user.email;
+        const admin = user.admin_privileges;
+        const sites =  database.getSites(db, orgId);
+        const categories = database.getCategories(db);
+        return Promise.all([sites, categories, email, admin])
+          .then(([sites, categories, email, admin]) => {
+            const templateVars = {
+              sites,
+              categories,
+              orgId,
+              email,
+              admin,
+            };
+            return res.render("sites", templateVars);
+          });
       })
       .catch(err => {
         res
@@ -146,43 +132,34 @@ module.exports = (db) => {
     const userId = req.session.user_id;
 
     // Logged in and check if user accessing unauthorized :organization_id
-    database.getUsersForOrganization(db, organizationId)
-      .then(users => {
-        if (users.length < 1) {
-          return res.redirect('/organizations/error');
+    database.getUserForOrganization(db, userId, organizationId)
+      .then(userArr => {
+        if (userArr.length < 1) {
+          return res.redirect("/organizations");
         }
 
-        let authUser = true;
-        for (const user of users) {
-          if (user.id === userId && user.admin_privileges === true) {
-            return authUser;
-          }
+        const user = userArr[0];
+        
+        if (user.admin_privileges === false) {
+          return res.redirect("/organizations");
         }
-        authUser = false;
-        return authUser;
-      })
-      .then(authUser => {
-        if (!authUser) {
-          return res.redirect('/organizations/error');
-        } else {
-          return database.getOrganization(db, userId, organizationId)
-            .then(organization => {
-              const orgId = organization.organization_id;
 
-              return database.getUsersForOrganization(db, orgId)
-                .then(users => {
-                  return database.findUserEmail(db, userId)
-                    .then(email => {
-                      const templateVars = {
-                        organization,
-                        users,
-                        email,
-                      };
-                      res.render("./organizations/organization_edit", templateVars);
-                    });
-                });
-            });
-        }
+        return database.getOrganization(db, userId, organizationId)
+          .then(organization => {
+            const orgId = organization.organization_id;
+            const users = database.getUsersForOrganization(db, orgId);
+            const email = user.email;
+
+            return Promise.all([users, email])
+              .then(([users, email]) => {
+                const templateVars = {
+                  organization,
+                  users,
+                  email,
+                };
+                res.render("./organizations/organization_edit", templateVars);
+              });
+          });
       })
       .catch(err => {
         res
