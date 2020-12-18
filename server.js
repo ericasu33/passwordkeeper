@@ -44,13 +44,13 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const loginRoutes = require("./routes/login");
-const registerRoutes = require("./routes/login");
+const registerRoutes = require("./routes/register");
 const sitesRoutes = require("./routes/sites");
 const orgRoutes = require("./routes/organizations");
 
 // Mount all resource routes
 app.use("/login", loginRoutes(db));
-app.use("/login", registerRoutes(db));
+app.use("/register", registerRoutes(db));
 app.use("/organization", sitesRoutes(db));
 app.use("/organizations", orgRoutes(db));
 
