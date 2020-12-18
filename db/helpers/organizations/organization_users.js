@@ -46,7 +46,7 @@ const findUserEmail = (db, userId) => {
   `;
 
   const queryParams = [userId];
-
+  let userEmail;
   return db.query(query, queryParams)
     .then(data => {
       return userEmail = data.rows[0].email;
@@ -71,7 +71,7 @@ const findRegisteredUser = (db, userEmail) => {
 
 const findUserInOrganization = (db, userId, orgId) => {
   const query = `
-  SELECT id 
+  SELECT id
   FROM user_organizations_role
   WHERE user_id = $1 AND organization_id = $2;
   `;
@@ -95,7 +95,7 @@ const addUserToOrganization = (db, userId, orgId,) => {
 
 const deleteUser = (db, userId, orgId) => {
   const query = `
-  DELETE FROM user_organizations_role 
+  DELETE FROM user_organizations_role
   WHERE user_id = $1 AND organization_id = $2;
   `;
 
@@ -112,7 +112,7 @@ const giveOwnership = (db, transfereeId, orgId) => {
   `;
 
   const queryParams = [transfereeId, orgId];
-  
+
   return db.query(query, queryParams);
 };
 
