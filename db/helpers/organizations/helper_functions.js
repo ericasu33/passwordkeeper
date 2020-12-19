@@ -8,50 +8,6 @@ const isUrl = str => {
   }
 };
 
-const url = require('url');
-
-const validation = str => {
-
-  const q = url.parse(str);
-
-  if (q.protocol === "http:" || q.protocol === "https:") {
-    if (q.host) {
-
-      return true;
-    }
-
-
-  } else {
-    return false;
-  }
-
-};
-
-/* $(document).ready(function() {
-const editButton = () => {
-  $(".edit-url").submit(function(event) {
-    event.preventDefault();
-    const text = $(".logo-url").val();
-    if (text.length === 0) {
-      $(".error-container").text("Error: Cannot enter an empty url");
-      $(".error-container").show();
-    } else if (!isUrl(text)) {
-      $(".error-container").text("Error: invalid url");
-      $(".error-container").show();
-    } else {
-      const dataEntry = $(this).serialize();
-      $.ajax("organization/:organization_id", {method : 'POST', data: dataEntry})
-        .then(() => {
-          $(".logo-url").val("");
-          $(".error-container").hide();
-        });
-    }
-
-  });
-};
-editButton();
-}); */
-
 module.exports = {
   isUrl,
 };

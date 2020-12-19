@@ -1,4 +1,12 @@
 $(document).ready(function() {
+  const baseUrl = "https://passwordkeeper-app.herokuapp.com/";
+
+  $.ajaxSetup({
+    beforeSend: function(xhr, options) {
+      options.url = baseUrl + options.url;
+    }
+  });
+  
   const errorEmail = () => {
     return `
     <div class="invalid-email">

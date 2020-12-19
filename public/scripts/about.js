@@ -9,12 +9,10 @@ const isUrl = str => {
 
 
 $(document).ready(function() {
-  console.log("Heloooooooo");
   const editButton = () => {
     $(".edit-url").submit(function(event) {
       event.preventDefault();
       const text = $(".logo-url").val();
-      console.log("Text Value", text);
       if (text.length === 0) {
         $(".error-container").text("Error: Cannot enter an empty url");
         $(".error-container").show();
