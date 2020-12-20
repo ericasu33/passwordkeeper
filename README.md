@@ -20,7 +20,7 @@ Due to a time constraint of 7 days, our team decided to prioritize functionality
 
 - Image slide to show unregistered users the features of PasswordKeeper
 
-  - - This feature was implemented by [mohdtorabi](https://github.com/mohdtorabi)
+  - This feature was implemented by [mohdtorabi](https://github.com/mohdtorabi)
 
 - Delete Organization due to it's importancy send a conformation before deleting the organization immediatley.
 
