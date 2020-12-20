@@ -23,6 +23,9 @@ module.exports = (db) => {
     db.query(query, queryParams)
       .then(data => {
         const user = data.rows[0];
+        if (user === undefined) {
+          return res.status(400).send("Email or password is wrong!");
+        }
         req.session.user_id = user.id;
         res.redirect('/organizations');
       })
