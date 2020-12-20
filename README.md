@@ -1,6 +1,6 @@
 # PasswordKeeper
 
-**Lighthouse Lab
+**Lighthouse Lab**
 
 ## Description
 
