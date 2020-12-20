@@ -4,7 +4,7 @@
 
 ## Description
 
-PasswordKeeper is a useful applications for large companies and cooperates to be able to save and share password between their employees.
+PasswordKeeper is a useful applications for large companies and corporations to be able to save and share password between their employees.
 
 PasswordKeeper is a website that can be used for many to many organizations-users applications. where each user can be assigned to as many organizations and each organization can share their password between as many users they want. Only organiation Owner's can  update, delete or add anything related to their organization. Owners can also transfer ownership to another user assigned to the organization to take the ownership.
 
@@ -69,7 +69,8 @@ Go to `localhost:8080` in your web browser to see the page
 
 ## Visit Website 
 
-- 
+**Open in Google Chrome**
+- https://passwordkeeper-app.herokuapp.com/
 
 ### Summary
 
