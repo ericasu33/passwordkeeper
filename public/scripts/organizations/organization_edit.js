@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  const baseUrl = "https://passwordkeeper-app.herokuapp.com/";
+  const baseUrl = "https://passwordkeeper-app.herokuapp.com";
   
   $.ajaxSetup({
     beforeSend: function(xhr, options) {
